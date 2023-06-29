@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 # create the extension
 db = SQLAlchemy()
@@ -9,9 +10,9 @@ def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
-        SECRET_KEY='AywjhbiaUHWu.asho:I',    
+        SECRET_KEY=os.getenv('SECRET_KEY'),    
     )
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.path.join(app.instance_path, 'flaskr.sqlite')
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('SQLALCHEMY_DATABASE_URI')
 
 
     # initialize the app with the extension
@@ -31,13 +32,13 @@ def create_app(test_config=None):
         pass
 
     # import db models
-    from database.models import User
+    from .database.models import User
 
     with app.app_context():
         db.create_all()
 
     #  register views
-    from views.front import frontend
+    from .views.front import frontend
     app.register_blueprint(frontend)
 
     
