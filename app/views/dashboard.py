@@ -12,11 +12,21 @@ dashboard = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 def dashboard_home():
     return render_template('dashboard/index.html')
 
-@dashboard.route('/2')
-def dashboard_home2():
-    return render_template('dashboard/index-2.html')
-
 
 @dashboard.route('/base')
 def base():
     return render_template('dashboard/base.html')
+
+
+@dashboard.route('/transfers')
+def transfers():
+    return render_template('dashboard/exchange.html')
+
+@dashboard.route('/wallets')
+def wallet():
+    return render_template('dashboard/wallet.html')
+
+@dashboard.route('/profile')
+def profile():
+    return render_template('dashboard/profile-settings.html')
+
