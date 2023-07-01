@@ -8,14 +8,9 @@ dashboard = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 
 
 
-@dashboard.route('/dashboard')
+@dashboard.route('/')
 def dashboard_home():
     return render_template('dashboard/index.html')
-
-
-@dashboard.route('/base')
-def base():
-    return render_template('dashboard/base.html')
 
 
 @dashboard.route('/transfers')
@@ -30,3 +25,11 @@ def wallet():
 def profile():
     return render_template('dashboard/profile-settings.html')
 
+@dashboard.route('/log-out')
+def sign_out():
+    return render_template('dashboard/profile-settings.html')
+
+
+@dashboard.route('/base')
+def base():
+    return render_template('dashboard/base.html')
