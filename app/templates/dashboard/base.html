@@ -1,14 +1,14 @@
+{% set active_page = active_page|default('index') -%}
+
 <!DOCTYPE html>
 <html lang="en">
-  
-<!-- Mirrored from cripto-dash.vercel.app/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 16 Jun 2023 10:30:57 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href={{url_for('static', filename="dashboard/assets/images/logo.png") }} type="image/x-icon" />
-    <title>Crypto Currency Exchange Dashboard</title>
+    <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href={{url_for('static', filename="dashboard/assets/css/main.css") }} />
   </head>
   <body>
@@ -19,10 +19,10 @@
     <div class="cf-child cf-bounce3"></div>
   </div>
 </div>
+
  <header class="header">
   <div class="container-xl d-flex align-items-center justify-content-between">
     <div class="header-left d-flex">
-      <!-- <h4>Hello Codey</h4> -->
       <h4>Dashboard</h4>
     </div>
     <ul class="header-right">
@@ -510,8 +510,8 @@
   </a>
 </div>
  <ul id="menu" class="sidebar">
-  <li>
-    <a href="index-2.html">
+  <li class={{ 'mm-active' if request.path == url_for('dashboard.dashboard_home') }}>
+    <a href="{{url_for('dashboard.dashboard_home')}}">
       <svg
         class="svgh-20"
         viewBox="0 0 512 512"
@@ -532,7 +532,7 @@
       </svg>
     </a>
   </li>
-  <li>
+  <li class={{ 'mm-active' if request.path == url_for('dashboard.profile') }}>
     <a href="trade.html" aria-expanded="true">
       <svg
         class="svgh-20"
@@ -591,7 +591,7 @@
       </svg>
     </a>
   </li>
-  <li>
+  <li class={{ 'mm-active' if request.path == url_for('dashboard.profile') }}>
     <a href="exchange.html">
       <svg
         class="svgh-20"
@@ -605,7 +605,7 @@
       </svg>
     </a>
   </li>
-  <li>
+  <li class={{ 'mm-active' if request.path == url_for('dashboard.profile') }}>
     <a href="wallet.html">
       <svg
         class="svgh-20"
@@ -620,8 +620,8 @@
       </svg>
     </a>
   </li>
-  <li id="setting">
-    <a href="profile-settings.html">
+  <li class={{ 'mm-active' if request.path == url_for('dashboard.profile') }} id="setting">
+    <a href={{url_for('dashboard.profile')}}>
       <svg
         class="svgh-20"
         viewBox="-12 0 512 512"

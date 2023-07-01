@@ -8,7 +8,7 @@ dashboard = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 
 
 
-@dashboard.route('/')
+@dashboard.route('/dashboard')
 def dashboard_home():
     return render_template('dashboard/index.html')
 
