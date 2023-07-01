@@ -39,7 +39,9 @@ def create_app(test_config=None):
 
     #  register views
     from .views.front import frontend
+    from .views.dashboard import dashboard
     app.register_blueprint(frontend)
+    app.register_blueprint(dashboard)
 
     
     
