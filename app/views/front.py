@@ -8,6 +8,11 @@ frontend = Blueprint('frontend', __name__, url_prefix='/')
 
 
 
-@frontend.route('/hello')
-def hello():
-    return 'Hello, World!'
+@frontend.route('/')
+def home():
+    return render_template('landing/index.html')
+
+
+@frontend.route('/base')
+def base():
+    return render_template('landing/base.html')
