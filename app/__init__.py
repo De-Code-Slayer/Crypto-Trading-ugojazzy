@@ -3,6 +3,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_login import LoginManager
+from flask_migrate import Migrate
 
 # create the extension
 db = SQLAlchemy()
@@ -14,6 +15,9 @@ def create_app(test_config=None):
         SECRET_KEY=os.getenv('SECRET_KEY'),    
     )
     app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('SQLALCHEMY_DATABASE_URI')
+
+    # init flask migrate
+    migrate = Migrate(app, db)
 
 
     # initialize the app with the extension
