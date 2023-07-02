@@ -1,135 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
-  
-<!-- Mirrored from cripto-dash.vercel.app/signin.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 16 Jun 2023 10:31:11 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="assets/images/logo.png" type="image/x-icon" />
-    <title>Crypto Currency Exchange Dashboard</title>
-    <link rel="stylesheet" href="assets/css/main.css" />
-  </head>
-  <body>
-    <div class="preloader">
-      <div class="cf-three-bounce">
-        <div class="cf-child cf-bounce1"></div>
-        <div class="cf-child cf-bounce2"></div>
-        <div class="cf-child cf-bounce3"></div>
-      </div>
-    </div>
-    <main>
-      <div class="container">
+{% extends 'dashboard/base.html' %}
+{% block main %}
+<main>
+  <div class="container">
 <div class="row justify-content-center auth">
-  <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10">
-    <div class="card p-0">
-      <div class="card-body p-0">
-        <form action="https://cripto-dash.vercel.app/index.html" name="form" id="form" role="form" class="p-4">
-          <div class="text-center mb-4">
-            <div
-              class="op-primary p-3 ch-75 cw-75 d-flex align-items-center justify-content-center m-auto rounded-circle"
-            >
+<div class="col-xl-5 col-lg-6 col-md-8 col-sm-10">
+<div class="card p-0">
+  <div class="card-body p-0">
+    <form name="form" id="form" role="form" class="p-4">
+      <div class="text-center mb-4">
+        <div
+          class="op-primary p-3 ch-75 cw-75 d-flex align-items-center justify-content-center m-auto rounded-circle"
+        >
+          <img
+            src={{url_for('static', filename="dashboard/assets/icons/logout.svg")}}
+            class="svg svgh-35 ms-2 fill-primary"
+            alt=""
+          />
+        </div>
+        <h4>Login your account</h4>
+        <p class="text-muted">
+          Enter your credentials to access your account
+        </p>
+      </div>
+      <div class="row g-3">
+        <div class="col-12">
+          <div class="input-group p-2">
+            <span class="input-group-text p-2 bg-transparent">
               <img
-                src="assets/icons/logout.svg"
-                class="svg svgh-35 ms-2 fill-primary"
+                src={{url_for('static', filename="dashboard/assets/icons/envelope.svg")}}
+                class="svg svgh-15 cw-20"
                 alt=""
               />
-            </div>
-            <h4>Login your account</h4>
-            <p class="text-muted">
-              Enter your credentials to access your account
-            </p>
+            </span>
+            <input
+              type="email"
+              name="email"
+              class="form-control"
+              placeholder="example@example.com"
+            />
           </div>
-          <div class="row g-3">
-            <div class="col-12">
-              <div class="input-group p-2">
-                <span class="input-group-text p-2 bg-transparent">
-                  <img
-                    src="assets/icons/envelope.svg"
-                    class="svg svgh-15 cw-20"
-                    alt=""
-                  />
-                </span>
-                <input
-                  type="email"
-                  name="email"
-                  class="form-control"
-                  placeholder="example@example.com"
-                />
-              </div>
-            </div>
-            <div class="col-12">
-              <div class="input-group p-2">
-                <span class="input-group-text p-2 bg-transparent">
-                  <img
-                    src="assets/icons/lock.svg"
-                    class="svg svgh-20 cw-20"
-                    alt=""
-                  />
-                </span>
-                <input
-                  type="password"
-                  name="password"
-                  class="form-control"
-                  placeholder="Password"
-                />
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="d-flex align-items-center">
-                <label class="switch checked-bg-primary me-1">
-                  <input type="checkbox" checked="" id="never" />
-                  <span class="slider round"> </span>
-                </label>
-                <label for="never" class="c-pointer text-muted"
-                  >Remember me</label
-                >
-              </div>
-            </div>
-            <div class="col-6">
-              <a href="reset.html" class="text-end text-primary d-block"
-                >Forgot Password?</a
-              >
-            </div>
-            <div class="col-12">
-              <input
-                type="submit"
-                value="Log In"
-                class="btn btn-primary p-2 cfs-18 fw-500 border-0 d-block w-100 rounded-0"
+        </div>
+        <div class="col-12">
+          <div class="input-group p-2">
+            <span class="input-group-text p-2 bg-transparent">
+              <img
+                src={{url_for('static', filename="dashboard/assets/icons/lock.svg")}}
+                class="svg svgh-20 cw-20"
+                alt=""
               />
-            </div>
+            </span>
+            <input
+              type="password"
+              name="password"
+              class="form-control"
+              placeholder="Password"
+            />
           </div>
-        </form>
-        <div class="text-center border-top p-3">
-          <p>
-            Don't have an account?
-            <a href="signup.html" class="text-primary">Sign up</a>
-          </p>
+        </div>
+        <div class="col-6">
+          <div class="d-flex align-items-center">
+            <label class="switch checked-bg-primary me-1">
+              <input type="checkbox" checked="" id="never" />
+              <span class="slider round"> </span>
+            </label>
+            <label for="never" class="c-pointer text-muted"
+              >Remember me</label
+            >
+          </div>
+        </div>
+        <div class="col-6">
+          <a href={{url_for('dashboard.reset_password')}} class="text-end text-primary d-block"
+            >Forgot Password?</a
+          >
+        </div>
+        <div class="col-12">
+          <input
+            type="submit"
+            value="Log In"
+            class="btn btn-primary p-2 cfs-18 fw-500 border-0 d-block w-100 rounded-0"
+          />
         </div>
       </div>
+    </form>
+    <div class="text-center border-top p-3">
+      <p>
+        Don't have an account?
+        <a href={{url_for('frontend.register')}} class="text-primary">Sign up</a>
+      </p>
     </div>
   </div>
 </div>
+</div>
+</div>
 
 </div>
-    </main>
-    <script src="assets/vendor/jquery/jquery.js"></script>
-    <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/metismenu/metismenu.js"></script>
-    <script src="assets/vendor/perfectscrollbar/perfectscrollbar.js"></script>
-    <script src="assets/js/cf-init.js"></script>
-      <!-- 1-2022 -->
-    
-    <script src="assets/vendor/jqueryvalidation/jqueryvalidation.js"></script>
-    <script src="assets/js/validator-init.js"></script>
-    <script>
-      jQuery(window).on("load", function () {
-        $(".preloader").fadeOut(500);
-        $("main").addClass("show");
-      });
-    </script>
-  </body>
-
-<!-- Mirrored from cripto-dash.vercel.app/signin.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 16 Jun 2023 10:31:13 GMT -->
-</html>
+</main>
+{% endblock %}
