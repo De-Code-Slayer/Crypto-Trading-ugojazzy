@@ -12,6 +12,9 @@ dashboard = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 def dashboard_home():
     return render_template('dashboard/index.html')
 
+@dashboard.route('/trade-live')
+def live_trading():
+    return render_template('dashboard/trade.html')
 
 @dashboard.route('/transfers')
 def transfers():
