@@ -22,12 +22,13 @@ class User(db.Model, UserMixin):
 
     ssn = db.Column(db.String)
     display_photo = db.Column(db.String)
-    refferals = db.Column(db.String)
     postal_code = db.Column(db.String)
     
     card_payment_method = db.relationship('PaymentMethod', uselist=False, backref='user', lazy=True, foreign_keys='PaymentMethod.card_user_id')
     bank_payment_method = db.relationship('PaymentMethod', uselist=False, backref='user', lazy=True, foreign_keys='PaymentMethod.bank_user_id')
 
+    
+    refferals = db.relationship('Refferals', backref='user', lazy=True, foreign_keys='Refferals.user_id')
 
     transactions = db.relationship('Transactions', backref='user', lazy=True)
 
@@ -73,3 +74,12 @@ class Transactions(db.Model):
     amount = db.Column(db.Float)
     timestamp = db.Column(db.DateTime)
     # Add more fields as needed
+
+class Referrals(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    reffered_user_name = db.Column(db.String)
+    
+    timestamp = db.Column(db.DateTime)
+    # Add more fields as needed
+
