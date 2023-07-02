@@ -12,6 +12,9 @@ dashboard = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 def dashboard_home():
     return render_template('dashboard/index.html')
 
+@dashboard.route('/trade-live')
+def live_trading():
+    return render_template('dashboard/trade.html')
 
 @dashboard.route('/transfers')
 def transfers():
@@ -24,6 +27,14 @@ def wallet():
 @dashboard.route('/profile')
 def profile():
     return render_template('dashboard/profile-settings.html')
+
+@dashboard.route('/sign-in')
+def sign_in():
+    return render_template('dashboard/signin.html')
+
+@dashboard.route('/reset-password')
+def reset_password():
+    return render_template('dashboard/reset.html')
 
 @dashboard.route('/log-out')
 def sign_out():

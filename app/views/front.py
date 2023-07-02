@@ -31,6 +31,10 @@ def contact():
 def support():
     return render_template('landing/faqs.html')
 
+@frontend.route('/signup')
+def register():
+    return render_template('landing/signup.html')
+
 
 @frontend.route('/base')
 def base():
