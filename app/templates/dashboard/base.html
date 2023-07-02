@@ -592,7 +592,7 @@
     </a>
   </li>
   <li class={{ 'mm-active' if request.path == url_for('dashboard.profile') }}>
-    <a href="exchange.html">
+    <a href="{{url_for('dashboard.transfers')}}">
       <svg
         class="svgh-20"
         enable-background="new 0 0 510.947 510.947"
@@ -606,7 +606,7 @@
     </a>
   </li>
   <li class={{ 'mm-active' if request.path == url_for('dashboard.profile') }}>
-    <a href="wallet.html">
+    <a href="{{url_for('dashboard.wallet')}}">
       <svg
         class="svgh-20"
         enable-background="new 0 0 507.246 507.246"
@@ -638,7 +638,7 @@
   </li>
 </ul>
  <div class="footer">
-  <a href="signin.html">
+  <a href="{{url_for('dashboard.sign_out')}}">
     <svg
       class="svgh-20"
       xmlns="http://www.w3.org/2000/svg"
