@@ -8,7 +8,7 @@ def save_file() -> str:
     pass
 
 
-def update_user_info(form_data):
+def update_profile_info(form_data):
     profile_photo = form_data.get('profile_photo')
     username = form_data.get('username')
 
@@ -68,6 +68,9 @@ def update_user_info(form_data):
 
         if postal_code:
             current_user.postal_code = postal_code
+
+        if city:
+            current_user.city = city
 
 
 

@@ -3,7 +3,7 @@ from flask import (
 )
 from flask_login import login_user, logout_user, login_required 
 from .view_utils.authentication import login_user_from_db
-from .view_utils.data_objects import update_user_info
+from .view_utils.data_objects import update_profile_info
 
 
 
@@ -35,7 +35,7 @@ def wallet():
 def profile():
     # user info update
     if request.method == 'POST':
-        updated = update_user_info(request.form)
+        updated = update_profile_info(request.form)
         if updated:
             flash('User info updated', 'success')
     return render_template('dashboard/profile-settings.html')
