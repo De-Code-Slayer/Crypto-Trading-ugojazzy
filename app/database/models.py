@@ -1,36 +1,37 @@
 from app import db
 from flask_login import UserMixin
+from datetime import datetime
 
 
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    full_name = db.Column(db.String, unique=True, nullable=False)
+    full_name = db.Column(db.String, nullable=False)
     username = db.Column(db.String, unique=True, nullable=False)
-    email = db.Column(db.String)
-    password = db.Column(db.String)
-    dob = db.Column(db.String)
-    country = db.Column(db.String)
-    temporary_address = db.Column(db.String)
-    permanent_address = db.Column(db.String)
-    phone= db.Column(db.String)
+    email = db.Column(db.String,unique=True, nullable=False)
+    password = db.Column(db.String, nullable=False)
+    dob = db.Column(db.String, nullable=False)
+    country = db.Column(db.String, nullable=True)
+    temporary_address = db.Column(db.String,nullable=True)
+    permanent_address = db.Column(db.String, nullable=True)
+    phone= db.Column(db.String, nullable=False)
 
     # crypto accounts
-    tether_account = db.relationship('TetherAccount', uselist=False, backref='user', lazy=True)
-    bitcoin_account = db.relationship('BitcoinAccount', uselist=False, backref='user', lazy=True)
-    ethereum_account = db.relationship('EthereumAccount', uselist=False, backref='user', lazy=True)
+    tether_account = db.relationship('TetherAccount', uselist=False, backref='tether_acct', lazy=True)
+    bitcoin_account = db.relationship('BitcoinAccount', uselist=False, backref='bitcoin_acct', lazy=True)
+    ethereum_account = db.relationship('EthereumAccount', uselist=False, backref='ethereum_acct', lazy=True)
 
-    ssn = db.Column(db.String)
-    display_photo = db.Column(db.String)
-    postal_code = db.Column(db.String)
+    ssn = db.Column(db.String, nullable=True)
+    display_photo = db.Column(db.String, nullable=True)
+    postal_code = db.Column(db.String, nullable=False)
     
-    card_payment_method = db.relationship('PaymentMethod', uselist=False, backref='user', lazy=True, foreign_keys='PaymentMethod.card_user_id')
-    bank_payment_method = db.relationship('PaymentMethod', uselist=False, backref='user', lazy=True, foreign_keys='PaymentMethod.bank_user_id')
+    card_payment_method = db.relationship('PaymentMethod', uselist=False, backref='card_user', lazy=True, foreign_keys='PaymentMethod.card_user_id')
+    bank_payment_method = db.relationship('PaymentMethod', uselist=False, backref='bank_user', lazy=True, foreign_keys='PaymentMethod.bank_user_id')
 
     
-    refferals = db.relationship('Refferals', backref='user', lazy=True, foreign_keys='Refferals.user_id')
+    referer = db.relationship('Referrals', backref='reff_user', lazy=True, foreign_keys='Referrals.username')
 
-    transactions = db.relationship('Transactions', backref='user', lazy=True)
+    transactions = db.relationship('Transactions', backref='trx_user', lazy=True)
 
 class PaymentMethod(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -77,7 +78,7 @@ class Transactions(db.Model):
 
 class Referrals(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    username = db.Column(db.String(), db.ForeignKey('user.username'), nullable=False)
     reffered_user_name = db.Column(db.String)
     
     timestamp = db.Column(db.DateTime)

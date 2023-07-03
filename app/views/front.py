@@ -1,6 +1,7 @@
 from flask import (
     Blueprint, flash, redirect, render_template, request, url_for
 )
+from .view_utils.authentication import handle_registration
 
 
 frontend = Blueprint('frontend', __name__, url_prefix='/')
@@ -31,8 +32,23 @@ def contact():
 def support():
     return render_template('landing/faqs.html')
 
-@frontend.route('/signup')
+@frontend.route('/signup', methods=['GET','POST'])
 def register():
+    if request.method == 'POST':
+
+        form_data = request.form
+        registered = handle_registration(form_data)
+
+        if registered:
+            # login user
+            return redirect(url_for('dashboard.dashboard_home'))
+        
+        elif registered == {'error': 'User already exists'}:
+            flash('Email already in used, login instead', 'warning')
+
+        else:
+            flash('Could not register user', 'warning')
+
     return render_template('landing/signup.html')
 
 
