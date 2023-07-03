@@ -2,17 +2,29 @@ from app.database.models import User, Referrals
 from app import db
 import logging
 
-def get_user_from_db(*args):
+def login_user_from_db(form_data) -> User:
+    try:
+    # Extract the required data from form_data using argument unpacking
+        email, password,  = (    
+            form_data.get('email'),
+            form_data.get('password')
+        )
+        # ... extract other necessary fields
+        
+        # return user from db
+        return User.query.filter((User.email == email) & (User.password == password)).first()
+
+    except Exception as e:
+        # Handle specific exceptions or provide a general error message
+        logging.error(f'Error occurred during user registration: {str(e)}')
+        return False
     return None
 
 def check_if_user_exists_in_db(email, username=None):
     return User.query.filter((User.username == username) | (User.email == email)).first()
 
-
 def handle_registration(form_data):
-    print(form_data)
     
-
     try:
     # Extract the required data from form_data using argument unpacking
         full_name, email, password, dob, country, phone, postal_code, referer = (

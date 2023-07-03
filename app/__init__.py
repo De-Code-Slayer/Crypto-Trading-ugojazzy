@@ -49,7 +49,7 @@ def create_app(test_config=None):
     app.register_blueprint(dashboard)
 
     # setup login manager
-    login_manager = LoginManager()
+    login_manager = LoginManager(app)
     login_manager.login_view = 'frontend.sign_in'
 
     @login_manager.user_loader

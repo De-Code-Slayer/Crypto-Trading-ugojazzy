@@ -6,7 +6,7 @@
 <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10">
 <div class="card p-0">
   <div class="card-body p-0">
-    <form name="form" id="form" role="form" class="p-4">
+    <form name="form" id="form" role="form" method="post" class="p-4">
       <div class="text-center mb-4">
         <div
           class="op-primary p-3 ch-75 cw-75 d-flex align-items-center justify-content-center m-auto rounded-circle"
@@ -37,6 +37,7 @@
               name="email"
               class="form-control"
               placeholder="example@example.com"
+              required
             />
           </div>
         </div>
@@ -54,13 +55,14 @@
               name="password"
               class="form-control"
               placeholder="Password"
+              required
             />
           </div>
         </div>
         <div class="col-6">
           <div class="d-flex align-items-center">
             <label class="switch checked-bg-primary me-1">
-              <input type="checkbox" checked="" id="never" />
+              <input type="checkbox" name="remember" checked="" id="never" />
               <span class="slider round"> </span>
             </label>
             <label for="never" class="c-pointer text-muted"

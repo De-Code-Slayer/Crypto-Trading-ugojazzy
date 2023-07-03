@@ -159,7 +159,7 @@ class="
 <h4 class="card-title">User Informations</h4>
 </div>
 <div class="card-body">
-<form class="form">
+<form name='user_info' method="post" class="form">
   <div class="form-group mb-4">
     <!-- <label for="" class="d-block fw-bold mb-1">Profile Pic</label> -->
     <div class="d-flex align-items-center">
@@ -175,7 +175,7 @@ class="
         >
           Upload
         </label>
-        <input id="file-upload" class="d-none" type="file" />
+        <input id="file-upload" name="profile_photo" class="d-none" type="file" />
         <a href="#" class="btn btn-danger border-0 cw-160 mb-2 text-center"
           >Remove</a
         >
@@ -197,7 +197,9 @@ class="
 
       <input
         type="text"
-        placeholder="sabujhasansarker"
+        name="username"
+        placeholder="Username"
+        value="{{current_user.username}}"
         class="form-control"
       />
     </div>
