@@ -103,9 +103,9 @@ class EthereumAccount(db.Model):
 
 class Transactions(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    thether_account_user_id = db.Column(db.Integer, db.ForeignKey('tetheraccount.user_id'), nullable=True)
-    bitcoin_account_user_id = db.Column(db.Integer, db.ForeignKey('bitcoinaccount.user_id'), nullable=True)
-    ethereum_account_user_id = db.Column(db.Integer, db.ForeignKey('ethereumaccount.user_id'), nullable=True)
+    thether_account_user_id = db.Column(db.Integer, db.ForeignKey('tether_account.user_id'), nullable=True)
+    bitcoin_account_user_id = db.Column(db.Integer, db.ForeignKey('bitcoin_account.user_id'), nullable=True)
+    ethereum_account_user_id = db.Column(db.Integer, db.ForeignKey('ethereum_account.user_id'), nullable=True)
     transaction_type = db.Column(db.String)
     amount = db.Column(db.Float)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
