@@ -9,6 +9,9 @@ def save_file() -> str:
 
 
 def update_profile_info(form_data):
+
+    print(form_data)
+
     profile_photo = form_data.get('profile_photo')
     username = form_data.get('username')
 
@@ -61,7 +64,7 @@ def update_profile_info(form_data):
             current_user.dob = dob
 
         if present_address:
-            current_user.present_address = present_address
+            current_user.temporary_address = present_address
 
         if permanent_address:
             current_user.permanent_address = permanent_address

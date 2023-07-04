@@ -221,7 +221,7 @@ class="
 <h4 class="card-title">Security Informations</h4>
 </div>
 <div class="card-body">
-<form class="form">
+<form class="form" name="security-info" method="post">
   <div class="form-group mb-2">
     <label for="" class="d-block fw-bold mb-2">Email</label>
     <div class="input-group">
@@ -237,7 +237,9 @@ class="
 
       <input
         type="text"
+        name="email"
         placeholder="sabujhasansarker@gmail.com"
+        value="{{current_user.email}}"
         class="form-control"
       />
     </div>
@@ -256,8 +258,10 @@ class="
       </div>
 
       <input
+        name="password"
         type="password"
         placeholder="Enter your new password"
+        value="{{current_user.password}}"
         class="form-control"
       />
     </div>
@@ -282,48 +286,9 @@ class="
 <h4 class="card-title">Personal Informations</h4>
 </div>
 <div class="card-body">
-<form class="form">
+<form class="form" name="security-info" method="post">
   <div class="row">
-    <div class="col-sm-6">
-      <div class="form-group mb-3">
-        <label for="" class="d-block fw-bold mb-2">First Name</label>
-        <div class="input-group">
-          <div
-            class="op-primary d-flex align-items-center justify-content-center input-group-text border-0"
-          >
-            <img
-              class="svg svgh-16 cw-16 text-primary fill-primary"
-              src={{url_for('static', filename="dashboard/assets/icons/avatar.svg")}}
-              alt=""
-            />
-          </div>
-
-          <input type="text" placeholder="Sabuj" class="form-control" />
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="form-group mb-3">
-        <label for="" class="d-block fw-bold mb-2">Last Name</label>
-        <div class="input-group">
-          <div
-            class="op-primary d-flex align-items-center justify-content-center input-group-text border-0"
-          >
-            <img
-              class="svg svgh-16 cw-16 text-primary fill-primary"
-              src={{url_for('static', filename="dashboard/assets/icons/avatar.svg")}}
-              alt=""
-            />
-          </div>
-
-          <input
-            type="text"
-            placeholder="Hasan Sarker"
-            class="form-control"
-          />
-        </div>
-      </div>
-    </div>
+  
     <div class="col-sm-6">
       <div class="form-group mb-3">
         <label for="" class="d-block fw-bold mb-2">Birth Day</label>
@@ -340,9 +305,10 @@ class="
 
           <input
             type="date"
-            placeholder="Hasan Sarker"
+            name="dob"
+            placeholder=""
             class="form-control"
-            value="2020-09-09"
+            value="{{current_user.dob}}"
           />
         </div>
       </div>
@@ -362,7 +328,7 @@ class="
             />
           </div>
 
-          <input type="text" placeholder="Dhaka" class="form-control" />
+          <input type="text" name="city"   value="{{current_user.city|title}}" placeholder="Dhaka" class="form-control" />
         </div>
       </div>
     </div>
@@ -382,7 +348,9 @@ class="
 
           <input
             type="text"
+            name="present_address"
             placeholder="Dhaka,Bangladesh"
+            value="{{current_user.temporary_address}}"
             class="form-control"
           />
         </div>
@@ -404,8 +372,10 @@ class="
 
           <input
             type="text"
+            name="permanent_address"
             placeholder="Rangpur,Bangladesh"
             class="form-control"
+            value="{{current_user.permanent_address}}"
           />
         </div>
       </div>
@@ -424,29 +394,7 @@ class="
             />
           </div>
 
-          <input type="text" placeholder="8800" class="form-control" />
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="form-group mb-3">
-        <label for="" class="d-block fw-bold mb-2">Country</label>
-        <div class="input-group">
-          <div
-            class="op-primary d-flex align-items-center justify-content-center input-group-text border-0"
-          >
-            <img
-              class="svg svgh-16 cw-16 text-primary fill-primary"
-              src={{url_for('static', filename="dashboard/assets/icons/placeholder.svg")}}
-              alt=""
-            />
-          </div>
-
-          <input
-            type="text"
-            placeholder="Bangladesh"
-            class="form-control"
-          />
+          <input type="text" name="postal_code" placeholder="8800"   value="{{current_user.postal_code}}" class="form-control" />
         </div>
       </div>
     </div>

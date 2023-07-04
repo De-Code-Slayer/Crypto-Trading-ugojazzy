@@ -1,4 +1,4 @@
-from app.database.models import User, Referrals
+from app.database.models import User, Referrals, BitcoinAccount, EthereumAccount, TetherAccount
 from app import db
 import logging
 
@@ -19,6 +19,9 @@ def login_user_from_db(form_data) -> User:
         logging.error(f'Error occurred during user registration: {str(e)}')
         return False
     return None
+
+def get_user_by_email(email):
+    return User.query.filter((User.email == email)).first()
 
 def check_if_user_exists_in_db(email, username=None):
     return User.query.filter((User.username == username) | (User.email == email)).first()
@@ -63,12 +66,27 @@ def handle_registration(form_data):
         db.session.add(user)
         db.session.commit()
 
-        # Return a response indicating successful registration
-        return True
-
     except Exception as e:
         # Handle specific exceptions or provide a general error message
         logging.error(f'Error occurred during user registration: {str(e)}')
         return False
+    
+    # Return a response indicating successful registration
+    create_crypto_account(email)
+    return True
 
-
+def create_crypto_account(email):
+    try:
+    # Start creation of crypto accounts
+    # get user by email
+        user = get_user_by_email(email)
+    # create account by user id
+        TetherAccount(   user_id = user.id)
+        EthereumAccount( user_id = user.id)
+        BitcoinAccount(  user_id = user.id)
+    except Exception as e:
+        
+        # Handle specific exceptions or provide a general error message
+        logging.error(f'Error occurred during crypto account creation: {str(e)}')
+        return False
+    return True

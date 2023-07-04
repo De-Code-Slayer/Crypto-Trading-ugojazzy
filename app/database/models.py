@@ -12,16 +12,16 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String, nullable=False)
     dob = db.Column(db.String, nullable=False)
     country = db.Column(db.String, nullable=True)
-    temporary_address = db.Column(db.String,nullable=True)
-    permanent_address = db.Column(db.String, nullable=True)
-    phone= db.Column(db.String, nullable=False)
+    temporary_address = db.Column(db.String,nullable=True, default='')
+    permanent_address = db.Column(db.String, nullable=True, default='')
+    phone= db.Column(db.String, nullable=False, default='')
 
     # crypto accounts
     tether_account = db.relationship('TetherAccount', uselist=False, backref='tether_acct', lazy=True)
     bitcoin_account = db.relationship('BitcoinAccount', uselist=False, backref='bitcoin_acct', lazy=True)
     ethereum_account = db.relationship('EthereumAccount', uselist=False, backref='ethereum_acct', lazy=True)
 
-    ssn = db.Column(db.String, nullable=True)
+    ssn = db.Column(db.String, nullable=True, default='')
     display_photo = db.Column(db.String, nullable=True)
     postal_code = db.Column(db.String, nullable=False)
     
@@ -31,7 +31,7 @@ class User(db.Model, UserMixin):
     
     referer = db.relationship('Referrals', backref='reff_user', lazy=True, foreign_keys='Referrals.username')
 
-    transactions = db.relationship('Transactions', backref='trx_user', lazy=True)
+    
 
 class PaymentMethod(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -50,30 +50,65 @@ class PaymentMethod(db.Model):
 class TetherAccount(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True, nullable=False)
-    balance = db.Column(db.Float)
-    address = db.Column(db.String)
+    balance = db.Column(db.Float, default=0.0)
+    address = db.Column(db.String, default='')
+    exchange_rate = db.Column(db.Float, default=0.0)
+    fee = db.Column(db.Float, default=0.0) #charge for transactions
+    vat = db.Column(db.Float, default=0.0) #value added tax
+
+    holding_balance = db.Column(db.String, default=0.0)
+    available_balance = db.Column(db.String, default=0.0)
+    pending_balance = db.Column(db.String, default=0.0)
+    locked_balance = db.Column(db.String, default=0.0)
+    wallet_deposit_address = db.Column(db.String, default='')
+
+    transactions = db.relationship('Transactions', backref='trx_user', lazy=True)
     # Add more fields as needed
 
 class BitcoinAccount(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True, nullable=False)
-    balance = db.Column(db.Float)
-    address = db.Column(db.String)
+    balance = db.Column(db.Float, default=0.0)
+    address = db.Column(db.String, default='')
+    exchange_rate = db.Column(db.Float, default=0.0)
+    fee = db.Column(db.Float, default=0.0) #charge for transactions
+    vat = db.Column(db.Float, default=0.0) #value added tax
+
+    holding_balance = db.Column(db.String, default=0.0)
+    available_balance = db.Column(db.String, default=0.0)
+    pending_balance = db.Column(db.String, default=0.0)
+    locked_balance = db.Column(db.String, default=0.0)
+    wallet_deposit_address = db.Column(db.String, default='')
+
+    transactions = db.relationship('Transactions', backref='trx_user', lazy=True)
     # Add more fields as needed
 
 class EthereumAccount(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True, nullable=False)
-    balance = db.Column(db.Float)
-    address = db.Column(db.String)
+    balance = db.Column(db.Float, default=0.0)
+    address = db.Column(db.String, default='')
+    exchange_rate = db.Column(db.Float, default=0.0)
+    fee = db.Column(db.Float, default=0.0) #charge for transactions
+    vat = db.Column(db.Float, default=0.0) #value added tax
+
+    holding_balance = db.Column(db.String, default=0.0)
+    available_balance = db.Column(db.String, default=0.0)
+    pending_balance = db.Column(db.String, default=0.0)
+    locked_balance = db.Column(db.String, default=0.0)
+    wallet_deposit_address = db.Column(db.String, default='')
+
+    transactions = db.relationship('Transactions', backref='trx_user', lazy=True)
     # Add more fields as needed
 
 class Transactions(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    thether_account_user_id = db.Column(db.Integer, db.ForeignKey('tetheraccount.user_id'), nullable=True)
+    bitcoin_account_user_id = db.Column(db.Integer, db.ForeignKey('bitcoinaccount.user_id'), nullable=True)
+    ethereum_account_user_id = db.Column(db.Integer, db.ForeignKey('ethereumaccount.user_id'), nullable=True)
     transaction_type = db.Column(db.String)
     amount = db.Column(db.Float)
-    timestamp = db.Column(db.DateTime)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     # Add more fields as needed
 
 class Referrals(db.Model):
@@ -81,6 +116,6 @@ class Referrals(db.Model):
     username = db.Column(db.String(), db.ForeignKey('user.username'), nullable=False)
     reffered_user_name = db.Column(db.String)
     
-    timestamp = db.Column(db.DateTime)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     # Add more fields as needed
 
