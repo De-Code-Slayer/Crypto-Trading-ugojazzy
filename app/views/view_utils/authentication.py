@@ -81,9 +81,15 @@ def create_crypto_account(email):
     # get user by email
         user = get_user_by_email(email)
     # create account by user id
-        TetherAccount(   user_id = user.id)
-        EthereumAccount( user_id = user.id)
-        BitcoinAccount(  user_id = user.id)
+        tether = TetherAccount(   user_id = user.id)
+        ether = EthereumAccount( user_id = user.id)
+        btc = BitcoinAccount(  user_id = user.id)
+
+        # add to database and commit
+        db.session.add(tether)
+        db.session.add(ether)
+        db.session.add(btc)
+        db.session.commit()
     except Exception as e:
         
         # Handle specific exceptions or provide a general error message

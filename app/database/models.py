@@ -30,7 +30,6 @@ class User(db.Model, UserMixin):
 
     
     referer = db.relationship('Referrals', backref='reff_user', lazy=True, foreign_keys='Referrals.username')
-
     
 
 class PaymentMethod(db.Model):
@@ -62,7 +61,7 @@ class TetherAccount(db.Model):
     locked_balance = db.Column(db.String, default=0.0)
     wallet_deposit_address = db.Column(db.String, default='')
 
-    transactions = db.relationship('Transactions', backref='trx_user', lazy=True)
+    transactions = db.relationship('Transactions', backref='tether_trx_user', lazy=True)
     # Add more fields as needed
 
 class BitcoinAccount(db.Model):
@@ -80,7 +79,7 @@ class BitcoinAccount(db.Model):
     locked_balance = db.Column(db.String, default=0.0)
     wallet_deposit_address = db.Column(db.String, default='')
 
-    transactions = db.relationship('Transactions', backref='trx_user', lazy=True)
+    transactions = db.relationship('Transactions', backref='btc_trx_user', lazy=True)
     # Add more fields as needed
 
 class EthereumAccount(db.Model):
@@ -98,7 +97,7 @@ class EthereumAccount(db.Model):
     locked_balance = db.Column(db.String, default=0.0)
     wallet_deposit_address = db.Column(db.String, default='')
 
-    transactions = db.relationship('Transactions', backref='trx_user', lazy=True)
+    transactions = db.relationship('Transactions', backref='eth_trx_user', lazy=True)
     # Add more fields as needed
 
 class Transactions(db.Model):

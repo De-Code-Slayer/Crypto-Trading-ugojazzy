@@ -41,6 +41,7 @@ def register():
 
         if registered:
             # login user
+            # login_user(user, remember=True)
             return redirect(url_for('dashboard.dashboard_home'))
         
         elif registered == {'error': 'User already exists'}:
