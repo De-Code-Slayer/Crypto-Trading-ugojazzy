@@ -35,7 +35,7 @@ def wallet():
 def profile():
     # user info update
     if request.method == 'POST':
-        updated = update_profile_info(request.form)
+        updated = update_profile_info(request.form, file=request.files)
         if updated:
             flash('User info updated', 'success')
     return render_template('dashboard/profile-settings.html')

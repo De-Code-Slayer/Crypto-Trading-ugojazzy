@@ -16,6 +16,11 @@ class User(db.Model, UserMixin):
     permanent_address = db.Column(db.String, nullable=True, default='')
     phone= db.Column(db.String, nullable=False, default='')
 
+    # verifications
+    confirmed = db.Column(db.Boolean, nullable=False, default=False)
+    verified  = db.Column(db.Boolean, nullable=False, default=False) 
+
+
     # crypto accounts
     tether_account = db.relationship('TetherAccount', uselist=False, backref='tether_acct', lazy=True)
     bitcoin_account = db.relationship('BitcoinAccount', uselist=False, backref='bitcoin_acct', lazy=True)

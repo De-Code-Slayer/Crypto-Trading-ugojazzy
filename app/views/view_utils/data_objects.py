@@ -1,25 +1,43 @@
 from app.database.models import User, Referrals
+from werkzeug.utils import secure_filename
 from flask_login import current_user
-from app import db
+from app import db, UPLOADS_PATH
 import logging
+from os import path
 
 
-def save_file() -> str:
-    pass
+
+ALLOWED_EXTENSIONS = {'png', 'jpg','jpeg'}
+
+basedir = path.abspath(path.dirname(__file__))
 
 
-def update_profile_info(form_data):
 
-    print(form_data)
 
-    profile_photo = form_data.get('profile_photo')
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+def save_file(file) -> str:
+    if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(path.join(UPLOADS_PATH, filename))
+            # return url_for('static', filename="images/{filename}")
+            return filename
+
+
+def update_profile_info(form_data,file=None):
+
+    profile_photo = file.get('profile_photo')
     username = form_data.get('username')
 
     # try to update userinfo section
     try:
         if profile_photo:
-            profile_photo = save_file()
-            current_user.display_photo = profile_photo
+            current_user.display_photo = save_file(profile_photo)
         
         if username:
             current_user.username = username

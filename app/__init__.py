@@ -4,9 +4,13 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from os.path import join, dirname, realpath
 
 # create the extension
 db = SQLAlchemy()
+
+# upload path
+UPLOADS_PATH = join(dirname(realpath(__file__)), 'static/images')
 
 def create_app(test_config=None):
     # create and configure the app
@@ -14,6 +18,9 @@ def create_app(test_config=None):
     app.config.from_mapping(
         SECRET_KEY=os.getenv('SECRET_KEY'),    
     )
+
+    # upload folder
+    app.config['UPLOAD_FOLDER'] = UPLOADS_PATH
     app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('SQLALCHEMY_DATABASE_URI')
 
     # init flask migrate
