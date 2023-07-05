@@ -60,10 +60,10 @@ class TetherAccount(db.Model):
     fee = db.Column(db.Float, default=0.0) #charge for transactions
     vat = db.Column(db.Float, default=0.0) #value added tax
 
-    holding_balance = db.Column(db.String, default=0.0)
-    available_balance = db.Column(db.String, default=0.0)
-    pending_balance = db.Column(db.String, default=0.0)
-    locked_balance = db.Column(db.String, default=0.0)
+    holding_balance = db.Column(db.Float, default=0.0)
+    available_balance = db.Column(db.Float, default=0.0)
+    pending_balance = db.Column(db.Float, default=0.0)
+    locked_balance = db.Column(db.Float, default=0.0)
     wallet_deposit_address = db.Column(db.String, default='')
 
     transactions = db.relationship('Transactions', backref='tether_trx_user', lazy=True)
@@ -78,10 +78,10 @@ class BitcoinAccount(db.Model):
     fee = db.Column(db.Float, default=0.0) #charge for transactions
     vat = db.Column(db.Float, default=0.0) #value added tax
 
-    holding_balance = db.Column(db.String, default=0.0)
-    available_balance = db.Column(db.String, default=0.0)
-    pending_balance = db.Column(db.String, default=0.0)
-    locked_balance = db.Column(db.String, default=0.0)
+    holding_balance = db.Column(db.Float, default=0.0)
+    available_balance = db.Column(db.Float, default=0.0)
+    pending_balance = db.Column(db.Float, default=0.0)
+    locked_balance = db.Column(db.Float, default=0.0)
     wallet_deposit_address = db.Column(db.String, default='')
 
     transactions = db.relationship('Transactions', backref='btc_trx_user', lazy=True)
@@ -96,10 +96,10 @@ class EthereumAccount(db.Model):
     fee = db.Column(db.Float, default=0.0) #charge for transactions
     vat = db.Column(db.Float, default=0.0) #value added tax
 
-    holding_balance = db.Column(db.String, default=0.0)
-    available_balance = db.Column(db.String, default=0.0)
-    pending_balance = db.Column(db.String, default=0.0)
-    locked_balance = db.Column(db.String, default=0.0)
+    holding_balance = db.Column(db.Float, default=0.0)
+    available_balance = db.Column(db.Float, default=0.0)
+    pending_balance = db.Column(db.Float, default=0.0)
+    locked_balance = db.Column(db.Float, default=0.0)
     wallet_deposit_address = db.Column(db.String, default='')
 
     transactions = db.relationship('Transactions', backref='eth_trx_user', lazy=True)

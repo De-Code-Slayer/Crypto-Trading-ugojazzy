@@ -4,6 +4,7 @@ from flask import (
 from flask_login import login_user, logout_user, login_required 
 from .view_utils.authentication import login_user_from_db
 from .view_utils.data_objects import update_profile_info
+from .view_utils.currency_price import get_usd_to_
 
 
 
@@ -28,7 +29,13 @@ def transfers():
 @dashboard.route('/wallets')
 @login_required
 def wallet():
-    return render_template('dashboard/wallet.html')
+
+    exchange_rates = {
+    'usd_btc_rate'  : get_usd_to_('BTC'),
+    'usd_usdt_rate' : get_usd_to_('USDT'),
+    'usd_eth_rate'  : get_usd_to_('ETH'),
+    }
+    return render_template('dashboard/wallet.html', **exchange_rates)
 
 @dashboard.route('/profile', methods=['GET','POST','PUT'])
 @login_required
