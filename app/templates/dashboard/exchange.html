@@ -7,9 +7,9 @@
 <div class="row">
 <div class="col-md-12 col-lg-4"><div class="card quick-trad">
 <div class="card-header d-flex justify-content-between align-items-center">
-<h4 class="card-title">Quick Exchange</h4>
+<h4 class="card-title">Follow a Professional trader</h4>
 <div class="nav d-flex" id="quickTrade" role="tablist">
-  <a
+  <!-- <a
     class="mb-2 px-1 me-2 active"
     data-toggle="tab"
     href="#buy"
@@ -24,7 +24,7 @@
     role="tab"
     aria-selected="true"
     >Sell</a
-  >
+  > -->
 </div>
 </div>
 <div class="card-body">
@@ -32,7 +32,7 @@
   <div class="tab-pane fade show active" id="buy" role="tabpanel">
     <form class="form">
       <div class="form-group">
-        <div class="cfs-16 mb-1 fw-bold d-block">Seller</div>
+        <div class="cfs-16 mb-1 fw-bold d-block">Following</div>
         <div class="input-group">
           <div class="op-primary svg-container text-primary">
             <svg
@@ -88,8 +88,9 @@
           </div>
           <input
             type="text"
-            placeholder="Mehedi Hasan Sarker"
+            placeholder="{{current_user.trader_profile.trader_name}}"
             class="form-control"
+            readonly
           />
         </div>
       </div>
@@ -168,7 +169,7 @@
               <g></g>
             </svg>
           </div>
-          <select class="form-select form-select">
+          <select name='coin' class="form-select form-select">
             <option selected>Coin</option>
             <option value="bitcoin">Bitcoin</option>
             <option value="ethereum">Ethereum</option>
@@ -176,7 +177,7 @@
           </select>
         </div>
       </div>
-      <div class="form-group mt-2">
+      <!-- <div class="form-group mt-2">
         <div class="cfs-16 mb-1 fw-bold d-block">Payment Method</div>
         <div class="input-group">
           <div class="op-primary svg-container">
@@ -238,7 +239,7 @@
             <option value="Stripe">Stripe</option>
           </select>
         </div>
-      </div>
+      </div> -->
       <div class="form-group mt-2">
         <div class="cfs-16 mb-1 fw-bold d-block">Amount</div>
         <div class="input-group">
@@ -277,40 +278,62 @@
               />
             </svg>
           </div>
-          <input type="number" placeholder="0.32BTC" class="form-control" />
+          <input name="amount" type="number" placeholder="0.00" class="form-control" />
         </div>
       </div>
       <div class="my-3 sub-text">
-        <div class="d-flex mb-2 justify-content-between">
+        <!-- <div class="d-flex mb-2 justify-content-between">
           <p>Available</p>
           <p>0.0012 BTC = 1234 USD</p>
+        </div> -->
+        <div class="d-flex mb-2 justify-content-between">
+          <p>BTC Exchange rate</p>
+          <p>1 BTC = {{usd_btc_rate}} USD</p>
         </div>
         <div class="d-flex mb-2 justify-content-between">
-          <p>Exchange rate</p>
-          <p>1 BTC = 12345 USD</p>
+          <p>USDT Exchange rate</p>
+          <p>1 USDT = {{usd_usdt_rate}} USD</p>
         </div>
         <div class="d-flex mb-2 justify-content-between">
+          <p>Ethereum Exchange rate</p>
+          <p>1 ETH = {{usd_eth_rate}} USD</p>
+        </div>
+        <!-- <div class="d-flex mb-2 justify-content-between">
           <p>Fee</p>
-          <p>5.00%</p>
-        </div>
-        <div class="d-flex mb-2 justify-content-between">
+          <p>{5.00}%</p>
+        </div> -->
+        <!-- <div class="d-flex mb-2 justify-content-between">
           <p>Vat</p>
           <p>15.00%</p>
-        </div>
+        </div> -->
       </div>
       <div class="form-group mt-3">
+        <!-- display already following this trader if trader is the followed trader -->
+        {% if current_user.trader_profile.id == current_user.trader_profile_id %}
+        <input
+          disabled
+          type="submit"
+          class="form-control btn btn-primary border-0"
+          value="You are already following this trader"
+        />
+        {% else %}
         <input
           type="submit"
           class="form-control btn btn-primary border-0"
-          value="Buy now"
+          value="Follow Trader"
         />
+        {% endif %}
+
+
       </div>
     </form>
+
+
   </div>
   <div class="tab-pane fade show" id="sell" role="tabpanel">
     <form class="form">
       <div class="form-group">
-        <div class="cfs-16 mb-1 fw-bold d-block">Buyer</div>
+        <div class="cfs-16 mb-1 fw-bold d-block">You</div>
         <div class="input-group">
           <div class="op-danger svg-container text-danger">
             <svg

@@ -16,6 +16,13 @@ class User(db.Model, UserMixin):
     permanent_address = db.Column(db.String, nullable=True, default='')
     phone= db.Column(db.String, nullable=False, default='')
 
+    # traders profile
+    trader_profile_id = db.Column(db.Integer, db.ForeignKey('trader_profile.id'), unique=True, nullable=True)
+    traded_amount = db.Column(db.Float, nullable=True, default=0.0)
+    traded_coin = db.Column(db.String, nullable=True, default='tether')
+    trader_profile = db.relationship('TraderProfile', backref='trader', uselist=False)
+
+
     # withdrawal address
     trc_tether_wallet_address = db.Column(db.String, nullable=True, default='')
     erc_tether_wallet_address = db.Column(db.String, nullable=True, default='')
@@ -131,3 +138,8 @@ class Referrals(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     # Add more fields as needed
 
+class TraderProfile(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    trader_name = db.Column(db.String, nullable=False)
+    description = db.Column(db.String, nullable=True)
+    # Add more fields for trader profile as needed

@@ -13,7 +13,11 @@ basedir = path.abspath(path.dirname(__file__))
 
 
 
-
+def get_trader(request_data=None):
+    if request_data == None:
+        return 
+    else:
+        return
 
 
 def allowed_file(filename):

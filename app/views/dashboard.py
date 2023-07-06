@@ -3,7 +3,7 @@ from flask import (
 )
 from flask_login import login_user, logout_user, login_required 
 from .view_utils.authentication import login_user_from_db
-from .view_utils.data_objects import update_profile_info
+from .view_utils.data_objects import update_profile_info, get_trader
 from .view_utils.currency_price import get_usd_to_
 
 
@@ -21,10 +21,25 @@ def dashboard_home():
 def live_trading():
     return render_template('dashboard/trade.html')
 
+# copy trading
 @dashboard.route('/transfers')
 @login_required
 def transfers():
-    return render_template('dashboard/exchange.html')
+    exchange_rates = {
+    'usd_btc_rate'  : get_usd_to_('BTC'),
+    'usd_usdt_rate' : get_usd_to_('USDT'),
+    'usd_eth_rate'  : get_usd_to_('ETH'),
+    }
+    # get followed trader info
+    trader = get_trader()
+    if request.method == 'PUT':
+        # get info of selected trader
+        trader = get_trader(request.form)
+    if request.method=="POST":
+        # follow trader
+        pass
+    
+    return render_template('dashboard/exchange.html', **exchange_rates, trader=trader)
 
 @dashboard.route('/wallets')
 @login_required

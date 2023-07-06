@@ -392,11 +392,11 @@ role="tabpanel"
     </div>
   </div>
   <div class="form-group btn-group w-100 mt-4">
-    <input
+    <!-- <input
       type="submit"
       class="btn btn-success border-0 w-100"
       value="deposit"
-    />
+    /> -->
     <input
       type="submit"
       class="btn btn-danger border-0 w-100"
@@ -918,11 +918,11 @@ role="tabpanel"
     </div>
   </div>
   <div class="form-group btn-group w-100 mt-4">
-    <input
+    <!-- <input
       type="submit"
       class="btn btn-success border-0 w-100"
       value="deposit"
-    />
+    /> -->
     <input
       type="submit"
       class="btn btn-danger border-0 w-100"
@@ -1260,7 +1260,8 @@ role="tabpanel"
 
 
 <!-- deposit address -->
-  <div class="col-lg-4 col-sm-6"><div class="card">
+<div class="col-lg-4 col-sm-6">
+<div class="card">
 <div class="card-header">
 <h4 class="card-title">Wallet Deposit Addresses (TRC20)</h4>
 </div>
@@ -1269,6 +1270,7 @@ role="tabpanel"
   Submit a deposit using the following address or QR code. Your deposit will
  reflect on your account after confirmation (TRC20)
 </p>
+
 <img
   src={{url_for('static', filename="dashboard/assets/images/qr-code.png")}}
   class="cw-200 d-block m-auto"
@@ -1290,19 +1292,14 @@ role="tabpanel"
     Copy
   </span>
 </div>
-</div>
-</div>
 
-<!-- deposit address -->
-  <div class="col-lg-4 col-sm-6"><div class="card">
-<div class="card-header">
-<h4 class="card-title">Wallet Deposit Addresses (ERC20)</h4>
-</div>
-<div class="card-body">
+
+<!-- ERC20 -->
 <p class="sub-text mb-3">
   Submit a deposit using the following address or QR code. Your deposit will
  reflect on your account after confirmation (ERC20)
 </p>
+
 <img
   src={{url_for('static', filename="dashboard/assets/images/qr-code.png")}}
   class="cw-200 d-block m-auto"
@@ -1325,11 +1322,13 @@ role="tabpanel"
   </span>
 </div>
 </div>
-</div>
-
-
 
 </div>
+
+
+</div>
+
+<!-- about -->
   <div class="col-lg-3 col-sm-6"><div class="card">
 <div class="card-header">
 <h4 class="card-title">About</h4>
@@ -1486,11 +1485,11 @@ role="tabpanel"
     </div>
   </div>
   <div class="form-group btn-group w-100 mt-4">
-    <input
+    <!-- <input
       type="submit"
       class="btn btn-success border-0 w-100"
       value="deposit"
-    />
+    /> -->
     <input
       type="submit"
       class="btn btn-danger border-0 w-100"
