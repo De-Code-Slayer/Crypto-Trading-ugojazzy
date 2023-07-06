@@ -170,7 +170,7 @@
             </svg>
           </div>
           <select name='coin' class="form-select form-select">
-            <option selected>Coin</option>
+            <option selected disabled>Coin</option>
             <option value="bitcoin">Bitcoin</option>
             <option value="ethereum">Ethereum</option>
             <option value="tether">Tether</option>
@@ -328,12 +328,12 @@
       </div>
     </form>
 
-
+    
   </div>
-  <div class="tab-pane fade show" id="sell" role="tabpanel">
+  <!-- <div class="tab-pane fade show" id="sell" role="tabpanel">
     <form class="form">
       <div class="form-group">
-        <div class="cfs-16 mb-1 fw-bold d-block">You</div>
+        <div class="cfs-16 mb-1 fw-bold d-block">Buyer</div>
         <div class="input-group">
           <div class="op-danger svg-container text-danger">
             <svg
@@ -607,14 +607,14 @@
         />
       </div>
     </form>
-  </div>
+  </div> -->
 </div>
 </div>
 </div>
 </div>
 <div class="col-md-12 col-lg-8"><div class="card">
 <div class="card-header">
-<h4 class="card-title">Exchange Info</h4>
+<h4 class="card-title">Trader Info</h4>
 </div>
 <div class="card-body">
 <div class="d-sm-flex align-items-center justify-content-between">
@@ -625,9 +625,9 @@
       class="cw-70 rounded"
     />
     <div class="ms-3">
-      <p class="fw-bold cfs-18">Buyer</p>
-      <p>Sabuj Hasan Sarker</p>
-      <a href="mailto:shs@info.com" class="text-primary">shs@info.com</a>
+      <p class="fw-bold cfs-18">You</p>
+      <p>{{current_user.full_name}}</p>
+      <a href="mailto:shs@info.com" class="text-primary">{{current_user.email}}</a>
     </div>
   </div>
   <div class="d-flex mb-3">
