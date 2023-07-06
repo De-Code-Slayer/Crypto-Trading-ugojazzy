@@ -266,7 +266,7 @@ role="tabpanel"
 </div>
   <div class="col-lg-6 col-sm-6"><div class="card">
 <div class="card-header">
-<h4 class="card-title">Quick Transfer</h4>
+<h4 class="card-title">Quick Withdrawal</h4>
 </div>
 <div class="card-body">
 <form class="form">
@@ -322,11 +322,13 @@ role="tabpanel"
         </svg>
       </div>
       <select class="form-select form-select">
-        <option selected>Open this select your transition method</option>
-        <option value="card">Credit / Debit Card</option>
-        <option value="Paypal">Paypal</option>
+        <option selected>Open this select your withdrawal method</option>
+        {% if current_user.bitcoin_wallet_address %}
+        <option value="{{current_user.bitcoin_wallet_address}}">Bitcoin withdrawal address</option>
+        {% endif %}
+        <!-- <option value="Paypal">Paypal</option>
         <option value="Payoneer">Payoneer</option>
-        <option value="Stripe">Stripe</option>
+        <option value="Stripe">Stripe</option> -->
       </select>
     </div>
   </div>
@@ -789,7 +791,7 @@ role="tabpanel"
 </div>
   <div class="col-lg-6 col-sm-6"><div class="card">
 <div class="card-header">
-<h4 class="card-title">Quick Transfer</h4>
+<h4 class="card-title">Quick Withdrawal</h4>
 </div>
 <div class="card-body">
 <form class="form">
@@ -846,10 +848,13 @@ role="tabpanel"
       </div>
       <select class="form-select form-select">
         <option selected>Open this select your transition method</option>
-        <option value="card">Credit / Debit Card</option>
+        {% if current_user.ethereum_wallet_address %}
+        <option value="{{current_user.ethereum_wallet_address}}">Ethereum wallet address</option>
+        {% endif %}
+        <!-- <option value="card">Credit / Debit Card</option>
         <option value="Paypal">Paypal</option>
         <option value="Payoneer">Payoneer</option>
-        <option value="Stripe">Stripe</option>
+        <option value="Stripe">Stripe</option> -->
       </select>
     </div>
   </div>
@@ -1252,14 +1257,17 @@ role="tabpanel"
 </div>
 </div>
 </div>
+
+
+<!-- deposit address -->
   <div class="col-lg-4 col-sm-6"><div class="card">
 <div class="card-header">
-<h4 class="card-title">Wallet Deposit Addresses</h4>
+<h4 class="card-title">Wallet Deposit Addresses (TRC20)</h4>
 </div>
 <div class="card-body">
 <p class="sub-text mb-3">
   Submit a deposit using the following address or QR code. Your deposit will
- reflect on your account after confirmation
+ reflect on your account after confirmation (TRC20)
 </p>
 <img
   src={{url_for('static', filename="dashboard/assets/images/qr-code.png")}}
@@ -1284,6 +1292,43 @@ role="tabpanel"
 </div>
 </div>
 </div>
+
+<!-- deposit address -->
+  <div class="col-lg-4 col-sm-6"><div class="card">
+<div class="card-header">
+<h4 class="card-title">Wallet Deposit Addresses (ERC20)</h4>
+</div>
+<div class="card-body">
+<p class="sub-text mb-3">
+  Submit a deposit using the following address or QR code. Your deposit will
+ reflect on your account after confirmation (ERC20)
+</p>
+<img
+  src={{url_for('static', filename="dashboard/assets/images/qr-code.png")}}
+  class="cw-200 d-block m-auto"
+  alt="Qr code"
+/>
+<div class="input-group mt-3 d-flex align-items-center">
+  <input
+    readonly
+    type="text"
+    aria-describedby="search"
+    placeholder="{{current_user.tether_account.address_erc}}"
+    class="form-control"
+    id="copy-wallet"
+  />
+  <span
+    onclick="copy()"
+    class="input-group-text bg-tether border-tether c-pointer"
+  >
+    Copy
+  </span>
+</div>
+</div>
+</div>
+
+
+
 </div>
   <div class="col-lg-3 col-sm-6"><div class="card">
 <div class="card-header">
@@ -1312,7 +1357,7 @@ role="tabpanel"
 </div>
   <div class="col-lg-6 col-sm-6"><div class="card">
 <div class="card-header">
-<h4 class="card-title">Quick Transfer</h4>
+<h4 class="card-title">Quick Withdrawal</h4>
 </div>
 <div class="card-body">
 <form class="form">
@@ -1369,10 +1414,15 @@ role="tabpanel"
       </div>
       <select class="form-select form-select">
         <option selected>Open this select your transition method</option>
-        <option value="card">Credit / Debit Card</option>
-        <option value="Paypal">Paypal</option>
+        {% if current_user.trc_tether_wallet_address %}
+        <option value="{{current_user.trc_tether_wallet_address}}">USDT(TRC20)</option>
+        {% endif %}
+        {% if current_user.erc_tether_wallet_address %}
+        <option value="{{current_user.erc_tether_wallet_address}}">USDT(ERC20)</option>
+        {% endif %}
+        <!-- <option value="Paypal">Paypal</option>
         <option value="Payoneer">Payoneer</option>
-        <option value="Stripe">Stripe</option>
+        <option value="Stripe">Stripe</option> -->
       </select>
     </div>
   </div>

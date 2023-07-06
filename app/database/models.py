@@ -16,6 +16,13 @@ class User(db.Model, UserMixin):
     permanent_address = db.Column(db.String, nullable=True, default='')
     phone= db.Column(db.String, nullable=False, default='')
 
+    # withdrawal address
+    trc_tether_wallet_address = db.Column(db.String, nullable=True, default='')
+    erc_tether_wallet_address = db.Column(db.String, nullable=True, default='')
+    ethereum_wallet_address = db.Column(db.String, nullable=True, default='')
+    bitcoin_wallet_address = db.Column(db.String, nullable=True, default='')
+
+
     # verifications
     confirmed = db.Column(db.Boolean, nullable=False, default=False)
     verified  = db.Column(db.Boolean, nullable=False, default=False) 
@@ -56,6 +63,7 @@ class TetherAccount(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True, nullable=False)
     balance = db.Column(db.Float, default=0.0)
     address = db.Column(db.String, default='')
+    address_erc = db.Column(db.String, default='')
     exchange_rate = db.Column(db.Float, default=0.0)
     fee = db.Column(db.Float, default=0.0) #charge for transactions
     vat = db.Column(db.Float, default=0.0) #value added tax
