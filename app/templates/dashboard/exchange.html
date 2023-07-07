@@ -632,11 +632,11 @@
   </div>
   <div class="d-flex mb-3">
     <div class="me-sm-3 ms-3 ms-sm-0 text-sm-end order-1 order-sm-0">
-      <p class="fw-bold cfs-18">Seller</p>
-      <p>Mr.Mehedi</p>
-      <a href="mailto:mehedi@info.com" class="text-primary"
+      <p class="fw-bold cfs-18">Trader</p>
+      <p>{{trader.trader_name}}</p>
+      <!-- <a href="mailto:mehedi@info.com" class="text-primary"
         >mehedi@info.com</a
-      >
+      > -->
     </div>
     <img
       src={{url_for('static', filename="dashboard/assets/images/profile/2.jpg")}}
@@ -651,20 +651,24 @@
   >
     <tbody>
       <tr class="text-primary">
-        <td>You are selling</td>
-        <td class="text-end">0.0000BTC</td>
+        <td>Last 7 days return in USD</td>
+        <td class="text-end">{{trader.last_days_return_usd}}</td>
       </tr>
-      <tr>
-        <td>Payment Method</td>
-        <td class="text-end">Bank of America Bank ***********5245</td>
+      <tr class="text-primary">
+        <td>Last 6 months return in USD </td>
+        <td class="text-end">{{trader.last_months_return_usd}}</td>
       </tr>
-      <tr>
-        <td>Exchange Rate</td>
-        <td class="text-end">12345 BTC</td>
+      <tr class="text-success">
+        <td>Profit percentage</td>
+        <td class="text-end">{{trader.profit_percentage}}</td>
       </tr>
       <tr class="text-danger">
-        <td>Fee (5%)</td>
-        <td class="text-end">$28.00 USD</td>
+        <td >Loss percentage</td>
+        <td class="text-end">{{trader.loss_percentage}}</td>
+      </tr>
+      <tr class="text-info">
+        <td>Number of Trades</td>
+        <td class="text-end">{{trader.numbers_of_trades}}</td>
       </tr>
       <tr>
         <td>Sub Total</td>
