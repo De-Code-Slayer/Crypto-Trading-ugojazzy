@@ -31,15 +31,16 @@ def transfers():
     'usd_eth_rate'  : get_usd_to_('ETH'),
     }
     # get followed trader info
-    trader = get_trader()
+    trader_list = get_trader()
     if request.method == 'PUT':
         # get info of selected trader
         trader = get_trader(request.form)
     if request.method=="POST":
         # follow trader
+
         pass
     
-    return render_template('dashboard/exchange.html', **exchange_rates, trader=trader)
+    return render_template('dashboard/exchange.html', **exchange_rates, trader=trader, trader_list=trader_list)
 
 @dashboard.route('/wallets')
 @login_required

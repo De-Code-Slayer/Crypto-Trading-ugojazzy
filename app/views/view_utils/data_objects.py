@@ -1,4 +1,4 @@
-from app.database.models import User, Referrals
+from app.database.models import User, Referrals, TraderProfile
 from werkzeug.utils import secure_filename
 from flask_login import current_user
 from app import db, UPLOADS_PATH
@@ -15,9 +15,10 @@ basedir = path.abspath(path.dirname(__file__))
 
 def get_trader(request_data=None):
     if request_data == None:
-        return 
+        return TraderProfile.query.all()
     else:
-        return
+        trader_id = request_data.get('trader_id')
+        return TraderProfile.query.filter((TraderProfile.id == trader_id)).first()
 
 
 def allowed_file(filename):
