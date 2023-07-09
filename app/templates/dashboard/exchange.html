@@ -618,7 +618,7 @@
 </div>
 <div class="card-body">
 <div class="d-sm-flex align-items-center justify-content-between">
-  <div class="d-flex mb-3">
+  <!-- <div class="d-flex mb-3">
     <img
       src={{url_for('static', filename="dashboard/assets/images/profile.jpg")}}
       alt="profile"
@@ -629,7 +629,7 @@
       <p>{{current_user.full_name}}</p>
       <a href="mailto:shs@info.com" class="text-primary">{{current_user.email}}</a>
     </div>
-  </div>
+  </div> -->
   <div class="d-flex mb-3">
     <div class="me-sm-3 ms-3 ms-sm-0 text-sm-end order-1 order-sm-0">
       <p class="fw-bold cfs-18">Trader</p>
@@ -731,6 +731,8 @@
       </tr>
     </thead>
     <tbody>
+      {% if trader_list %}
+        {% for trader in trader_list %}
       <tr>
         <td class="cw-40">
           <!-- <i
@@ -744,18 +746,18 @@
                "
           ></i> -->
         </td>
-        <td>#1</td>
-        <td class="cw-120">John Doe</td>
+        <td>#{{trader.id}}</td>
+        <td class="cw-120">{{trader.trader_name}}</td>
         <td class="cw-190">
           <!-- <img
             src={{url_for('static', filename="dashboard/assets/images/profile/1.jpg")}}
             alt="profile"
             class="cw-30 ch-30 rounded-2 me-1"
           /> -->
-          10K
+        {{trader.trading_hours}}
         </td>
         <td>
-          10K
+          {{trader.numbers_of_trades}}
           <!-- <p class="d-flex">
             <span class="op-bitcoin trad-table-icon rounded-2 me-1">
               <i class="cc BTC-alt text-bitcoin"></i>
@@ -763,9 +765,9 @@
             BTC
           </p> -->
         </td>
-        <td class="cw-250">5%</td>
-        <td class="text-danger">3%</td>
-        <td class="text-success text-capitalize">Active</td>
+        <td class="cw-250">{{trader.profit_percentage}}%</td>
+        <td class="text-danger">{{trader.loss_percentage}}%</td>
+        <td class="text-success text-capitalize">{{trader.status}}</td>
         <td><div class="dropdown">
 <a data-toggle="dropdown" href="#" class="p-2">
 <svg
@@ -811,13 +813,15 @@
 </svg>
 </a>
 <div class="dropdown-menu py-0 mt-2 dropdown-menu-end">
-<a href="#" class="dropdown-item">Competed</a>
-<a href="#" class="dropdown-item">Panding</a>
-<a href="#" class="text-danger dropdown-item">Canceled</a>
+<a href="#" class="dropdown-item">Follow</a>
+<!-- <a href="#" class="dropdown-item">Panding</a>
+<a href="#" class="text-danger dropdown-item">Canceled</a> -->
 </div>
 </div>
 </td>
       </tr>
+         {%  endfor %}
+      {% endif %}
       <tr>
         <td class="cw-40">
           <i

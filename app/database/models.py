@@ -149,5 +149,6 @@ class TraderProfile(db.Model):
     loss_percentage = db.Column(db.Float, nullable=True)
     trading_hours = db.Column(db.Float, nullable=True)
     followers = db.Column(db.String, nullable=True)
+    status = db.Column(db.String, nullable=True)
 
     # Add more fields for trader profile as needed

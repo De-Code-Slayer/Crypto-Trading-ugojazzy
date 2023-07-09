@@ -13,12 +13,17 @@ basedir = path.abspath(path.dirname(__file__))
 
 
 
-def get_trader(request_data=None):
-    if request_data == None:
-        return TraderProfile.query.all()
-    else:
+def get_trader(request_data=None, user_trader=None):
+    if request_data:
+        # return trader by trader id
         trader_id = request_data.get('trader_id')
         return TraderProfile.query.filter((TraderProfile.id == trader_id)).first()
+    if user_trader:
+        # return current user followed trader if passed
+        return TraderProfile.query.filter((TraderProfile.id == user_trader)).first()
+    else:
+        # return list of all traders
+         return TraderProfile.query.all()
 
 
 def allowed_file(filename):
