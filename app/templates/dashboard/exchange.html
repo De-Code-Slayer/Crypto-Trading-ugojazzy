@@ -7,9 +7,9 @@
 <div class="row">
 <div class="col-md-12 col-lg-4"><div class="card quick-trad">
 <div class="card-header d-flex justify-content-between align-items-center">
-<h4 class="card-title">Quick Exchange</h4>
+<h4 class="card-title">Follow a Professional trader</h4>
 <div class="nav d-flex" id="quickTrade" role="tablist">
-  <a
+  <!-- <a
     class="mb-2 px-1 me-2 active"
     data-toggle="tab"
     href="#buy"
@@ -24,7 +24,7 @@
     role="tab"
     aria-selected="true"
     >Sell</a
-  >
+  > -->
 </div>
 </div>
 <div class="card-body">
@@ -32,7 +32,7 @@
   <div class="tab-pane fade show active" id="buy" role="tabpanel">
     <form class="form">
       <div class="form-group">
-        <div class="cfs-16 mb-1 fw-bold d-block">Seller</div>
+        <div class="cfs-16 mb-1 fw-bold d-block">Name</div>
         <div class="input-group">
           <div class="op-primary svg-container text-primary">
             <svg
@@ -88,8 +88,9 @@
           </div>
           <input
             type="text"
-            placeholder="Mehedi Hasan Sarker"
+            placeholder="{{trader.trader_name}}"
             class="form-control"
+            readonly
           />
         </div>
       </div>
@@ -168,15 +169,15 @@
               <g></g>
             </svg>
           </div>
-          <select class="form-select form-select">
-            <option selected>Coin</option>
+          <select readonly name='coin' class="form-select form-select">
+            <option selected disabled>Coin</option>
             <option value="bitcoin">Bitcoin</option>
             <option value="ethereum">Ethereum</option>
             <option value="tether">Tether</option>
           </select>
         </div>
       </div>
-      <div class="form-group mt-2">
+      <!-- <div class="form-group mt-2">
         <div class="cfs-16 mb-1 fw-bold d-block">Payment Method</div>
         <div class="input-group">
           <div class="op-primary svg-container">
@@ -238,7 +239,7 @@
             <option value="Stripe">Stripe</option>
           </select>
         </div>
-      </div>
+      </div> -->
       <div class="form-group mt-2">
         <div class="cfs-16 mb-1 fw-bold d-block">Amount</div>
         <div class="input-group">
@@ -277,37 +278,60 @@
               />
             </svg>
           </div>
-          <input type="number" placeholder="0.32BTC" class="form-control" />
+          <input readonly name="amount" type="number" placeholder="1000" class="form-control" />
         </div>
       </div>
       <div class="my-3 sub-text">
-        <div class="d-flex mb-2 justify-content-between">
+        <!-- <div class="d-flex mb-2 justify-content-between">
           <p>Available</p>
           <p>0.0012 BTC = 1234 USD</p>
+        </div> -->
+        <div class="d-flex mb-2 justify-content-between">
+          <p>BTC Exchange rate</p>
+          <p>1 BTC = {{usd_btc_rate}} USD</p>
         </div>
         <div class="d-flex mb-2 justify-content-between">
-          <p>Exchange rate</p>
-          <p>1 BTC = 12345 USD</p>
+          <p>USDT Exchange rate</p>
+          <p>1 USDT = {{usd_usdt_rate}} USD</p>
         </div>
         <div class="d-flex mb-2 justify-content-between">
+          <p>Ethereum Exchange rate</p>
+          <p>1 ETH = {{usd_eth_rate}} USD</p>
+        </div>
+        <!-- <div class="d-flex mb-2 justify-content-between">
           <p>Fee</p>
-          <p>5.00%</p>
-        </div>
-        <div class="d-flex mb-2 justify-content-between">
+          <p>{5.00}%</p>
+        </div> -->
+        <!-- <div class="d-flex mb-2 justify-content-between">
           <p>Vat</p>
           <p>15.00%</p>
-        </div>
+        </div> -->
       </div>
       <div class="form-group mt-3">
+        <!-- display already following this trader if trader is the followed trader -->
+        {% if trader.id == current_user.trader_profile_id %}
+        <input
+          disabled
+          type="submit"
+          class="form-control btn btn-primary border-0"
+          value="You are already following this trader"
+        />
+        {% else %}
         <input
           type="submit"
           class="form-control btn btn-primary border-0"
-          value="Buy now"
+          value="Follow Trader"
+          onclick="sendPostRequest({{trader.id}})"
         />
+        {% endif %}
+
+
       </div>
     </form>
+
+    
   </div>
-  <div class="tab-pane fade show" id="sell" role="tabpanel">
+  <!-- <div class="tab-pane fade show" id="sell" role="tabpanel">
     <form class="form">
       <div class="form-group">
         <div class="cfs-16 mb-1 fw-bold d-block">Buyer</div>
@@ -584,42 +608,49 @@
         />
       </div>
     </form>
-  </div>
+  </div> -->
 </div>
 </div>
 </div>
 </div>
 <div class="col-md-12 col-lg-8"><div class="card">
 <div class="card-header">
-<h4 class="card-title">Exchange Info</h4>
+<h4 class="card-title">Trader Info</h4>
 </div>
 <div class="card-body">
 <div class="d-sm-flex align-items-center justify-content-between">
   <div class="d-flex mb-3">
-    <img
+    <!-- <img
       src={{url_for('static', filename="dashboard/assets/images/profile.jpg")}}
       alt="profile"
       class="cw-70 rounded"
-    />
+    /> -->
     <div class="ms-3">
-      <p class="fw-bold cfs-18">Buyer</p>
-      <p>Sabuj Hasan Sarker</p>
-      <a href="mailto:shs@info.com" class="text-primary">shs@info.com</a>
+      <p class="fw-bold cfs-18">You</p>
+      <p>{{current_user.full_name}}</p>
+      <a class="text-primary">{{current_user.email}}</a>
     </div>
   </div>
   <div class="d-flex mb-3">
     <div class="me-sm-3 ms-3 ms-sm-0 text-sm-end order-1 order-sm-0">
-      <p class="fw-bold cfs-18">Seller</p>
-      <p>Mr.Mehedi</p>
-      <a href="mailto:mehedi@info.com" class="text-primary"
-        >mehedi@info.com</a
+      <p class="fw-bold cfs-18">Trader</p>
+      <p>{{trader.trader_name}}</p>
+
+      {% if current_user.trader_profile.id == trader.id %}
+      <a class="text-info"
+        >You are following this trader</a
       >
+      {% else %}
+      <a class="text-danger"
+        >You are Not following this trader</a
+      >
+      {% endif %}
     </div>
-    <img
+    <!-- <img
       src={{url_for('static', filename="dashboard/assets/images/profile/2.jpg")}}
       alt="profile"
       class="cw-70 rounded order-0 order-sm-1"
-    />
+    /> -->
   </div>
 </div>
 <div class="table-responsive mt-4">
@@ -628,42 +659,48 @@
   >
     <tbody>
       <tr class="text-primary">
-        <td>You are selling</td>
-        <td class="text-end">0.0000BTC</td>
+        <td>Last 7 days return in USD</td>
+        <td class="text-end">{{trader.last_days_return_usd}}</td>
       </tr>
-      <tr>
-        <td>Payment Method</td>
-        <td class="text-end">Bank of America Bank ***********5245</td>
+      <tr class="text-primary">
+        <td>Last 6 months return in USD </td>
+        <td class="text-end">{{trader.last_months_return_usd}}</td>
       </tr>
-      <tr>
-        <td>Exchange Rate</td>
-        <td class="text-end">12345 BTC</td>
-      </tr>
-      <tr class="text-danger">
-        <td>Fee (5%)</td>
-        <td class="text-end">$28.00 USD</td>
-      </tr>
-      <tr>
-        <td>Sub Total</td>
-        <td class="text-end">$854.00 USD</td>
+      <tr class="text-success">
+        <td>Profit percentage</td>
+        <td class="text-end">{{trader.profit_percentage}}</td>
       </tr>
       <tr class="text-danger">
-        <td>Vat (15%)</td>
-        <td class="text-end">$25.00 USD</td>
+        <td >Loss percentage</td>
+        <td class="text-end">{{trader.loss_percentage}}</td>
+      </tr>
+      <tr class="text-info">
+        <td>Number of Trades</td>
+        <td class="text-end">{{trader.numbers_of_trades}}</td>
       </tr>
       <tr>
+        <td>Trading Hours</td>
+        <td class="text-end">{{trader.trading_hours}}</td>
+      </tr>
+      <tr>
+        <td>Followers</td>
+        <td class="text-end">{{trader.followers}}</td>
+      </tr>
+      <!-- <tr>
         <td>Total</td>
         <td class="text-end">$1232.00 USD</td>
-      </tr>
+      </tr> -->
     </tbody>
   </table>
 </div>
 </div>
 </div>
 </div>
+
+<!-- Traders -->
 <div class="col-12"><div class="card">
 <div class="card-header">
-<h4 class="card-title">Exchange Activity</h4>
+<h4 class="card-title">Traders</h4>
 </div>
 <div class="card-body ch-table">
 <div class="table-responsive">
@@ -692,19 +729,21 @@
           ></i> -->
         </td>
         <td class="border-0">Id</td>
-        <td class="border-0 cw-120">Date</td>
-        <td class="border-0 cw-190">Name</td>
-        <td class="border-0">Coin</td>
-        <td class="border-0 cw-250">Payment Method</td>
-        <td class="border-0">Amount</td>
+        <td class="border-0 cw-120">Name</td>
+        <td class="border-0 cw-190">Hours</td>
+        <td class="border-0">Number of Trades</td>
+        <td class="border-0 cw-250">Profit</td>
+        <td class="border-0">Loss</td>
         <td class="border-0">Status</td>
-        <!-- <td class="border-0">Action</td> -->
+        <td class="border-0">Action</td>
       </tr>
     </thead>
     <tbody>
+      {% if trader_list %}
+        {% for trader in trader_list %}
       <tr>
         <td class="cw-40">
-          <i
+          <!-- <i
             class="
                  ri-arrow-down-line
                  text-success
@@ -713,30 +752,31 @@
                  op-success
                  rounded-2
                "
-          ></i>
+          ></i> -->
         </td>
-        <td>#8089089</td>
-        <td class="cw-120">03/05/21</td>
+        <td>#{{trader.id}}</td>
+        <td class="cw-120">{{trader.trader_name}}</td>
         <td class="cw-190">
-          <img
+          <!-- <img
             src={{url_for('static', filename="dashboard/assets/images/profile/1.jpg")}}
             alt="profile"
             class="cw-30 ch-30 rounded-2 me-1"
-          />
-          Mr.Mehedi
+          /> -->
+        {{trader.trading_hours}}
         </td>
         <td>
-          <p class="d-flex">
+          {{trader.numbers_of_trades}}
+          <!-- <p class="d-flex">
             <span class="op-bitcoin trad-table-icon rounded-2 me-1">
               <i class="cc BTC-alt text-bitcoin"></i>
             </span>
             BTC
-          </p>
+          </p> -->
         </td>
-        <td class="cw-250">Using - Card *******8475</td>
-        <td>$573</td>
-        <td class="text-success text-capitalize">completed</td>
-        <!-- <td><div class="dropdown">
+        <td class="cw-250">{{trader.profit_percentage}}%</td>
+        <td class="text-danger">{{trader.loss_percentage}}%</td>
+        <td class="text-success text-capitalize">{{trader.status}}</td>
+        <td><div class="dropdown">
 <a data-toggle="dropdown" href="#" class="p-2">
 <svg
   class="svgh-18"
@@ -781,14 +821,18 @@
 </svg>
 </a>
 <div class="dropdown-menu py-0 mt-2 dropdown-menu-end">
-<a href="#" class="dropdown-item">Competed</a>
-<a href="#" class="dropdown-item">Panding</a>
-<a href="#" class="text-danger dropdown-item">Canceled</a>
+  {% if current_user.trader_profile.id != trader.id %}
+<a href="" onclick="sendPostRequest({{trader.id}})" class="dropdown-item">Follow Trader</a>
+  {% endif %}
+<a href="#" onclick="sendPutRequest({{trader.id}})" class="dropdown-item">View More</a>
+<!-- <a href="#" class="text-danger dropdown-item">Canceled</a> -->
 </div>
 </div>
-</td> -->
+</td>
       </tr>
-      <tr>
+         {%  endfor %}
+      {% endif %}
+      <!-- <tr>
         <td class="cw-40">
           <i
             class="
@@ -822,7 +866,7 @@
         <td class="cw-250">Using - Card *******8475</td>
         <td>$273</td>
         <td class="text-success text-capitalize">completed</td>
-        <!-- <td><div class="dropdown">
+        <td><div class="dropdown">
 <a data-toggle="dropdown" href="#" class="p-2">
 <svg
   class="svgh-18"
@@ -872,9 +916,9 @@
 <a href="#" class="text-danger dropdown-item">Canceled</a>
 </div>
 </div>
-</td> -->
-      </tr>
-      <tr>
+</td>
+      </tr> -->
+      <!-- <tr>
         <td class="cw-40">
           <i
             class="
@@ -908,7 +952,7 @@
         <td class="cw-250">Using - Card *******8475</td>
         <td>$305</td>
         <td class="text-warning text-capitalize">Panding</td>
-        <!-- <td><div class="dropdown">
+        <td><div class="dropdown">
 <a data-toggle="dropdown" href="#" class="p-2">
 <svg
   class="svgh-18"
@@ -958,7 +1002,7 @@
 <a href="#" class="text-danger dropdown-item">Canceled</a>
 </div>
 </div>
-</td> -->
+</td>
       </tr>
       <tr>
         <td class="cw-40">
@@ -994,7 +1038,7 @@
         <td class="cw-250">Using - Card *******8475</td>
         <td>$120</td>
         <td class="text-danger text-capitalize">canceled</td>
-        <!-- <td><div class="dropdown">
+        <td><div class="dropdown">
 <a data-toggle="dropdown" href="#" class="p-2">
 <svg
   class="svgh-18"
@@ -1044,7 +1088,7 @@
 <a href="#" class="text-danger dropdown-item">Canceled</a>
 </div>
 </div>
-</td> -->
+</td>
       </tr>
       <tr>
         <td class="cw-40">
@@ -1080,7 +1124,7 @@
         <td class="cw-250">Using - Card *******8475</td>
         <td>$273</td>
         <td class="text-success text-capitalize">completed</td>
-        <!-- <td><div class="dropdown">
+        <td><div class="dropdown">
 <a data-toggle="dropdown" href="#" class="p-2">
 <svg
   class="svgh-18"
@@ -1130,7 +1174,7 @@
 <a href="#" class="text-danger dropdown-item">Canceled</a>
 </div>
 </div>
-</td> -->
+</td>
       </tr>
       <tr>
         <td class="cw-40">
@@ -1166,7 +1210,7 @@
         <td class="cw-250">Using - Card *******8475</td>
         <td>$273</td>
         <td class="text-success text-capitalize">completed</td>
-        <!-- <td><div class="dropdown">
+        <td><div class="dropdown">
 <a data-toggle="dropdown" href="#" class="p-2">
 <svg
   class="svgh-18"
@@ -1216,7 +1260,7 @@
 <a href="#" class="text-danger dropdown-item">Canceled</a>
 </div>
 </div>
-</td> -->
+</td>
       </tr>
       <tr>
         <td class="cw-40">
@@ -1252,7 +1296,7 @@
         <td class="cw-250">Using - Card *******8475</td>
         <td>$573</td>
         <td class="text-success text-capitalize">completed</td>
-        <!-- <td><div class="dropdown">
+        <td><div class="dropdown">
 <a data-toggle="dropdown" href="#" class="p-2">
 <svg
   class="svgh-18"
@@ -1302,7 +1346,7 @@
 <a href="#" class="text-danger dropdown-item">Canceled</a>
 </div>
 </div>
-</td> -->
+</td>
       </tr>
       <tr>
         <td class="cw-40">
@@ -1338,7 +1382,7 @@
         <td class="cw-250">Using - Card *******8475</td>
         <td>$273</td>
         <td class="text-success text-capitalize">completed</td>
-        <!-- <td><div class="dropdown">
+        <td><div class="dropdown">
 <a data-toggle="dropdown" href="#" class="p-2">
 <svg
   class="svgh-18"
@@ -1388,7 +1432,7 @@
 <a href="#" class="text-danger dropdown-item">Canceled</a>
 </div>
 </div>
-</td> -->
+</td>
       </tr>
       <tr>
         <td class="cw-40">
@@ -1424,7 +1468,7 @@
         <td class="cw-250">Using - Card *******8475</td>
         <td>$305</td>
         <td class="text-warning text-capitalize">Panding</td>
-        <!-- <td><div class="dropdown">
+        <td><div class="dropdown">
 <a data-toggle="dropdown" href="#" class="p-2">
 <svg
   class="svgh-18"
@@ -1474,7 +1518,7 @@
 <a href="#" class="text-danger dropdown-item">Canceled</a>
 </div>
 </div>
-</td> -->
+</td>
       </tr>
       <tr>
         <td class="cw-40">
@@ -1510,7 +1554,7 @@
         <td class="cw-250">Using - Card *******8475</td>
         <td>$120</td>
         <td class="text-danger text-capitalize">canceled</td>
-        <!-- <td><div class="dropdown">
+        <td><div class="dropdown">
 <a data-toggle="dropdown" href="#" class="p-2">
 <svg
   class="svgh-18"
@@ -1560,7 +1604,7 @@
 <a href="#" class="text-danger dropdown-item">Canceled</a>
 </div>
 </div>
-</td> -->
+</td>
       </tr>
       <tr>
         <td class="cw-40">
@@ -1596,7 +1640,7 @@
         <td class="cw-250">Using - Card *******8475</td>
         <td>$273</td>
         <td class="text-success text-capitalize">completed</td>
-        <!-- <td><div class="dropdown">
+        <td><div class="dropdown">
 <a data-toggle="dropdown" href="#" class="p-2">
 <svg
   class="svgh-18"
@@ -1646,7 +1690,7 @@
 <a href="#" class="text-danger dropdown-item">Canceled</a>
 </div>
 </div>
-</td> -->
+</td>
       </tr>
       <tr>
         <td class="cw-40">
@@ -1682,7 +1726,7 @@
         <td class="cw-250">Using - Card *******8475</td>
         <td>$273</td>
         <td class="text-success text-capitalize">completed</td>
-        <!-- <td><div class="dropdown">
+        <td><div class="dropdown">
 <a data-toggle="dropdown" href="#" class="p-2">
 <svg
   class="svgh-18"
@@ -1732,8 +1776,8 @@
 <a href="#" class="text-danger dropdown-item">Canceled</a>
 </div>
 </div>
-</td> -->
-      </tr>
+</td>
+      </tr> -->
     </tbody>
   </table>
 </div>
@@ -1744,5 +1788,76 @@
 
 </div>
 </main>
+
+<script>
+  function sendPostRequest(data) {
+    // Get the current URL
+    var currentUrl = window.location.href;
+  
+    // Create a new request object
+    var request = new Request(currentUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ trader_id: data }) // Modify the payload as needed
+    });
+  
+    // Send the POST request
+    fetch(request)
+      .then(function(response) {
+        // Handle the response
+        if (response.ok) {
+          window.location.reload();
+          return response.json();
+        } else {
+          throw new Error('Error: ' + response.status);
+        }
+      })
+      .then(function(data) {
+        // Handle the data returned from the server
+        console.log(data);
+      })
+      .catch(function(error) {
+        // Handle any errors that occur during the request
+        console.error(error);
+      });
+  }
+
+  function sendPutRequest(data) {
+    // Get the current URL
+    var currentUrl = window.location.href;
+  
+    // Create a new request object
+    var request = new Request(currentUrl, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ trader_id: data }) // Modify the payload as needed
+    });
+  
+    // Send the PUT request
+  fetch(request)
+  .then(function(response) {
+    // Handle the response
+    if (response.ok) {
+      return response.text();
+    } else {
+      throw new Error('Error: ' + response.status);
+    }
+  })
+  .then(function(html) {
+    // Replace the current page with the new HTML
+    document.open();
+    document.write(html);
+    document.close();
+  })
+  .catch(function(error) {
+    // Handle any errors that occur during the request
+    console.error(error);
+  });
+}
+</script>
 
 {% endblock %}

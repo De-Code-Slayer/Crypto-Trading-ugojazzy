@@ -46,33 +46,49 @@
 							<div class="row">
 								<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 									<h3 class="heading-lead center">Register An Account</h3>
-									<form class="form-signup"  method="post">
+									<form class="form-signup" onsubmit="return validatePassword()"  method="post">
 										<div class="form-results"></div>
 										<div class="form-group">
 											<div class="form-field form-m-bttm">
-												<input name="signup-name" type="text" placeholder="Name *" class="form-control required" aria-required="true">
+												<input name="fullname" type="text" placeholder="Name *" class="form-control required" aria-required="true" required>
 											</div>
 										</div>
 										<div class="form-group">
 											<div class="form-field form-m-bttm">
-												<input name="signup-email" type="email" placeholder="Email *" class="form-control required email" aria-required="true">
+												<input name="email" type="email" placeholder="Email *" class="form-control required email" aria-required="true" required>
+											</div>
+											<div class="form-field form-m-bttm">
+												<input name="dob" type="date" placeholder="Date of birth *" class="form-control required email" aria-required="true" required>
+											</div>
+											<div class="form-field form-m-bttm">
+												<input name="country" type="text" placeholder="country *" class="form-control required email" aria-required="true" required>
+											</div>
+											<div class="form-field form-m-bttm">
+												<input name="phone" type="phone" placeholder="Phone *" class="form-control required email" aria-required="true" required>
+											</div>
+											<div class="form-field form-m-bttm">
+												<input name="postal_code" type="postal_code" placeholder="Postal Code *" class="form-control required email" aria-required="true" required>
+											</div>
+											<div class="form-field form-m-bttm">
+												<input name="referee" type="text" placeholder="Username of referer" class="form-control required email" aria-required="true" >
 											</div>
 										</div>
 										<div class="form-group">
 											<div class="form-field">
-												<input name="signup-passkey" type="password" placeholder="Password *" class="form-control required" aria-required="true">
+												<input name="password" type="password" id="password" placeholder="Password *" class="form-control required" aria-required="true" required>
 											</div>
 										</div>
 										<div class="form-group">
 											<div class="form-field">
-												<input name="signup-passkey-confirm" type="password" placeholder="Confirm Password *" class="form-control required" aria-required="true">
+												<input name="passkey-confirm" type="password" id="confirmPassword" placeholder="Confirm Password *" class="form-control required" aria-required="true" required>
 											</div>
 										</div>
 										<div class="form-group">
 											<div class="form-field">
-												<input type="checkbox" name="signup-term"> <span> I accept and agree with the terms of the <a href="#">User Agreement</a>.</span>
+												<input type="checkbox" name="signup-term" required> <span> I accept and agree with the terms of the <a href="#">User Agreement</a>.</span>
 											</div>
 										</div>
+										<p class="text-danger" id="validationMessage"></p>
 
 										<button type="submit" class="btn btn-alt">Signup</button>
 										<span class="gaps"></span>
@@ -86,6 +102,56 @@
 			</div>	
 		</div>
 		<!-- End Section -->
+
+		<script>
+			function validatePassword() {
+			  var passwordInput = document.getElementById("password");
+			  var confirmPasswordInput = document.getElementById("confirmPassword");
+			  var validationMessage = document.getElementById("validationMessage");
+		
+			  var password = passwordInput.value;
+			  var confirmPassword = confirmPasswordInput.value;
+		
+			  var minLength = 8;
+			  var uppercaseRegex = /[A-Z]/;
+			  var lowercaseRegex = /[a-z]/;
+			  var digitRegex = /[0-9]/;
+			  var specialCharRegex = /[!@#$%^&-/_*]/;
+		
+			  if (password !== confirmPassword) {
+				validationMessage.innerHTML = "Passwords do not match.";
+				return false;
+			  }
+		
+			  if (password.length < minLength) {
+				validationMessage.innerHTML = "Password should be at least " + minLength + " characters long.";
+				return false;
+			  }
+		
+			  if (!uppercaseRegex.test(password)) {
+				validationMessage.innerHTML = "Password should contain at least one uppercase letter.";
+				return false;
+			  }
+		
+			  if (!lowercaseRegex.test(password)) {
+				validationMessage.innerHTML = "Password should contain at least one lowercase letter.";
+				return false;
+			  }
+		
+			  if (!digitRegex.test(password)) {
+				validationMessage.innerHTML = "Password should contain at least one digit.";
+				return false;
+			  }
+		
+			  if (!specialCharRegex.test(password)) {
+				validationMessage.innerHTML = "Password should contain at least one special character.";
+				return false;
+			  }
+		
+			  validationMessage.innerHTML = "Passwords are valid.";
+			  return true;
+			}
+		  </script>
       	
 		
 	{% endblock %}

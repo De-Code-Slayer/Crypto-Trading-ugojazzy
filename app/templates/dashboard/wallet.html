@@ -53,7 +53,9 @@ class="card-header d-flex pt-2 align-items-center justify-content-between"
       tether
     </p>
   </a>
-  <a
+
+  <!-- unused currencies -->
+  <!-- <a
     class="px-1  text-capitalize mb-2  bg-active-dash rounded-3 p-1 me-3"
     data-toggle="tab"
     href="#dash"
@@ -80,11 +82,14 @@ class="card-header d-flex pt-2 align-items-center justify-content-between"
       ></i>
       ltc
     </p>
-  </a>
+  </a> -->
 </div>
+
+
 <ul class="mb-2 d-none d-lg-block">
   <li class="search">
-    <div class="input-group d-flex align-items-center">
+    <!-- search bar -->
+    <!-- <div class="input-group d-flex align-items-center">
       <input
         type="text"
         aria-describedby="search"
@@ -109,13 +114,18 @@ class="card-header d-flex pt-2 align-items-center justify-content-between"
           />
         </svg>
       </span>
-    </div>
+    </div> -->
   </li>
 </ul>
+
 </div>
 </div>
 </div>
+
 <div class="col-12"><div class="tab-content">
+
+
+<!-- bitcoin -->
 <div
 class="tab-pane fade show "
 id="bitcoin"
@@ -130,10 +140,10 @@ role="tabpanel"
   </div>
   <div class="card-body pt-0">
     <p>
-      <span class="text-bitcoin cfs-30 fw-bold"> 0.0004 </span>
+      <span class="text-bitcoin cfs-30 fw-bold"> {{current_user.bitcoin_account.holding_balance}} </span>
       <span class="fw-normal">BTC</span>
     </p>
-    <p class="sub-text mt-n1">= 129USD</p>
+    <p class="sub-text mt-n1">= {{current_user.bitcoin_account.holding_balance/usd_btc_rate}}USD</p>
   </div>
 </div>
 </div>
@@ -144,10 +154,10 @@ role="tabpanel"
   </div>
   <div class="card-body pt-0">
     <p>
-      <span class="text-success cfs-30 fw-bold"> 0.009 </span>
+      <span class="text-success cfs-30 fw-bold"> {{current_user.bitcoin_account.available_balance}} </span>
       <span class="fw-normal">BTC</span>
     </p>
-    <p class="sub-text mt-n1">= 239USD</p>
+    <p class="sub-text mt-n1">= {{current_user.bitcoin_account.available_balance/usd_btc_rate}}USD</p>
   </div>
 </div>
 </div>
@@ -158,10 +168,10 @@ role="tabpanel"
   </div>
   <div class="card-body pt-0">
     <p>
-      <span class="text-warning cfs-30 fw-bold"> 0.0002 </span>
+      <span class="text-warning cfs-30 fw-bold"> {{current_user.bitcoin_account.pending_balance}} </span>
       <span class="fw-normal">BTC</span>
     </p>
-    <p class="sub-text mt-n1">= 99USD</p>
+    <p class="sub-text mt-n1">= {{current_user.bitcoin_account.pending_balance/usd_btc_rate}}USD</p>
   </div>
 </div>
 </div>
@@ -172,10 +182,10 @@ role="tabpanel"
   </div>
   <div class="card-body pt-0">
     <p>
-      <span class="text-danger cfs-30 fw-bold"> 0.00 </span>
+      <span class="text-danger cfs-30 fw-bold"> {{current_user.bitcoin_account.locked_balance}} </span>
       <span class="fw-normal">BTC</span>
     </p>
-    <p class="sub-text mt-n1">= 0.00USD</p>
+    <p class="sub-text mt-n1">= {{current_user.bitcoin_account.locked_balance/usd_btc_rate}}USD</p>
   </div>
 </div>
 </div>
@@ -203,7 +213,7 @@ role="tabpanel"
 <div class="card-body">
 <p class="sub-text mb-3">
   Submit a deposit using the following address or QR code. Your deposit will
-  be refiected in your account offer 6 confirmationos
+  reflect on your account after confirmation
 </p>
 <img
   src={{url_for('static', filename="dashboard/assets/images/qr-code.png")}}
@@ -212,9 +222,10 @@ role="tabpanel"
 />
 <div class="input-group mt-3 d-flex align-items-center">
   <input
+    readonly
     type="text"
     aria-describedby="search"
-    placeholder="https://www.codeefly.con/join/12345"
+    placeholder="{{current_user.bitcoin_account.address}}"
     class="form-control"
     id="copy-wallet"
   />
@@ -255,7 +266,7 @@ role="tabpanel"
 </div>
   <div class="col-lg-6 col-sm-6"><div class="card">
 <div class="card-header">
-<h4 class="card-title">Quick Transfer</h4>
+<h4 class="card-title">Quick Withdrawal</h4>
 </div>
 <div class="card-body">
 <form class="form">
@@ -311,11 +322,13 @@ role="tabpanel"
         </svg>
       </div>
       <select class="form-select form-select">
-        <option selected>Open this select your transition method</option>
-        <option value="card">Credit / Debit Card</option>
-        <option value="Paypal">Paypal</option>
+        <option selected>Open this select your withdrawal method</option>
+        {% if current_user.bitcoin_wallet_address %}
+        <option value="{{current_user.bitcoin_wallet_address}}">Bitcoin withdrawal address</option>
+        {% endif %}
+        <!-- <option value="Paypal">Paypal</option>
         <option value="Payoneer">Payoneer</option>
-        <option value="Stripe">Stripe</option>
+        <option value="Stripe">Stripe</option> -->
       </select>
     </div>
   </div>
@@ -379,11 +392,11 @@ role="tabpanel"
     </div>
   </div>
   <div class="form-group btn-group w-100 mt-4">
-    <input
+    <!-- <input
       type="submit"
       class="btn btn-success border-0 w-100"
       value="deposit"
-    />
+    /> -->
     <input
       type="submit"
       class="btn btn-danger border-0 w-100"
@@ -636,6 +649,8 @@ role="tabpanel"
 </div>
 </div>
 </div>
+
+<!-- ethereum -->
 <div
 class="tab-pane fade show "
 id="ethereum"
@@ -650,10 +665,10 @@ role="tabpanel"
   </div>
   <div class="card-body pt-0">
     <p>
-      <span class="text-ethereum cfs-30 fw-bold"> 0.0004 </span>
+      <span class="text-ethereum cfs-30 fw-bold"> {{current_user.ethereum_account.holdinge_balance}} </span>
       <span class="fw-normal">ETC</span>
     </p>
-    <p class="sub-text mt-n1">= 129USD</p>
+    <p class="sub-text mt-n1">= {{current_user.ethereum_account.holding_balance/usd_eth_rate}}USD</p>
   </div>
 </div>
 </div>
@@ -664,10 +679,10 @@ role="tabpanel"
   </div>
   <div class="card-body pt-0">
     <p>
-      <span class="text-success cfs-30 fw-bold"> 0.009 </span>
+      <span class="text-success cfs-30 fw-bold"> {{current_user.ethereum_account.available_balance}} </span>
       <span class="fw-normal">ETC</span>
     </p>
-    <p class="sub-text mt-n1">= 239USD</p>
+    <p class="sub-text mt-n1">= {{current_user.ethereum_account.available_balance/usd_eth_rate}}USD</p>
   </div>
 </div>
 </div>
@@ -678,10 +693,10 @@ role="tabpanel"
   </div>
   <div class="card-body pt-0">
     <p>
-      <span class="text-warning cfs-30 fw-bold"> 0.0002 </span>
+      <span class="text-warning cfs-30 fw-bold"> {{current_user.ethereum_account.pending_balance}} </span>
       <span class="fw-normal">ETC</span>
     </p>
-    <p class="sub-text mt-n1">= 99USD</p>
+    <p class="sub-text mt-n1">= {{current_user.ethereum_account.pending_balance/usd_eth_rate}}USD</p>
   </div>
 </div>
 </div>
@@ -692,10 +707,10 @@ role="tabpanel"
   </div>
   <div class="card-body pt-0">
     <p>
-      <span class="text-danger cfs-30 fw-bold"> 0.00 </span>
+      <span class="text-danger cfs-30 fw-bold"> {{current_user.ethereum_account.locked_balance}} </span>
       <span class="fw-normal">ETC</span>
     </p>
-    <p class="sub-text mt-n1">= 0.00USD</p>
+    <p class="sub-text mt-n1">= {{current_user.ethereum_account.locked_balance/usd_eth_rate}}USD</p>
   </div>
 </div>
 </div>
@@ -723,7 +738,7 @@ role="tabpanel"
 <div class="card-body">
 <p class="sub-text mb-3">
   Submit a deposit using the following address or QR code. Your deposit will
-  be refiected in your account offer 6 confirmationos
+  reflect on your account after confirmation
 </p>
 <img
   src={{url_for('static', filename="dashboard/assets/images/qr-code.png")}}
@@ -732,9 +747,10 @@ role="tabpanel"
 />
 <div class="input-group mt-3 d-flex align-items-center">
   <input
+    readonly
     type="text"
     aria-describedby="search"
-    placeholder="https://www.codeefly.con/join/12345"
+    placeholder="{{current_user.ethereum_account.address}}"
     class="form-control"
     id="copy-wallet"
   />
@@ -775,7 +791,7 @@ role="tabpanel"
 </div>
   <div class="col-lg-6 col-sm-6"><div class="card">
 <div class="card-header">
-<h4 class="card-title">Quick Transfer</h4>
+<h4 class="card-title">Quick Withdrawal</h4>
 </div>
 <div class="card-body">
 <form class="form">
@@ -832,10 +848,13 @@ role="tabpanel"
       </div>
       <select class="form-select form-select">
         <option selected>Open this select your transition method</option>
-        <option value="card">Credit / Debit Card</option>
+        {% if current_user.ethereum_wallet_address %}
+        <option value="{{current_user.ethereum_wallet_address}}">Ethereum wallet address</option>
+        {% endif %}
+        <!-- <option value="card">Credit / Debit Card</option>
         <option value="Paypal">Paypal</option>
         <option value="Payoneer">Payoneer</option>
-        <option value="Stripe">Stripe</option>
+        <option value="Stripe">Stripe</option> -->
       </select>
     </div>
   </div>
@@ -899,11 +918,11 @@ role="tabpanel"
     </div>
   </div>
   <div class="form-group btn-group w-100 mt-4">
-    <input
+    <!-- <input
       type="submit"
       class="btn btn-success border-0 w-100"
       value="deposit"
-    />
+    /> -->
     <input
       type="submit"
       class="btn btn-danger border-0 w-100"
@@ -1156,6 +1175,8 @@ role="tabpanel"
 </div>
 </div>
 </div>
+
+<!-- USDT -->
 <div
 class="tab-pane fade show active"
 id="tether"
@@ -1170,10 +1191,10 @@ role="tabpanel"
   </div>
   <div class="card-body pt-0">
     <p>
-      <span class="text-tether cfs-30 fw-bold"> 0.0004 </span>
+      <span class="text-tether cfs-30 fw-bold"> {{current_user.tether_account.holding_balance}} </span>
       <span class="fw-normal">USDT</span>
     </p>
-    <p class="sub-text mt-n1">= 129USD</p>
+    <p class="sub-text mt-n1">= {{current_user.tether_account.holding_balance/usd_usdt_rate}}USD</p>
   </div>
 </div>
 </div>
@@ -1184,10 +1205,10 @@ role="tabpanel"
   </div>
   <div class="card-body pt-0">
     <p>
-      <span class="text-success cfs-30 fw-bold"> 0.009 </span>
+      <span class="text-success cfs-30 fw-bold"> {{current_user.tether_account.available_balance}} </span>
       <span class="fw-normal">USDT</span>
     </p>
-    <p class="sub-text mt-n1">= 239USD</p>
+    <p class="sub-text mt-n1">= {{current_user.tether_account.available_balance/usd_usdt_rate}}USD</p>
   </div>
 </div>
 </div>
@@ -1198,10 +1219,10 @@ role="tabpanel"
   </div>
   <div class="card-body pt-0">
     <p>
-      <span class="text-warning cfs-30 fw-bold"> 0.0002 </span>
+      <span class="text-warning cfs-30 fw-bold"> {{current_user.tether_account.pending_balance}} </span>
       <span class="fw-normal">USDT</span>
     </p>
-    <p class="sub-text mt-n1">= 99USD</p>
+    <p class="sub-text mt-n1">= {{current_user.tether_account.pending_balance/usd_usdt_rate}}USD</p>
   </div>
 </div>
 </div>
@@ -1212,10 +1233,10 @@ role="tabpanel"
   </div>
   <div class="card-body pt-0">
     <p>
-      <span class="text-danger cfs-30 fw-bold"> 0.00 </span>
+      <span class="text-danger cfs-30 fw-bold"> {{current_user.tether_account.locked_balance}} </span>
       <span class="fw-normal">USDT</span>
     </p>
-    <p class="sub-text mt-n1">= 0.00USD</p>
+    <p class="sub-text mt-n1">= {{current_user.tether_account.pending_balance/usd_usdt_rate}}USD</p>
   </div>
 </div>
 </div>
@@ -1236,15 +1257,20 @@ role="tabpanel"
 </div>
 </div>
 </div>
-  <div class="col-lg-4 col-sm-6"><div class="card">
+
+
+<!-- deposit address -->
+<div class="col-lg-4 col-sm-6">
+<div class="card">
 <div class="card-header">
-<h4 class="card-title">Wallet Deposit Addresses</h4>
+<h4 class="card-title">Wallet Deposit Addresses (TRC20)</h4>
 </div>
 <div class="card-body">
 <p class="sub-text mb-3">
   Submit a deposit using the following address or QR code. Your deposit will
-  be refiected in your account offer 6 confirmationos
+ reflect on your account after confirmation (TRC20)
 </p>
+
 <img
   src={{url_for('static', filename="dashboard/assets/images/qr-code.png")}}
   class="cw-200 d-block m-auto"
@@ -1252,9 +1278,39 @@ role="tabpanel"
 />
 <div class="input-group mt-3 d-flex align-items-center">
   <input
+    readonly
     type="text"
     aria-describedby="search"
-    placeholder="https://www.codeefly.con/join/12345"
+    placeholder="{{current_user.tether_account.address}}"
+    class="form-control"
+    id="copy-wallet"
+  />
+  <span
+    onclick="copy()"
+    class="input-group-text bg-tether border-tether c-pointer"
+  >
+    Copy
+  </span>
+</div>
+
+
+<!-- ERC20 -->
+<p class="sub-text mb-3">
+  Submit a deposit using the following address or QR code. Your deposit will
+ reflect on your account after confirmation (ERC20)
+</p>
+
+<img
+  src={{url_for('static', filename="dashboard/assets/images/qr-code.png")}}
+  class="cw-200 d-block m-auto"
+  alt="Qr code"
+/>
+<div class="input-group mt-3 d-flex align-items-center">
+  <input
+    readonly
+    type="text"
+    aria-describedby="search"
+    placeholder="{{current_user.tether_account.address_erc}}"
     class="form-control"
     id="copy-wallet"
   />
@@ -1266,8 +1322,13 @@ role="tabpanel"
   </span>
 </div>
 </div>
+
 </div>
+
+
 </div>
+
+<!-- about -->
   <div class="col-lg-3 col-sm-6"><div class="card">
 <div class="card-header">
 <h4 class="card-title">About</h4>
@@ -1295,7 +1356,7 @@ role="tabpanel"
 </div>
   <div class="col-lg-6 col-sm-6"><div class="card">
 <div class="card-header">
-<h4 class="card-title">Quick Transfer</h4>
+<h4 class="card-title">Quick Withdrawal</h4>
 </div>
 <div class="card-body">
 <form class="form">
@@ -1352,10 +1413,15 @@ role="tabpanel"
       </div>
       <select class="form-select form-select">
         <option selected>Open this select your transition method</option>
-        <option value="card">Credit / Debit Card</option>
-        <option value="Paypal">Paypal</option>
+        {% if current_user.trc_tether_wallet_address %}
+        <option value="{{current_user.trc_tether_wallet_address}}">USDT(TRC20)</option>
+        {% endif %}
+        {% if current_user.erc_tether_wallet_address %}
+        <option value="{{current_user.erc_tether_wallet_address}}">USDT(ERC20)</option>
+        {% endif %}
+        <!-- <option value="Paypal">Paypal</option>
         <option value="Payoneer">Payoneer</option>
-        <option value="Stripe">Stripe</option>
+        <option value="Stripe">Stripe</option> -->
       </select>
     </div>
   </div>
@@ -1419,11 +1485,11 @@ role="tabpanel"
     </div>
   </div>
   <div class="form-group btn-group w-100 mt-4">
-    <input
+    <!-- <input
       type="submit"
       class="btn btn-success border-0 w-100"
       value="deposit"
-    />
+    /> -->
     <input
       type="submit"
       class="btn btn-danger border-0 w-100"
@@ -1676,7 +1742,9 @@ role="tabpanel"
 </div>
 </div>
 </div>
-<div
+
+
+<!-- <div
 class="tab-pane fade show "
 id="dash"
 role="tabpanel"
@@ -1802,7 +1870,7 @@ role="tabpanel"
   <div class="ms-2">
     <h5 class="text-capitalize">dash</h5>
     <!-- <p class="text-uppercase">DASH</p> -->
-    <p class="text-uppercase">1 <span>DASH</span> = 12345 USD</p>
+    <!-- <p class="text-uppercase">1 <span>DASH</span> = 12345 USD</p>
   </div>
 </div>
 
@@ -1960,7 +2028,8 @@ role="tabpanel"
 </div>
 <div class="card-body ch-table">
 <div class="table-responsive">
-  <!-- table-striped bg-table-striped-dash -->
+
+  <!-- table-striped bg-table-striped-dash
   <table class="table mb-0 align-middle table-borderless cmw-30">
     <thead class="align-middle">
       <tr class="text-muted">
@@ -2195,8 +2264,10 @@ role="tabpanel"
 </div>
 </div>
 </div>
-</div>
-<div
+</div> --> 
+
+<!-- LTC coin -->
+<!-- <div
 class="tab-pane fade show "
 id="ltc"
 role="tabpanel"
@@ -2321,7 +2392,9 @@ role="tabpanel"
   </div>
   <div class="ms-2">
     <h5 class="text-capitalize">ltc</h5>
-    <!-- <p class="text-uppercase">LTC</p> -->
+    
+
+     <p class="text-uppercase">LTC</p> 
     <p class="text-uppercase">1 <span>LTC</span> = 12345 USD</p>
   </div>
 </div>
@@ -2480,7 +2553,9 @@ role="tabpanel"
 </div>
 <div class="card-body ch-table">
 <div class="table-responsive">
-  <!-- table-striped bg-table-striped-ltc -->
+
+
+  table-striped bg-table-striped-ltc 
   <table class="table mb-0 align-middle table-borderless cmw-30">
     <thead class="align-middle">
       <tr class="text-muted">
@@ -2715,7 +2790,8 @@ role="tabpanel"
 </div>
 </div>
 </div>
-</div>
+</div> -->
+
 </div>
 </div>
 </div>

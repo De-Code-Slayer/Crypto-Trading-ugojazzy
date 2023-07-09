@@ -19,7 +19,7 @@
     <div class="cf-child cf-bounce3"></div>
   </div>
 </div>
-
+{% if current_user.is_authenticated %}
  <header class="header">
   <div class="container-xl d-flex align-items-center justify-content-between">
     <div class="header-left d-flex">
@@ -504,7 +504,9 @@
     </ul>
   </div>
 </header>
- <nav><div class="nav-header">
+
+ <nav>
+  <div class="nav-header">
   <a href="#" class="brand-logo">
     <img src={{url_for('static', filename="dashboard/assets/images/logo.png") }} alt="logo" />
   </a>
@@ -683,6 +685,7 @@
   </a>
 </div>
 </nav>
+{% endif %}
 
 {% block main %}
 {% endblock %}
