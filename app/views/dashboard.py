@@ -3,7 +3,7 @@ from flask import (
 )
 from flask_login import login_user, logout_user, login_required, current_user
 from .view_utils.authentication import login_user_from_db
-from .view_utils.data_objects import update_profile_info, get_trader
+from .view_utils.data_objects import update_profile_info, get_trader, follow_trader
 from .view_utils.currency_price import get_usd_to_
 
 
@@ -22,7 +22,7 @@ def live_trading():
     return render_template('dashboard/trade.html')
 
 # copy trading
-@dashboard.route('/transfers')
+@dashboard.route('/transfers', methods=('POST','PUT','GET'))
 @login_required
 def transfers():
     exchange_rates = {
@@ -32,18 +32,20 @@ def transfers():
     }
     # get followed trader info
     trader_list = get_trader() # - populate the trader list when page is opened at any time
-    print('list of all traders', trader_list)
     trader = get_trader(user_trader = current_user.trader_profile_id) # returns the followed trader by the user
-    print('followed trader profile', trader)
     # used to view the info of selected trader by clicking view profile
     if request.method == 'PUT':
         # get info of selected trader
-        trader = get_trader(request.get_data)
-        print('selected trader profile', trader)
+        trader = get_trader(request.get_json())
     if request.method=="POST":
+        trader_id = request.get_json()['trader_id']
+        print(trader_id)
         # follow trader
-
-        pass
+        followed = follow_trader(trader_id)
+        if not followed:
+            flash('Could not Follow','warning')
+        else:
+            flash('Followed','success')
     
     return render_template('dashboard/exchange.html', **exchange_rates, trader=trader, trader_list=trader_list)
 

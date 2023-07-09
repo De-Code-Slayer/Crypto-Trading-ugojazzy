@@ -32,7 +32,7 @@
   <div class="tab-pane fade show active" id="buy" role="tabpanel">
     <form class="form">
       <div class="form-group">
-        <div class="cfs-16 mb-1 fw-bold d-block">Following</div>
+        <div class="cfs-16 mb-1 fw-bold d-block">Name</div>
         <div class="input-group">
           <div class="op-primary svg-container text-primary">
             <svg
@@ -88,7 +88,7 @@
           </div>
           <input
             type="text"
-            placeholder="{{current_user.trader_profile.trader_name}}"
+            placeholder="{{trader.trader_name}}"
             class="form-control"
             readonly
           />
@@ -169,7 +169,7 @@
               <g></g>
             </svg>
           </div>
-          <select name='coin' class="form-select form-select">
+          <select readonly name='coin' class="form-select form-select">
             <option selected disabled>Coin</option>
             <option value="bitcoin">Bitcoin</option>
             <option value="ethereum">Ethereum</option>
@@ -278,7 +278,7 @@
               />
             </svg>
           </div>
-          <input name="amount" type="number" placeholder="0.00" class="form-control" />
+          <input readonly name="amount" type="number" placeholder="1000" class="form-control" />
         </div>
       </div>
       <div class="my-3 sub-text">
@@ -309,7 +309,7 @@
       </div>
       <div class="form-group mt-3">
         <!-- display already following this trader if trader is the followed trader -->
-        {% if current_user.trader_profile.id == current_user.trader_profile_id %}
+        {% if trader.id == current_user.trader_profile_id %}
         <input
           disabled
           type="submit"
@@ -321,6 +321,7 @@
           type="submit"
           class="form-control btn btn-primary border-0"
           value="Follow Trader"
+          onclick="sendPostRequest({{trader.id}})"
         />
         {% endif %}
 
@@ -618,31 +619,38 @@
 </div>
 <div class="card-body">
 <div class="d-sm-flex align-items-center justify-content-between">
-  <!-- <div class="d-flex mb-3">
-    <img
+  <div class="d-flex mb-3">
+    <!-- <img
       src={{url_for('static', filename="dashboard/assets/images/profile.jpg")}}
       alt="profile"
       class="cw-70 rounded"
-    />
+    /> -->
     <div class="ms-3">
       <p class="fw-bold cfs-18">You</p>
       <p>{{current_user.full_name}}</p>
-      <a href="mailto:shs@info.com" class="text-primary">{{current_user.email}}</a>
+      <a class="text-primary">{{current_user.email}}</a>
     </div>
-  </div> -->
+  </div>
   <div class="d-flex mb-3">
     <div class="me-sm-3 ms-3 ms-sm-0 text-sm-end order-1 order-sm-0">
       <p class="fw-bold cfs-18">Trader</p>
       <p>{{trader.trader_name}}</p>
-      <!-- <a href="mailto:mehedi@info.com" class="text-primary"
-        >mehedi@info.com</a
-      > -->
+
+      {% if current_user.trader_profile.id == trader.id %}
+      <a class="text-info"
+        >You are following this trader</a
+      >
+      {% else %}
+      <a class="text-danger"
+        >You are Not following this trader</a
+      >
+      {% endif %}
     </div>
-    <img
+    <!-- <img
       src={{url_for('static', filename="dashboard/assets/images/profile/2.jpg")}}
       alt="profile"
       class="cw-70 rounded order-0 order-sm-1"
-    />
+    /> -->
   </div>
 </div>
 <div class="table-responsive mt-4">
@@ -723,7 +731,7 @@
         <td class="border-0">Id</td>
         <td class="border-0 cw-120">Name</td>
         <td class="border-0 cw-190">Hours</td>
-        <td class="border-0">Number of trades</td>
+        <td class="border-0">Number of Trades</td>
         <td class="border-0 cw-250">Profit</td>
         <td class="border-0">Loss</td>
         <td class="border-0">Status</td>
@@ -813,16 +821,18 @@
 </svg>
 </a>
 <div class="dropdown-menu py-0 mt-2 dropdown-menu-end">
-<a href="#" class="dropdown-item">Follow</a>
-<!-- <a href="#" class="dropdown-item">Panding</a>
-<a href="#" class="text-danger dropdown-item">Canceled</a> -->
+  {% if current_user.trader_profile.id != trader.id %}
+<a href="" onclick="sendPostRequest({{trader.id}})" class="dropdown-item">Follow Trader</a>
+  {% endif %}
+<a href="#" onclick="sendPutRequest({{trader.id}})" class="dropdown-item">View More</a>
+<!-- <a href="#" class="text-danger dropdown-item">Canceled</a> -->
 </div>
 </div>
 </td>
       </tr>
          {%  endfor %}
       {% endif %}
-      <tr>
+      <!-- <tr>
         <td class="cw-40">
           <i
             class="
@@ -907,7 +917,7 @@
 </div>
 </div>
 </td>
-      </tr>
+      </tr> -->
       <!-- <tr>
         <td class="cw-40">
           <i
@@ -1778,5 +1788,76 @@
 
 </div>
 </main>
+
+<script>
+  function sendPostRequest(data) {
+    // Get the current URL
+    var currentUrl = window.location.href;
+  
+    // Create a new request object
+    var request = new Request(currentUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ trader_id: data }) // Modify the payload as needed
+    });
+  
+    // Send the POST request
+    fetch(request)
+      .then(function(response) {
+        // Handle the response
+        if (response.ok) {
+          window.location.reload();
+          return response.json();
+        } else {
+          throw new Error('Error: ' + response.status);
+        }
+      })
+      .then(function(data) {
+        // Handle the data returned from the server
+        console.log(data);
+      })
+      .catch(function(error) {
+        // Handle any errors that occur during the request
+        console.error(error);
+      });
+  }
+
+  function sendPutRequest(data) {
+    // Get the current URL
+    var currentUrl = window.location.href;
+  
+    // Create a new request object
+    var request = new Request(currentUrl, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ trader_id: data }) // Modify the payload as needed
+    });
+  
+    // Send the PUT request
+  fetch(request)
+  .then(function(response) {
+    // Handle the response
+    if (response.ok) {
+      return response.text();
+    } else {
+      throw new Error('Error: ' + response.status);
+    }
+  })
+  .then(function(html) {
+    // Replace the current page with the new HTML
+    document.open();
+    document.write(html);
+    document.close();
+  })
+  .catch(function(error) {
+    // Handle any errors that occur during the request
+    console.error(error);
+  });
+}
+</script>
 
 {% endblock %}

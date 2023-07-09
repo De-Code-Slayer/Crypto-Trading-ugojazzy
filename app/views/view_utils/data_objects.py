@@ -11,6 +11,16 @@ ALLOWED_EXTENSIONS = {'png', 'jpg','jpeg'}
 
 basedir = path.abspath(path.dirname(__file__))
 
+def follow_trader(trader_id):
+    try:
+        current_user.trader_profile_id = trader_id
+        db.session.commit()
+    except Exception as e:
+        # Handle specific exceptions or provide a general error message
+        logging.error(f'Error occurred: {str(e)}')
+        return False
+    else:
+        return True
 
 
 def get_trader(request_data=None, user_trader=None):
