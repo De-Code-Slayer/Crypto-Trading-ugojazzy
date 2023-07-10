@@ -10,6 +10,9 @@
     <link rel="shortcut icon" href={{url_for('static', filename="dashboard/assets/images/logo.png") }} type="image/x-icon" />
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href={{url_for('static', filename="dashboard/assets/css/main.css") }} />
+      <!-- Include jQuery library -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src={{url_for('static', filename="dashboard/assets/vendor/perfectscrollbar/perfectscrollbar.js") }}></script>
   </head>
   <body>
     <div class="preloader">
@@ -692,7 +695,6 @@
     <script src={{url_for('static', filename="dashboard/assets/vendor/jquery/jquery.js") }}></script>
     <script src={{url_for('static', filename="dashboard/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js") }}></script>
     <script src={{url_for('static', filename="dashboard/assets/vendor/metismenu/metismenu.js") }}></script>
-    <script src={{url_for('static', filename="dashboard/assets/vendor/perfectscrollbar/perfectscrollbar.js") }}></script>
     <script src={{url_for('static', filename="dashboard/assets/js/cf-init.js") }}></script>
       
     <script src={{url_for('static', filename="dashboard/assets/vendor/chartjs/chartjs.js") }}></script>
@@ -700,6 +702,7 @@
     <script src={{url_for('static', filename="dashboard/assets/vendor/apexchart/apexchart.js") }}></script>
     
     <script src={{url_for('static', filename="dashboard/assets/js/dashboard-init.js") }}></script>
+  
     <!-- 1-2022 -->
     
   </body>
