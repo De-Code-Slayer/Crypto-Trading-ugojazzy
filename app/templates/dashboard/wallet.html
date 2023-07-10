@@ -1521,6 +1521,7 @@ role="tabpanel"
       {% for trx in usdt_trx  %}
       <tr class="p-1">
         <td class="cw-45">
+          {% if trx.transaction_type == 'credit' %}
           <i
             class="
                ri-arrow-down-line
@@ -1530,14 +1531,27 @@ role="tabpanel"
                op-success
                rounded-2
              "
-          ></i>
+          >
+        </i>
+        {% else %}
+        <i
+        class="
+           ri-arrow-up-line
+           text-danger
+           cfs-20
+           p-1
+           op-danger
+           rounded-2
+         "
+      ></i>
+        {% endif%}
         </td>
         <td>#{{trx.id}}</td>
-        <td>{{trx.timestamp}}</td>
+        <td>{{trx.timestamp.strftime('%Y-%m-%d')}}</td>
         <td>{{trx.amount}} <span class="text-uppercase">USDT</span></td>
         {% if trx.status == 'complete' %}
         <td class="text-success">{{trx.status}}</td>
-        {% elif if trx.status == 'pending'%}
+        {% elif trx.status == 'pending'%}
         <td class="text-warning">{{trx.status}}</td>
         {% else %}
         <td class="text-danger">{{trx.status}}</td>

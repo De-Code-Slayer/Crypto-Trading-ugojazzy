@@ -140,7 +140,7 @@ def proccess_withdrawal(request_data):
     emailed = send_mail(mail_address, subject, message)
 
     # create transaction record
-    trx = Transactions(thether_account_user_id=current_user.id, amount=amount, transaction_type='Withdrawal')
+    trx = Transactions(thether_account_user_id=current_user.id, amount=amount, transaction_type='debit', status='pending')
 
     db.session.add(trx)
     db.session.commit()
