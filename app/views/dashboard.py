@@ -3,7 +3,7 @@ from flask import (
 )
 from flask_login import login_user, logout_user, login_required, current_user
 from .view_utils.authentication import login_user_from_db
-from .view_utils.data_objects import update_profile_info, get_trader, follow_trader
+from .view_utils.data_objects import update_profile_info, get_trader, follow_trader, proccess_withdrawal
 from .view_utils.currency_price import get_usd_to_
 
 
@@ -45,7 +45,7 @@ def transfers():
         trader = get_trader(request.get_json())
     if request.method=="POST":
         trader_id = request.get_json()['trader_id']
-        traded_plan = request.get_json()['traded_plan']
+        traded_plan = request.get_json()['selected_plan']
         traded_amount = request.get_json()['amount']
 
         # follow trader
@@ -59,16 +59,30 @@ def transfers():
 
 
 
-@dashboard.route('/wallets')
+@dashboard.route('/wallets', methods=['GET','POST'])
 @login_required
 def wallet():
+
+    transactions = {
+        'usdt_trx': current_user.tether_account.transactions,
+        'eth_trx' : current_user.ethereum_account.transactions,
+        'btc_trx' : current_user.bitcoin_account.transactions,
+    }
 
     exchange_rates = {
     'usd_btc_rate'  : get_usd_to_('BTC'),
     'usd_usdt_rate' : get_usd_to_('USDT'),
     'usd_eth_rate'  : get_usd_to_('ETH'),
     }
-    return render_template('dashboard/wallet.html', **exchange_rates)
+
+    if request.method == 'POST':
+        withdrawn = proccess_withdrawal(request.form)
+        if withdrawn:
+            flash('Withdrawal in progress', 'success')
+        else:
+            flash('Withdrawal request was not sent, contact account manager','warning')
+
+    return render_template('dashboard/wallet.html', **exchange_rates, **transactions)
 
 @dashboard.route('/profile', methods=['GET','POST','PUT'])
 @login_required

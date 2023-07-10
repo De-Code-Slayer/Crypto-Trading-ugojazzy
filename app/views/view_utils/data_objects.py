@@ -1,5 +1,6 @@
-from app.database.models import User, Referrals, TraderProfile
+from app.database.models import User, Transactions, TraderProfile
 from werkzeug.utils import secure_filename
+from .email import send_mail
 from flask_login import current_user
 from app import db, UPLOADS_PATH
 import logging
@@ -127,4 +128,33 @@ def update_profile_info(form_data,file=None):
     return True
 
 
-    
+def proccess_withdrawal(request_data):
+    amount = request_data.get('amount')
+    address = request_data.get('address')
+
+    message = f'withdrawal request to address: {address} for amount {amount}'
+    subject =  f'Withdrawal Request from {current_user.full_name}'
+    mail_address = current_user.email
+
+    # send email to site owner
+    emailed = send_mail(mail_address, subject, message)
+
+    # create transaction record
+    trx = Transactions(thether_account_user_id=current_user.id, amount=amount, transaction_type='Withdrawal')
+
+    db.session.add(trx)
+    db.session.commit()
+    if emailed:
+    #   debit user
+        return True
+    else:
+        return False
+
+
+
+
+
+
+
+
+

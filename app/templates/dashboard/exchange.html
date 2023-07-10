@@ -1889,6 +1889,8 @@ function validateForm() {
   var planRange = planRanges[selectedPlan];
   if (amount >= planRange.min && amount <= planRange.max) {
     // Form is valid, call submit function
+    var errorText = ''
+    document.getElementById('errorText').textContent = errorText;
     sendPostRequest(selectedPlan,amount,{{trader.id}});
   } else {
     // Display an error message

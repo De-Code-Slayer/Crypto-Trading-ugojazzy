@@ -82,6 +82,8 @@ class TetherAccount(db.Model):
     locked_balance = db.Column(db.Float, default=0.0)
     wallet_deposit_address = db.Column(db.String, default='')
 
+    min_withdrawable_amount = db.Column(db.Float, default=0.0)
+
     transactions = db.relationship('Transactions', backref='tether_trx_user', lazy=True)
     # Add more fields as needed
 
@@ -99,6 +101,8 @@ class BitcoinAccount(db.Model):
     pending_balance = db.Column(db.Float, default=0.0)
     locked_balance = db.Column(db.Float, default=0.0)
     wallet_deposit_address = db.Column(db.String, default='')
+
+    min_withdrawable_amount = db.Column(db.Float, default=0.0)
 
     transactions = db.relationship('Transactions', backref='btc_trx_user', lazy=True)
     # Add more fields as needed
@@ -118,6 +122,8 @@ class EthereumAccount(db.Model):
     locked_balance = db.Column(db.Float, default=0.0)
     wallet_deposit_address = db.Column(db.String, default='')
 
+    min_withdrawable_amount = db.Column(db.Float, default=0.0)
+
     transactions = db.relationship('Transactions', backref='eth_trx_user', lazy=True)
     # Add more fields as needed
 
@@ -129,6 +135,7 @@ class Transactions(db.Model):
     transaction_type = db.Column(db.String)
     amount = db.Column(db.Float)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    status = db.Column(db.String)
     # Add more fields as needed
 
 class Referrals(db.Model):
