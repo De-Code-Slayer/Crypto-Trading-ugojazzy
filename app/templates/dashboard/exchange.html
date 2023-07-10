@@ -30,7 +30,7 @@
 <div class="card-body">
 <div class="tab-content">
   <div class="tab-pane fade show active" id="buy" role="tabpanel">
-    <form class="form">
+    <form id="followForm" class="form">
       <div class="form-group">
         <div class="cfs-16 mb-1 fw-bold d-block">Name</div>
         <div class="input-group">
@@ -95,7 +95,7 @@
         </div>
       </div>
       <div class="form-group mt-2">
-        <div class="cfs-16 mb-1 fw-bold d-block">Currency</div>
+        <div class="cfs-16 mb-1 fw-bold d-block">Subscription Plan</div>
         <div class="input-group">
           <div class="op-primary svg-container">
             <svg
@@ -169,13 +169,15 @@
               <g></g>
             </svg>
           </div>
-          <select readonly name='coin' class="form-select form-select">
-            <option selected disabled>Coin</option>
-            <option value="bitcoin">Bitcoin</option>
-            <option value="ethereum">Ethereum</option>
-            <option value="tether">Tether</option>
+          <select id="planSelect" readonly name='coin' class="form-select form-select">
+            <option selected disabled>Select Plan</option>
+            <option value="STARTER">Starter Plan</option>
+            <option value="PREMIUM">Premium Plan</option>
+            <option value="PROFESSIONAL">Professional Plan</option>
+            <option value="CHAMBERS">Chambers Plan</option>
           </select>
         </div>
+        <a class='text-primary' href="{{url_for('dashboard.trade_plans')}}">View Plan details</a>
       </div>
       <!-- <div class="form-group mt-2">
         <div class="cfs-16 mb-1 fw-bold d-block">Payment Method</div>
@@ -278,7 +280,7 @@
               />
             </svg>
           </div>
-          <input readonly name="amount" type="number" placeholder="1000" class="form-control" />
+          <input id="amountInput" value="" name="amount" type="number" placeholder="1000" class="form-control" />
         </div>
       </div>
       <div class="my-3 sub-text">
@@ -307,7 +309,9 @@
           <p>15.00%</p>
         </div> -->
       </div>
+      <p class="text-danger" id='errorText'></p>
       <div class="form-group mt-3">
+        
         <!-- display already following this trader if trader is the followed trader -->
         {% if trader.id == current_user.trader_profile_id %}
         <input
@@ -321,7 +325,6 @@
           type="submit"
           class="form-control btn btn-primary border-0"
           value="Follow Trader"
-          onclick="sendPostRequest({{trader.id}})"
         />
         {% endif %}
 
@@ -822,7 +825,7 @@
 </a>
 <div class="dropdown-menu py-0 mt-2 dropdown-menu-end">
   {% if current_user.trader_profile.id != trader.id %}
-<a href="" onclick="sendPostRequest({{trader.id}})" class="dropdown-item">Follow Trader</a>
+<!-- <a href="" onclick="sendPostRequest({{trader.id}})" class="dropdown-item">Follow Trader</a> -->
   {% endif %}
 <a href="#" onclick="sendPutRequest({{trader.id}})" class="dropdown-item">View More</a>
 <!-- <a href="#" class="text-danger dropdown-item">Canceled</a> -->
@@ -1858,6 +1861,47 @@
     console.error(error);
   });
 }
+
+function validateForm() {
+  // Get selected plan and amount input value
+  var planSelect = document.getElementById('planSelect');
+  var selectedPlan = planSelect.value;
+  var amountInput = document.getElementById('amountInput');
+  var amount = parseFloat(amountInput.value);
+
+  // Define the plan amount ranges
+  var planRanges = {
+    STARTER: { min: 1000, max: 10000 },
+    PREMIUM: { min: 11000, max: 20000 },
+    PROFESSIONAL: { min: 21000, max: 50000 },
+    CHAMBERS: { min: 50000, max: 500000 }
+  };
+
+
+   // Check if the selected plan is valid
+   if (!(selectedPlan in planRanges)) {
+    document.getElementById('errorText').textContent = 'Invalid plan selected.';
+    return;
+  }
+
+
+  // Check if the amount is within the selected plan range
+  var planRange = planRanges[selectedPlan];
+  if (amount >= planRange.min && amount <= planRange.max) {
+    // Form is valid, call submit function
+    sendPostRequest({{trader.id}});
+  } else {
+    // Display an error message
+    var errorText = 'Invalid amount. Amount should be between ' + planRange.min + ' and ' + planRange.max + ' for  ' + selectedPlan + ' plan.';
+    document.getElementById('errorText').textContent = errorText;
+  }
+}
+
+document.getElementById('followForm').addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent form submission
+  validateForm();
+});
+
 </script>
 
 {% endblock %}

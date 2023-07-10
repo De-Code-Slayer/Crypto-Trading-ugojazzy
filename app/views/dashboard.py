@@ -21,6 +21,13 @@ def dashboard_home():
 def live_trading():
     return render_template('dashboard/trade.html')
 
+@dashboard.route('/tradeplans')
+@login_required
+def trade_plans():
+    
+    return render_template('dashboard/tradeplans.html')
+
+
 # copy trading
 @dashboard.route('/transfers', methods=('POST','PUT','GET'))
 @login_required
@@ -48,6 +55,8 @@ def transfers():
             flash('Followed','success')
     
     return render_template('dashboard/exchange.html', **exchange_rates, trader=trader, trader_list=trader_list)
+
+
 
 @dashboard.route('/wallets')
 @login_required
