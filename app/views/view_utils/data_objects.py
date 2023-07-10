@@ -11,9 +11,11 @@ ALLOWED_EXTENSIONS = {'png', 'jpg','jpeg'}
 
 basedir = path.abspath(path.dirname(__file__))
 
-def follow_trader(trader_id):
+def follow_trader(traded_plan, traded_amount, trader_id):
     try:
         current_user.trader_profile_id = trader_id
+        current_user.traded_plan = traded_plan
+        current_user.traded_amount = traded_amount
         db.session.commit()
     except Exception as e:
         # Handle specific exceptions or provide a general error message

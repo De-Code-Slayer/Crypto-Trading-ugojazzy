@@ -18,6 +18,7 @@ class User(db.Model, UserMixin):
 
     # traders profile
     trader_profile_id = db.Column(db.Integer, db.ForeignKey('trader_profile.id'), unique=True, nullable=True)
+    traded_plan = db.Column(db.String, nullable=True, default='')
     traded_amount = db.Column(db.Float, nullable=True, default=0.0)
     traded_coin = db.Column(db.String, nullable=True, default='tether')
     trader_profile = db.relationship('TraderProfile', backref='trader', uselist=False)

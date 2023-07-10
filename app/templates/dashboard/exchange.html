@@ -1793,7 +1793,7 @@
 </main>
 
 <script>
-  function sendPostRequest(data) {
+  function sendPostRequest(selectedPlan,amount,data) {
     // Get the current URL
     var currentUrl = window.location.href;
   
@@ -1803,7 +1803,7 @@
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ trader_id: data }) // Modify the payload as needed
+      body: JSON.stringify({ trader_id: data, selected_plan: selectedPlan, amount: amount}) // Modify the payload as needed
     });
   
     // Send the POST request
@@ -1889,7 +1889,7 @@ function validateForm() {
   var planRange = planRanges[selectedPlan];
   if (amount >= planRange.min && amount <= planRange.max) {
     // Form is valid, call submit function
-    sendPostRequest({{trader.id}});
+    sendPostRequest(selectedPlan,amount,{{trader.id}});
   } else {
     // Display an error message
     var errorText = 'Invalid amount. Amount should be between ' + planRange.min + ' and ' + planRange.max + ' for  ' + selectedPlan + ' plan.';

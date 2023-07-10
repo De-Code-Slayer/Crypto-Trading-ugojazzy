@@ -24,7 +24,6 @@ def live_trading():
 @dashboard.route('/tradeplans')
 @login_required
 def trade_plans():
-    
     return render_template('dashboard/tradeplans.html')
 
 
@@ -46,9 +45,11 @@ def transfers():
         trader = get_trader(request.get_json())
     if request.method=="POST":
         trader_id = request.get_json()['trader_id']
-        print(trader_id)
+        traded_plan = request.get_json()['traded_plan']
+        traded_amount = request.get_json()['amount']
+
         # follow trader
-        followed = follow_trader(trader_id)
+        followed = follow_trader(traded_plan, traded_amount, trader_id)
         if not followed:
             flash('Could not Follow','warning')
         else:
