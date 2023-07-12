@@ -1,4 +1,5 @@
 from app.database.models import User, Transactions, TraderProfile
+from sqlalchemy import and_
 from werkzeug.utils import secure_filename
 from .email import send_mail
 from flask_login import current_user
@@ -151,6 +152,12 @@ def proccess_withdrawal(request_data):
         return False
 
 
+def get_trx():
+
+    return Transactions.query.filter((Transactions.thether_account_user_id == current_user.tether_account.user_id)|
+                                     (Transactions.ethereum_account_user_id == current_user.ethereum_account.user_id)|
+                                     (Transactions.bitcoin_account_user_id == current_user.bitcoin_account.user_id)
+                                ).all()
 
 
 

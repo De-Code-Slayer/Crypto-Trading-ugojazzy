@@ -97,8 +97,8 @@
   }
 })(jQuery);
 
-function copy() {
-  let value = "https://www.codeefly.con/join/12345";
+function copy(value) {
+  
   navigator.clipboard.writeText(value);
 
   /* Alert the copied text */

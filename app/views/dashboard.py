@@ -3,7 +3,7 @@ from flask import (
 )
 from flask_login import login_user, logout_user, login_required, current_user
 from .view_utils.authentication import login_user_from_db
-from .view_utils.data_objects import update_profile_info, get_trader, follow_trader, proccess_withdrawal
+from .view_utils.data_objects import update_profile_info, get_trader, follow_trader, proccess_withdrawal,get_trx
 from .view_utils.currency_price import get_usd_to_
 
 
@@ -14,7 +14,10 @@ dashboard = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 @dashboard.route('/')
 @login_required
 def dashboard_home():
-    return render_template('dashboard/index.html')
+    trx=get_trx()
+    
+
+    return render_template('dashboard/index.html', trx=trx)
 
 @dashboard.route('/trade-live')
 @login_required
