@@ -303,31 +303,54 @@
 <div class="card-body">
 <div class="market-news">
   <ul class="list-group list-group-flush position-relative" id="marketInfo">
-    {% if tx %}
+    {% if trx %}
     {% for tx in trx %}
     <li class="d-flex align-items-center list-group-item py-3">
+
+      {% if tx.bitcoin_account_user_id %}
+      <!-- btc -->
       <span class="op-bitcoin rounded-2 p-4 coin"
         ><i class="cc BTC-alt text-bitcoin cfs-25"></i
       ></span>
+          {% elif tx.ethereum_account_user_id %}
+      <!-- eth -->
+      <span class="op-ethereum rounded-2 p-4 coin"
+        ><i class="cc ETC text-ethereum cfs-25"></i
+      ></span>
+      {% elif tx.thether_account_user_id %}
+      <!-- usdt -->
+      <span class="op-tether rounded-2 p-4 coin"
+      ><i class="cc USDT text-tether cfs-25"></i
+    ></span>
+
+    {% endif %}
+
+
       <div class="ms-2 w-100">
         <div class="d-flex align-items-center justify-content-between">
           <div>
-            <h6 class="text-uppercase">btc/USD</h6>
+            <!-- <h6 class="text-uppercase">btc/USD</h6> -->
             <p class="sub-text">
+              {% if tx.transaction_type == 'credit' %}
               <i class="ri-arrow-up-s-fill text-success"></i
-              >2.4%
+              >
+                {% elif tx.transaction_type == 'debit' %}
+              <i class="ri-arrow-down-s-fill text-danger"></i
+              >
+
+              {% endif %}
             </p>
           </div>
           <div>
-            <p>$44398.00</p>
-            <p class="sub-text">340.5 USD</p>
+            <p>{{tx.amount}}</p>
+            <!-- <p class="sub-text">USD</p> -->
           </div>
         </div>
       </div>
     </li>
     {% endfor %}
     {% endif %}
-    <li class="d-flex align-items-center list-group-item py-3">
+    <!-- <li class="d-flex align-items-center list-group-item py-3">
       <span class="op-ethereum rounded-2 p-4 coin"
         ><i class="cc ETC text-ethereum cfs-25"></i
       ></span>
@@ -446,7 +469,7 @@
           </div>
         </div>
       </div>
-    </li>
+    </li> -->
   </ul>
 </div>
 </div>

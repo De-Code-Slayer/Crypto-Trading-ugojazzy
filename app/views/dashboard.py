@@ -29,7 +29,6 @@ def live_trading():
 def trade_plans():
     return render_template('dashboard/tradeplans.html')
 
-
 # copy trading
 @dashboard.route('/transfers', methods=('POST','PUT','GET'))
 @login_required
@@ -59,8 +58,6 @@ def transfers():
             flash('Followed','success')
     
     return render_template('dashboard/exchange.html', **exchange_rates, trader=trader, trader_list=trader_list)
-
-
 
 @dashboard.route('/wallets', methods=['GET','POST'])
 @login_required
@@ -96,6 +93,18 @@ def profile():
         if updated:
             flash('User info updated', 'success')
     return render_template('dashboard/profile-settings.html')
+
+@dashboard.route('/security', methods=['GET','POST','PUT'])
+@login_required
+def security():
+    # user info update
+    if request.method == 'POST':
+        updated = update_profile_info(request.form, file=request.files)
+        if updated:
+            flash('User info updated', 'success')
+    return render_template('dashboard/security-settings.html')
+
+
 
 @dashboard.route('/sign-in', methods=['GET','POST'])
 def sign_in():
