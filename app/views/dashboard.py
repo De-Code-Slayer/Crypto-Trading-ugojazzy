@@ -101,17 +101,12 @@ def security():
     
     return render_template('dashboard/payment-method.html')
 
-@dashboard.route('/payment-method', methods=['GET','POST','PUT'])
+@dashboard.route('/payment-method', methods=['GET','POST'])
 @login_required
 def payment_method():
     # user info update
-    if request.method == 'POST':
-        updated = update_profile_info(request.form, file=request.files)
-        if updated:
-            flash('User info updated', 'success')
-    return render_template('dashboard/security-settings.html')
-
-
+    
+    return render_template('dashboard/payment-method.html')
 
 @dashboard.route('/sign-in', methods=['GET','POST'])
 def sign_in():
@@ -137,7 +132,6 @@ def reset_password():
 def sign_out():
     logout_user()
     return redirect(url_for('dashboard.sign_in'))
-
 
 @dashboard.route('/base')
 def base():

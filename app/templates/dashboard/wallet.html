@@ -1286,7 +1286,7 @@ role="tabpanel"
     id="copy-wallet"
   />
   <span
-    onclick="copy()"
+    onclick="copy('{{current_user.tether_account.address}}')"
     class="input-group-text bg-tether border-tether c-pointer"
   >
     Copy
@@ -1315,7 +1315,7 @@ role="tabpanel"
     id="copy-wallet"
   />
   <span
-    onclick="copy()"
+    onclick="copy('{{current_user.tether_account.address_erc}}')"
     class="input-group-text bg-tether border-tether c-pointer"
   >
     Copy

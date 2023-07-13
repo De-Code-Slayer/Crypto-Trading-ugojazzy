@@ -26,11 +26,11 @@
  <header class="header">
   <div class="container-xl d-flex align-items-center justify-content-between">
     <div class="header-left d-flex">
-      <h4>Dashboard</h4>
+      <h4>Copy Trading Dashboard</h4>
     </div>
     <ul class="header-right">
       <li class="search">
-  <div class="input-group d-flex align-items-center">
+  <!-- <div class="input-group d-flex align-items-center">
     <input
       type="text"
       aria-describedby="search"
@@ -55,10 +55,11 @@
         />
       </svg>
     </span>
-  </div>
+  </div> -->
 </li>
+
  <li class="notification dropdown">
-  <a data-toggle="dropdown" href="#">
+  <!-- <a data-toggle="dropdown" href="#">
     <svg viewBox="-21 0 512 512" xmlns="http://www.w3.org/2000/svg">
       <path
         d="m213.332031 512c-44.09375 0-80-35.882812-80-80 0-8.832031 7.167969-16 16-16s16 7.167969 16 16c0 26.476562 21.546875 48 48 48s48-21.523438 48-48c0-8.832031 7.167969-16 16-16s16 7.167969 16 16c0 44.117188-35.902343 80-80 80zm0 0"
@@ -68,7 +69,7 @@
       />
     </svg>
     <div class="active_icon"></div>
-  </a>
+  </a> -->
   <div class="dropdown-menu mt-4 dropdown-menu-end">
     <div
       class="
@@ -340,6 +341,7 @@
     </ul>
   </div>
 </li>
+
  <li class="dropdown show profile">
   <a
     class="dropdown-toggle"
@@ -357,13 +359,13 @@
     <div class="user-header border-bottom border-1">
       <img src={{url_for('static', filename="dashboard/assets/images/profile.jpg") }} alt="profile" />
       <div class="user-info">
-        <h5>Sabuj Hasan Sarker</h5>
-        <span>sabujhasansarker@gmail.com</span>
+        <h5>{{current_user.full_name}}</h5>
+        <span>{{current_user.email}}</span>
       </div>
     </div>
     <ul>
       <li>
-        <a class="dropdown-item d-flex align-items-center" href="profile.html"
+        <a class="dropdown-item d-flex align-items-center" href="{{url_for('dashboard.profile')}}"
           ><svg
             id="icon-user1"
             xmlns="http://www.w3.org/2000/svg"
@@ -380,10 +382,10 @@
           ><span class="ms-2">Profile</span></a
         >
       </li>
-      <li>
+      <!-- <li>
         <a
           class="dropdown-item d-flex align-items-center"
-          href="profile-settings.html"
+          href=""
         >
           <svg
             class="svgh-15"
@@ -400,11 +402,11 @@
 
           <span class="ms-2">Setting</span></a
         >
-      </li>
+      </li> -->
       <li>
         <a
           class="dropdown-item d-flex align-items-center"
-          href="security-settings.html"
+          href="{{url_for('dashboard.security')}}"
         >
           <svg
             class="svgh-15"
@@ -456,7 +458,7 @@
       <li>
         <a
           class="dropdown-item text-danger d-flex align-items-center"
-          href="signin.html"
+          href="{{url_for('dashboard.sign_out')}}"
           ><svg
             class="fill-danger svgh-16"
             xmlns="http://www.w3.org/2000/svg"
