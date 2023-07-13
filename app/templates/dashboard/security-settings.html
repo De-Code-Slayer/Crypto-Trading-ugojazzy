@@ -89,7 +89,7 @@
     <i class="ri-arrow-right-s-line"></i>
   </a>
   <a
-    href="payment-method.html"
+    href="{{url_for('dashboard.payment_method')}}"
     class="
       d-flex
       btn btn-light
@@ -175,7 +175,7 @@
               class="d-xsm-flex align-items-center justify-content-between ms-3"
             >
               <div>
-                <p class="fw-bold">+xxx xxxxxxxx60</p>
+                <p class="fw-bold">{{current_user.phone}}</p>
                 <p class="sub-text">
                   Keep your primary phone number up-to-date
                 </p>
@@ -203,7 +203,7 @@
               class="d-xsm-flex align-items-center justify-content-between ms-3"
             >
               <div>
-                <p class="fw-bold">hello@example.com</p>
+                <p class="fw-bold">{{current_user.email}}</p>
                 <p class="sub-text">Keep your primary email up-to-date</p>
                 <p class="text-success sub-text">Required</p>
               </div>
