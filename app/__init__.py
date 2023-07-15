@@ -10,7 +10,7 @@ from os.path import join, dirname, realpath
 db = SQLAlchemy()
 
 # upload path
-UPLOADS_PATH = join(dirname(realpath(__file__)), 'static/images')
+UPLOADS_PATH = join(dirname(realpath(__file__)), u'static\\uploads')
 
 def create_app(test_config=None):
     # create and configure the app

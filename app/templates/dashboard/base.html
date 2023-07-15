@@ -352,7 +352,18 @@
     aria-haspopup="true"
     aria-expanded="false"
   >
-    <img src={{url_for('static', filename="dashboard/assets/images/profile.jpg") }} alt="profile" />
+    <img 
+    {% if not current_user.display_photo  %}
+    src={{url_for('static', filename="dashboard/assets/images/profile.jpg")}}
+    {% else %}
+    src={{url_for('static', filename="uploads/"+current_user.display_photo)}}
+    {% endif %}
+    alt="profile"
+      />
+
+    
+
+
   </a>
 
   <div class="dropdown-menu dropdown-menu-end mt-4">

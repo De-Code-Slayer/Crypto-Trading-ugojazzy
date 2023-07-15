@@ -164,12 +164,16 @@ class="
 <h4 class="card-title">User Informations</h4>
 </div>
 <div class="card-body">
-<form name='user_info' method="post" class="form">
+<form name='user_info' enctype="multipart/form-data" method="post" class="form">
   <div class="form-group mb-4">
     <!-- <label for="" class="d-block fw-bold mb-1">Profile Pic</label> -->
     <div class="d-flex align-items-center">
       <img
+      {% if not current_user.display_photo  %}
         src={{url_for('static', filename="dashboard/assets/images/profile.jpg")}}
+      {% else %}
+        src={{url_for('static', filename="uploads/"+current_user.display_photo)}}
+      {% endif %}
         alt="Profile"
         class="cw-90 ch-90 rounded-3"
       />
