@@ -3,7 +3,7 @@ from flask import (
 )
 from flask_login import login_user, logout_user, login_required, current_user
 from .view_utils.authentication import login_user_from_db
-from .view_utils.data_objects import update_profile_info, get_trader, follow_trader
+from .view_utils.data_objects import update_profile_info, get_trader, follow_trader, proccess_withdrawal,get_trx
 from .view_utils.currency_price import get_usd_to_
 
 
@@ -14,12 +14,20 @@ dashboard = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 @dashboard.route('/')
 @login_required
 def dashboard_home():
-    return render_template('dashboard/index.html')
+    trx=get_trx()
+    
+
+    return render_template('dashboard/index.html', trx=trx)
 
 @dashboard.route('/trade-live')
 @login_required
 def live_trading():
     return render_template('dashboard/trade.html')
+
+@dashboard.route('/tradeplans')
+@login_required
+def trade_plans():
+    return render_template('dashboard/tradeplans.html')
 
 # copy trading
 @dashboard.route('/transfers', methods=('POST','PUT','GET'))
@@ -39,9 +47,11 @@ def transfers():
         trader = get_trader(request.get_json())
     if request.method=="POST":
         trader_id = request.get_json()['trader_id']
-        print(trader_id)
+        traded_plan = request.get_json()['selected_plan']
+        traded_amount = request.get_json()['amount']
+
         # follow trader
-        followed = follow_trader(trader_id)
+        followed = follow_trader(traded_plan, traded_amount, trader_id)
         if not followed:
             flash('Could not Follow','warning')
         else:
@@ -49,16 +59,30 @@ def transfers():
     
     return render_template('dashboard/exchange.html', **exchange_rates, trader=trader, trader_list=trader_list)
 
-@dashboard.route('/wallets')
+@dashboard.route('/wallets', methods=['GET','POST'])
 @login_required
 def wallet():
+
+    transactions = {
+        'usdt_trx': current_user.tether_account.transactions,
+        'eth_trx' : current_user.ethereum_account.transactions,
+        'btc_trx' : current_user.bitcoin_account.transactions,
+    }
 
     exchange_rates = {
     'usd_btc_rate'  : get_usd_to_('BTC'),
     'usd_usdt_rate' : get_usd_to_('USDT'),
     'usd_eth_rate'  : get_usd_to_('ETH'),
     }
-    return render_template('dashboard/wallet.html', **exchange_rates)
+
+    if request.method == 'POST':
+        withdrawn = proccess_withdrawal(request.form)
+        if withdrawn:
+            flash('Withdrawal in progress', 'success')
+        else:
+            flash('Withdrawal request was not sent, contact account manager','warning')
+
+    return render_template('dashboard/wallet.html', **exchange_rates, **transactions)
 
 @dashboard.route('/profile', methods=['GET','POST','PUT'])
 @login_required
@@ -69,6 +93,20 @@ def profile():
         if updated:
             flash('User info updated', 'success')
     return render_template('dashboard/profile-settings.html')
+
+@dashboard.route('/security', methods=['GET','POST'])
+@login_required
+def security():
+    # user info update
+    
+    return render_template('dashboard/payment-method.html')
+
+@dashboard.route('/payment-method', methods=['GET','POST'])
+@login_required
+def payment_method():
+    # user info update
+    
+    return render_template('dashboard/payment-method.html')
 
 @dashboard.route('/sign-in', methods=['GET','POST'])
 def sign_in():
@@ -94,7 +132,6 @@ def reset_password():
 def sign_out():
     logout_user()
     return redirect(url_for('dashboard.sign_in'))
-
 
 @dashboard.route('/base')
 def base():

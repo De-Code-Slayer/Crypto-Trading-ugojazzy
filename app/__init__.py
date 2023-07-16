@@ -10,7 +10,7 @@ from os.path import join, dirname, realpath
 db = SQLAlchemy()
 
 # upload path
-UPLOADS_PATH = join(dirname(realpath(__file__)), 'static/images')
+UPLOADS_PATH = join(dirname(realpath(__file__)), u'static\\uploads')
 
 def create_app(test_config=None):
     # create and configure the app
@@ -19,9 +19,11 @@ def create_app(test_config=None):
         SECRET_KEY=os.getenv('SECRET_KEY'),    
     )
 
+
     # upload folder
     app.config['UPLOAD_FOLDER'] = UPLOADS_PATH
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('SQLALCHEMY_DATABASE_URI')
+    # app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('SQLALCHEMY_DATABASE_URI') #local testing
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('DATABASE_URL')
 
     # init flask migrate
     migrate = Migrate(app, db)

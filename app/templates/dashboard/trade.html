@@ -1,11 +1,14 @@
 {% extends 'dashboard/base.html' %}
 
+{% block title %}Live Trading{% endblock %}
 
 {% block main %}
 <main>
   <div class="container-xl">
 <div class="row">
-<div class="col-12"><div class="card">
+
+<!-- <div class="col-12">
+  <div class="card">
 <div class="card-header d-sm-flex align-items-center justify-content-between">
 <h4 class="card-title">Your Balance (BTC)</h4>
 <p class="text-muted">Update 10 minutes ago</p>
@@ -33,11 +36,16 @@
 </div>
 </div>
 </div>
-</div>
+</div> -->
+
+<!-- tradeview start -->
 <div class="col-md-12 col-lg-8">
 <div class="card"><div id="tradingview_e8053"></div></div>
 </div>
-<div class="col-md-6 col-lg-4"><div class="card quick-trad">
+<!-- trade view end -->
+
+<!-- my trades -->
+<!-- <div class="col-md-6 col-lg-4"><div class="card quick-trad">
 <div class="card-header">
 <div class="nav d-flex" role="tablist">
   <a
@@ -259,31 +267,36 @@
 </div>
 </div>
 </div>
-</div>
-<div class="col-md-6 col-lg-4"><div class="card quick-trad" id="trading">
+</div> -->
+<!-- my trades end -->
+
+
+<!-- Live trade -->
+<div class="col-md-6 col-lg-4">
+  <div class="card quick-trad" id="trading">
 <div class="card-header">
 <div class="nav d-flex" role="tablist">
-  <a
+  <!-- <a
     class="mb-2 px-1 me-2"
     data-toggle="tab"
     href="#Limit"
     role="tab"
     aria-selected="true"
     >Limit</a
-  >
+  > -->
   <a
     class="mb-2 px-1 me-2 active"
     data-toggle="tab"
-    href="#Market"
+    href="#"
     role="tab"
     aria-selected="true"
-    >Market</a
+    >Watch Live Traders</a
   >
 </div>
 </div>
 <div class="card-body">
 <div class="tab-content">
-  <div class="tab-pane fade show" id="Limit" role="tabpanel">
+  <!-- <div class="tab-pane fade show" id="Limit" role="tabpanel">
     <form class="from">
       <div class="input-group mb-3">
         <div>
@@ -350,7 +363,7 @@
           </label>
         </div>
       </div>
-      <!-- <div class="input-group mb-3">
+      <div class="input-group mb-3">
         <div
           class="d-flex align-items-center justify-content-between w-100"
         >
@@ -360,21 +373,21 @@
             <span class="slider round"></span>
           </label>
         </div>
-      </div> -->
+      </div>
       <div class="btn-group mb-1 w-100">
         <input type="submit" value="Buy" class="btn btn-success border-0" />
         <input type="submit" value="Sell" class="btn btn-danger border-0" />
       </div>
     </form>
-  </div>
+  </div> -->
   <div class="tab-pane fade show active" id="Market" role="tabpanel">
     <form class="from">
-      <div class="input-group mb-3">
+      <!-- <div class="input-group mb-3">
         <span class="input-group-text">USD</span>
         <input type="number" class="form-control" placeholder="8796" />
-      </div>
+      </div> -->
 
-      <div class="mb-3 sub-text">
+      <!-- <div class="mb-3 sub-text">
         <div class="d-flex mb-1 justify-content-between">
           <p>Quantity</p>
           <p>0.0012 BTC</p>
@@ -391,15 +404,15 @@
           <p>Est. % change</p>
           <p>1234 USD</p>
         </div>
-      </div>
+      </div> -->
 
       <div class="input-group mb-3">
         <div
           class="d-flex align-items-center justify-content-between w-100"
         >
-          <p>Trigger Condition</p>
-          <label class="switch checked-bg-danger">
-            <input type="checkbox" checked />
+          <p>Microphone</p>
+          <label class="switch checked-bg-success">
+            <input type="checkbox" />
             <span class="slider round"></span>
           </label>
         </div>
@@ -408,24 +421,29 @@
         <div
           class="d-flex align-items-center justify-content-between w-100"
         >
-          <p>Post only</p>
+          <p>Camera</p>
           <label class="switch checked-bg-success">
-            <input type="checkbox" checked />
+            <input type="checkbox" />
             <span class="slider round"></span>
           </label>
         </div>
       </div>
       <div class="btn-group mb-1 w-100">
-        <input type="submit" value="Buy" class="btn btn-success border-0" />
-        <input type="submit" value="Sell" class="btn btn-danger border-0" />
+        <input type="submit" value="Join Live Trade" class="btn btn-success border-0" />
+        <!-- <input type="submit" value="Sell" class="btn btn-danger border-0" /> -->
       </div>
     </form>
   </div>
 </div>
 </div>
 </div>
+
 </div>
-<div class="col-md-6 col-lg-4"><div class="card">
+
+
+
+<!-- <div class="col-md-6 col-lg-4">
+<div class="card">
 <div class="card-header d-flex align-items-center justify-content-between">
 <h4 class="card-title mb-0">Your Protfulio</h4>
 <p class="text-primary">My size</p>
@@ -530,7 +548,10 @@
 </div>
 </div>
 </div>
-<div class="col-md-6 col-lg-4"><div class="card orderBook">
+
+
+<div class="col-md-6 col-lg-4">
+<div class="card orderBook">
 <div class="card-header">
 <h4 class="card-title">Order Book</h4>
 </div>
@@ -593,15 +614,21 @@
 </table>
 </div>
 </div>
-</div>
-<div class="col-md-7 col-lg-8"><div class="card">
+</div> -->
+
+
+<div class="col-md-7 col-lg-8">
+<div class="card">
 <div class="card-header">
 <h4 class="card-title">Depth Chart</h4>
 </div>
 <div class="card-body"><div id="chartdiv"></div></div>
 </div>
 </div>
-<div class="col-md-5 col-lg-4"><div class="card">
+
+<!-- market news -->
+<!-- <div class="col-md-5 col-lg-4">
+<div class="card">
 <div class="card-header">
 <h4 class="card-title">Market News</h4>
 </div>
@@ -637,8 +664,11 @@
 </ul>
 </div>
 </div>
-</div>
-<div class="col-12"><div class="card quick-trad">
+</div> -->
+
+<!-- Table of Orders -->
+<!-- <div class="col-12">
+<div class="card quick-trad">
 <div class="card-header">
 <div class="nav d-flex" role="tablist">
   <a
@@ -1002,7 +1032,9 @@
 </div>
 </div>
 </div>
-</div>
+</div> -->
+
+
 </div>
 
 </div>

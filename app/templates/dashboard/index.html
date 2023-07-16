@@ -1,6 +1,6 @@
 {% extends 'dashboard/base.html' %}
 
-
+{% block title %}Overview{% endblock %}
 {% block main %}
 <main>
   <div class="container-xl">
@@ -27,7 +27,7 @@
 </div>
 </div>
 </div> -->
-<div class="col-md-12"><div class="row">
+<!-- <div class="col-md-12"><div class="row">
 <div class="col-sm-6 col-md-3">
 <div class="card overview">
   <div class="card-header mb-0">
@@ -117,13 +117,13 @@
 </div>
 </div>
 </div>
-</div>
+</div> -->
 
 <div class="col-md-12 col-sm-12 col-lg-6">
 <div class="col-12"><div class="card">
 <div class="card-header d-flex justify-content-between align-items-center">
-<h4 class="card-title">Wallet overview</h4>
-<div class="nav d-flex" id="myTab" role="tablist">
+<h4 class="card-title">Copy Trading Overview (Trade Mirroring)</h4>
+<!-- <div class="nav d-flex" id="myTab" role="tablist">
   <a
     class="btn mb-2 btn-sm border-0 me-2 btn-light active"
     data-toggle="tab"
@@ -156,27 +156,29 @@
     aria-selected="true"
     >1Y</a
   >
-</div>
+</div> -->
 </div>
 <div class="card-body">
 <div class="tab-content">
   <div class="tab-pane active" role="tabpanel">
     <div class="row d-flex align-items-center justify-content-around">
-      <div
+      <!-- <div
         id="walletChart"
         class="col-lg-7 col-sm-7 d-flex justify-content-center c-pointer"
-      ></div>
-      <div class="col-lg-5 col-sm-5">
+      >
+    </div> -->
+    {% if current_user.trader_profile_id %}
+    <div class="col-lg-5 col-sm-5">
         <ul>
           <li class="mb-3">
             <p class="cfs-18 d-flex align-items-center">
               <span
                 class="svgh-10 cw-10 bg-bitcoin me-1 d-block rounded-circle"
               ></span>
-              Bitcoin
+              You are copying:<br/> {{current_user.trader_profile.trader_name}}
             </p>
             <p class="ms-3">
-              <strong class="fw-bold">1 Btc</strong> = $43309.00
+              <strong class="fw-bold"></strong>
             </p>
           </li>
           <li class="mb-3">
@@ -191,10 +193,10 @@
                   rounded-circle
                 "
               ></span>
-              Ethereum
+              Amount
             </p>
             <p class="ms-3">
-              <strong class="fw-bold">0.4 Ether </strong> = $1184.53
+              <strong class="fw-bold">{{current_user.traded_amount}} USD </strong> 
             </p>
           </li>
           <li class="mb-1">
@@ -202,14 +204,20 @@
               <span
                 class="svgh-10 cw-10 bg-tether me-1 d-block rounded-circle"
               ></span>
-              Tether
+              Plan
             </p>
             <p class="ms-3">
-              <strong class="fw-bold">0.000242 USDT</strong> = $0.125
+              <strong class="fw-bold"></strong> {{current_user.traded_plan}}
             </p>
           </li>
         </ul>
       </div>
+      {% else %}
+      <div class="col-lg-5 col-sm-5">
+        <p class='test-warning center'> You are not copying any trader, click <a href="{{url_for('dashboard.transfers')}}" >here</a> copy an expert trader</p>
+      </div>
+      {% endif %}
+
     </div>
   </div>
 </div>
@@ -219,8 +227,8 @@
 <div class="col-12"><div class="card">
 <div class="card-body">
 <div>
-  <p>Transfer coins or tokens between cripto account and cripto Wallet.</p>
-  <a href="wallet.html" class="btn btn-sm btn-primary mt-2 px-3 border-0">
+  <p>Deposit and withdraw from wallet in minutes.</p>
+  <a href="{{url_for('dashboard.wallet')}}" class="btn btn-sm btn-primary mt-2 px-3 border-0">
     <svg
       class="fill-light me-1 svgh-12"
       xmlns="http://www.w3.org/2000/svg"
@@ -281,7 +289,7 @@
 <div class="col-md-6 col-sm-12 col-lg-6">
 <div class="col-12"><div class="card bg-primary invite-friend">
 <div class="card-body">
-<a href="#" onclick="copy()" class="d-flex justify-content-between">
+<a href="#" onclick="copy('copyable')" class="d-flex justify-content-between">
   <p>Earn up to 40% commission: Invite friend now !</p>
   <i class="ri-arrow-right-s-line"></i>
 </a>
@@ -290,32 +298,59 @@
 </div>
 <div class="col-12"><div class="card">
 <div class="card-header">
-<h4 class="card-title">Market Info</h4>
+<h4 class="card-title">Recent Transactions</h4>
 </div>
 <div class="card-body">
 <div class="market-news">
   <ul class="list-group list-group-flush position-relative" id="marketInfo">
+    {% if trx %}
+    {% for tx in trx %}
     <li class="d-flex align-items-center list-group-item py-3">
+
+      {% if tx.bitcoin_account_user_id %}
+      <!-- btc -->
       <span class="op-bitcoin rounded-2 p-4 coin"
         ><i class="cc BTC-alt text-bitcoin cfs-25"></i
       ></span>
+          {% elif tx.ethereum_account_user_id %}
+      <!-- eth -->
+      <span class="op-ethereum rounded-2 p-4 coin"
+        ><i class="cc ETC text-ethereum cfs-25"></i
+      ></span>
+      {% elif tx.thether_account_user_id %}
+      <!-- usdt -->
+      <span class="op-tether rounded-2 p-4 coin"
+      ><i class="cc USDT text-tether cfs-25"></i
+    ></span>
+
+    {% endif %}
+
+
       <div class="ms-2 w-100">
         <div class="d-flex align-items-center justify-content-between">
           <div>
-            <h6 class="text-uppercase">btc/USD</h6>
+            <!-- <h6 class="text-uppercase">btc/USD</h6> -->
             <p class="sub-text">
+              {% if tx.transaction_type == 'credit' %}
               <i class="ri-arrow-up-s-fill text-success"></i
-              >2.4%
+              >
+                {% elif tx.transaction_type == 'debit' %}
+              <i class="ri-arrow-down-s-fill text-danger"></i
+              >
+
+              {% endif %}
             </p>
           </div>
           <div>
-            <p>$44398.00</p>
-            <p class="sub-text">340.5 USD</p>
+            <p>{{tx.amount}}</p>
+            <!-- <p class="sub-text">USD</p> -->
           </div>
         </div>
       </div>
     </li>
-    <li class="d-flex align-items-center list-group-item py-3">
+    {% endfor %}
+    {% endif %}
+    <!-- <li class="d-flex align-items-center list-group-item py-3">
       <span class="op-ethereum rounded-2 p-4 coin"
         ><i class="cc ETC text-ethereum cfs-25"></i
       ></span>
@@ -434,22 +469,24 @@
           </div>
         </div>
       </div>
-    </li>
+    </li> -->
   </ul>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="col-md-6 col-lg-4"><div class="card transaction">
+
+
+<!-- <div class="col-md-6 col-lg-4"><div class="card transaction">
 <div class="card-header d-flex justify-content-between align-items-center">
 <h4 class="card-title">Recent Activity</h4>
-<!-- <select class="form-select cw-120 form-select-sm border-1 mb-2">
+<select class="form-select cw-120 form-select-sm border-1 mb-2">
   <option value="today">Today</option>
   <option value="Yesterday">Yesterday</option>
   <option value="Week">Last Week</option>
   <option value="Month">Last Month</option>
-</select> -->
+</select>
 </div>
 <div class="card-body">
 <ul
@@ -1263,8 +1300,10 @@
 </ul>
 </div>
 </div>
-</div>
-<div class="col-md-6 col-lg-4"><div class="card quick-trad">
+</div> -->
+
+
+<!-- <div class="col-md-6 col-lg-4"><div class="card quick-trad">
 <div class="card-header d-flex justify-content-between align-items-center">
 <h4 class="card-title">Quick Trade</h4>
 <div class="nav d-flex" id="quickTrade" role="tablist">
@@ -2025,13 +2064,15 @@
 </div>
 </div>
 </div>
-</div>
-<div class="col-md-6"><div class="card level">
+</div> -->
+
+
+<div class="col"><div class="card level">
 <div class="card-header">
-<h4 class="card-title">Your Trading Level: VIP 2</h4>
+<h4 class="card-title"> VIP </h4>
 </div>
 <div class="card-body">
-<h6 class="mb-3">To upgrade to VIP 3</h6>
+<!-- <h6 class="mb-3">To upgrade to VIP 3</h6>
 <div class="bg-light p-2 rounded">
   <p>1. 30d Trade Volume (BTC)</p>
   <div
@@ -2077,7 +2118,7 @@
     <p>VIP 2</p>
     <p>VIP 3</p>
   </div>
-</div>
+</div> -->
 <div class="bg-primary mt-3 rounded p-2">
   <a href="#"
     ><span class="text-light cfs-24 fw-bold">

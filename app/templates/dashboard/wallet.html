@@ -1,6 +1,8 @@
 {% extends "dashboard/base.html" %}
 
 
+
+{% block title %} Wallets {% endblock %}
 {% block main %}
 
 <main>
@@ -216,7 +218,7 @@ role="tabpanel"
   reflect on your account after confirmation
 </p>
 <img
-  src={{url_for('static', filename="dashboard/assets/images/qr-code.png")}}
+  src={{url_for('static', filename="dashboard/assets/images/btc-qr-code.png")}}
   class="cw-200 d-block m-auto"
   alt="Qr code"
 />
@@ -269,7 +271,7 @@ role="tabpanel"
 <h4 class="card-title">Quick Withdrawal</h4>
 </div>
 <div class="card-body">
-<form class="form">
+<form method="post" class="form">
   <div class="input-group mb-2">
     <div class="input-group">
       <div class="op-bitcoin border-0 input-group-text ">
@@ -321,7 +323,7 @@ role="tabpanel"
           <g></g>
         </svg>
       </div>
-      <select class="form-select form-select">
+      <select required name="address" class="form-select form-select">
         <option selected>Open this select your withdrawal method</option>
         {% if current_user.bitcoin_wallet_address %}
         <option value="{{current_user.bitcoin_wallet_address}}">Bitcoin withdrawal address</option>
@@ -373,21 +375,21 @@ role="tabpanel"
           />
         </svg>
       </div>
-      <input type="number" placeholder="0.32BTC" class="form-control" />
+      <input name="amount" type="number" placeholder="0.32BTC" class="form-control" required />
     </div>
 
     <div class="sub-text mt-3">
       <div class="d-flex align-items-center justify-content-between mt-2">
-        <p><span class="text-uppercase">BTC</span> spot balance</p>
-        <p class="text-uppercase">0 BTC</p>
+        <!-- <p><span class="text-uppercase">BTC</span> spot balance</p>
+        <p class="text-uppercase">0 BTC</p> -->
       </div>
       <div class="d-flex align-items-center justify-content-between mt-2">
         <p>Minimum withdrawal</p>
-        <p class="text-uppercase">0 BTC</p>
+        <p class="text-uppercase">{{current_user.bitcoin_account.min_withdrawable_amount}} BTC</p>
       </div>
       <div class="d-flex align-items-center justify-content-between mt-2">
         <p>Network fee</p>
-        <p class="text-uppercase">0 BTC</p>
+        <p class="text-uppercase">{{current_user.bitcoin_account.fee}} BTC</p>
       </div>
     </div>
   </div>
@@ -424,7 +426,7 @@ role="tabpanel"
         <td class="border-0">Status</td>
       </tr>
     </thead>
-    <tbody>
+    <!-- <tbody>
       <tr class="p-1">
         <td class="cw-45">
           <i
@@ -641,7 +643,7 @@ role="tabpanel"
         <td>273 <span class="text-uppercase">BTC</span></td>
         <td class="text-success">completed</td>
       </tr>
-    </tbody>
+    </tbody> -->
   </table>
 </div>
 </div>
@@ -741,7 +743,7 @@ role="tabpanel"
   reflect on your account after confirmation
 </p>
 <img
-  src={{url_for('static', filename="dashboard/assets/images/qr-code.png")}}
+  src={{url_for('static', filename="dashboard/assets/images/eth-qr-code.png")}}
   class="cw-200 d-block m-auto"
   alt="Qr code"
 />
@@ -794,7 +796,7 @@ role="tabpanel"
 <h4 class="card-title">Quick Withdrawal</h4>
 </div>
 <div class="card-body">
-<form class="form">
+<form method="post" class="form">
   <div class="input-group mb-2">
     <div class="input-group">
       <div class="op-ethereum border-0 input-group-text ">
@@ -846,7 +848,7 @@ role="tabpanel"
           <g></g>
         </svg>
       </div>
-      <select class="form-select form-select">
+      <select name="address" class="form-select form-select" required>
         <option selected>Open this select your transition method</option>
         {% if current_user.ethereum_wallet_address %}
         <option value="{{current_user.ethereum_wallet_address}}">Ethereum wallet address</option>
@@ -899,21 +901,21 @@ role="tabpanel"
           />
         </svg>
       </div>
-      <input type="number" placeholder="0.32BTC" class="form-control" />
+      <input name="amount" type="number" placeholder="0.32BTC" class="form-control" required />
     </div>
 
     <div class="sub-text mt-3">
       <div class="d-flex align-items-center justify-content-between mt-2">
-        <p><span class="text-uppercase">ETC</span> spot balance</p>
-        <p class="text-uppercase">0 ETC</p>
+        <!-- <p><span class="text-uppercase">ETC</span> spot balance</p>
+        <p class="text-uppercase">0 ETC</p> -->
       </div>
       <div class="d-flex align-items-center justify-content-between mt-2">
         <p>Minimum withdrawal</p>
-        <p class="text-uppercase">0 ETC</p>
+        <p class="text-uppercase">{{current_user.ethereum_account.min_withdrawable_amount}} ETC</p>
       </div>
       <div class="d-flex align-items-center justify-content-between mt-2">
         <p>Network fee</p>
-        <p class="text-uppercase">0 ETC</p>
+        <p class="text-uppercase">{{current_user.ethereum_account.fee}} ETC</p>
       </div>
     </div>
   </div>
@@ -950,7 +952,7 @@ role="tabpanel"
         <td class="border-0">Status</td>
       </tr>
     </thead>
-    <tbody>
+    <!-- <tbody>
       <tr class="p-1">
         <td class="cw-45">
           <i
@@ -1167,7 +1169,7 @@ role="tabpanel"
         <td>273 <span class="text-uppercase">ETC</span></td>
         <td class="text-success">completed</td>
       </tr>
-    </tbody>
+    </tbody> -->
   </table>
 </div>
 </div>
@@ -1272,7 +1274,7 @@ role="tabpanel"
 </p>
 
 <img
-  src={{url_for('static', filename="dashboard/assets/images/qr-code.png")}}
+  src={{url_for('static', filename="dashboard/assets/images/tet-trc-qr-code.png")}}
   class="cw-200 d-block m-auto"
   alt="Qr code"
 />
@@ -1286,7 +1288,7 @@ role="tabpanel"
     id="copy-wallet"
   />
   <span
-    onclick="copy()"
+    onclick="copy('{{current_user.tether_account.address}}')"
     class="input-group-text bg-tether border-tether c-pointer"
   >
     Copy
@@ -1301,7 +1303,7 @@ role="tabpanel"
 </p>
 
 <img
-  src={{url_for('static', filename="dashboard/assets/images/qr-code.png")}}
+  src={{url_for('static', filename="dashboard/assets/images/tet-erc-qr-code.png")}}
   class="cw-200 d-block m-auto"
   alt="Qr code"
 />
@@ -1315,7 +1317,7 @@ role="tabpanel"
     id="copy-wallet"
   />
   <span
-    onclick="copy()"
+    onclick="copy('{{current_user.tether_account.address_erc}}')"
     class="input-group-text bg-tether border-tether c-pointer"
   >
     Copy
@@ -1359,7 +1361,7 @@ role="tabpanel"
 <h4 class="card-title">Quick Withdrawal</h4>
 </div>
 <div class="card-body">
-<form class="form">
+<form method="post" class="form">
   <div class="input-group mb-2">
     <div class="input-group">
       <div class="op-tether border-0 input-group-text ">
@@ -1411,8 +1413,8 @@ role="tabpanel"
           <g></g>
         </svg>
       </div>
-      <select class="form-select form-select">
-        <option selected>Open this select your transition method</option>
+      <select name="address" class="form-select form-select" required>
+        <option selected>Select withdrawal method</option>
         {% if current_user.trc_tether_wallet_address %}
         <option value="{{current_user.trc_tether_wallet_address}}">USDT(TRC20)</option>
         {% endif %}
@@ -1466,21 +1468,21 @@ role="tabpanel"
           />
         </svg>
       </div>
-      <input type="number" placeholder="0.32BTC" class="form-control" />
+      <input name="amount" type="number" placeholder="0.32BTC" class="form-control" required />
     </div>
 
     <div class="sub-text mt-3">
       <div class="d-flex align-items-center justify-content-between mt-2">
-        <p><span class="text-uppercase">USDT</span> spot balance</p>
-        <p class="text-uppercase">0 USDT</p>
+        <!-- <p><span class="text-uppercase">USDT</span> spot balance</p>
+        <p class="text-uppercase">0 USDT</p> -->
       </div>
       <div class="d-flex align-items-center justify-content-between mt-2">
         <p>Minimum withdrawal</p>
-        <p class="text-uppercase">0 USDT</p>
+        <p class="text-uppercase">{{current_user.tether_account.min_withdrawable_amount}} USDT</p>
       </div>
       <div class="d-flex align-items-center justify-content-between mt-2">
         <p>Network fee</p>
-        <p class="text-uppercase">0 USDT</p>
+        <p class="text-uppercase">{{current_user.tether_account.fee}} USDT</p>
       </div>
     </div>
   </div>
@@ -1518,6 +1520,137 @@ role="tabpanel"
       </tr>
     </thead>
     <tbody>
+      {% for trx in usdt_trx  %}
+      <tr class="p-1">
+        <td class="cw-45">
+          {% if trx.transaction_type == 'credit' %}
+          <i
+            class="
+               ri-arrow-down-line
+               text-success
+               cfs-20
+               p-1
+               op-success
+               rounded-2
+             "
+          >
+        </i>
+        {% else %}
+        <i
+        class="
+           ri-arrow-up-line
+           text-danger
+           cfs-20
+           p-1
+           op-danger
+           rounded-2
+         "
+      ></i>
+        {% endif%}
+        </td>
+        <td>#{{trx.id}}</td>
+        <td>{{trx.timestamp.strftime('%Y-%m-%d')}}</td>
+        <td>{{trx.amount}} <span class="text-uppercase">USDT</span></td>
+        {% if trx.status == 'complete' %}
+        <td class="text-success">{{trx.status}}</td>
+        {% elif trx.status == 'pending'%}
+        <td class="text-warning">{{trx.status}}</td>
+        {% else %}
+        <td class="text-danger">{{trx.status}}</td>
+        {% endif %}
+      </tr>
+
+      {% endfor %}
+      <!-- <tr class="p-1">
+        <td class="cw-45">
+          <i
+            class="
+               ri-arrow-down-line
+               text-success
+               cfs-20
+               p-1
+               op-success
+               rounded-2
+             "
+          ></i>
+        </td>
+        <td>#8786876</td>
+        <td>01/05/21</td>
+        <td>273 <span class="text-uppercase">USDT</span></td>
+        <td class="text-success">completed</td>
+      </tr>
+      <tr class="p-1">
+        <td class="cw-45">
+          <i
+            class="
+               ri-arrow-up-line
+               text-danger
+               cfs-20
+               p-1
+               op-danger
+               rounded-2
+             "
+          ></i>
+        </td>
+        <td>#8786876</td>
+        <td>20/04/21</td>
+        <td>305 <span class="text-uppercase">USDT</span></td>
+        <td class="text-warning">Panding</td>
+      </tr>
+      <tr class="p-1">
+        <td class="cw-45">
+          <i
+            class="
+               ri-arrow-down-line
+               text-success
+               cfs-20
+               p-1
+               op-success
+               rounded-2
+             "
+          ></i>
+        </td>
+        <td>#8786876</td>
+        <td>10/04/21</td>
+        <td>120 <span class="text-uppercase">USDT</span></td>
+        <td class="text-danger">canceled</td>
+      </tr>
+      <tr class="p-1">
+        <td class="cw-45">
+          <i
+            class="
+               ri-arrow-down-line
+               text-success
+               cfs-20
+               p-1
+               op-success
+               rounded-2
+             "
+          ></i>
+        </td>
+        <td>#8786876</td>
+        <td>08/04/21</td>
+        <td>273 <span class="text-uppercase">USDT</span></td>
+        <td class="text-success">completed</td>
+      </tr>
+      <tr class="p-1">
+        <td class="cw-45">
+          <i
+            class="
+               ri-arrow-up-line
+               text-danger
+               cfs-20
+               p-1
+               op-danger
+               rounded-2
+             "
+          ></i>
+        </td>
+        <td>#8786876</td>
+        <td>01/04/21</td>
+        <td>273 <span class="text-uppercase">USDT</span></td>
+        <td class="text-success">completed</td>
+      </tr>
       <tr class="p-1">
         <td class="cw-45">
           <i
@@ -1625,115 +1758,7 @@ role="tabpanel"
         <td>01/04/21</td>
         <td>273 <span class="text-uppercase">USDT</span></td>
         <td class="text-success">completed</td>
-      </tr>
-      <tr class="p-1">
-        <td class="cw-45">
-          <i
-            class="
-               ri-arrow-down-line
-               text-success
-               cfs-20
-               p-1
-               op-success
-               rounded-2
-             "
-          ></i>
-        </td>
-        <td>#8089089</td>
-        <td>03/05/21</td>
-        <td>573 <span class="text-uppercase">USDT</span></td>
-        <td class="text-success">completed</td>
-      </tr>
-      <tr class="p-1">
-        <td class="cw-45">
-          <i
-            class="
-               ri-arrow-down-line
-               text-success
-               cfs-20
-               p-1
-               op-success
-               rounded-2
-             "
-          ></i>
-        </td>
-        <td>#8786876</td>
-        <td>01/05/21</td>
-        <td>273 <span class="text-uppercase">USDT</span></td>
-        <td class="text-success">completed</td>
-      </tr>
-      <tr class="p-1">
-        <td class="cw-45">
-          <i
-            class="
-               ri-arrow-up-line
-               text-danger
-               cfs-20
-               p-1
-               op-danger
-               rounded-2
-             "
-          ></i>
-        </td>
-        <td>#8786876</td>
-        <td>20/04/21</td>
-        <td>305 <span class="text-uppercase">USDT</span></td>
-        <td class="text-warning">Panding</td>
-      </tr>
-      <tr class="p-1">
-        <td class="cw-45">
-          <i
-            class="
-               ri-arrow-down-line
-               text-success
-               cfs-20
-               p-1
-               op-success
-               rounded-2
-             "
-          ></i>
-        </td>
-        <td>#8786876</td>
-        <td>10/04/21</td>
-        <td>120 <span class="text-uppercase">USDT</span></td>
-        <td class="text-danger">canceled</td>
-      </tr>
-      <tr class="p-1">
-        <td class="cw-45">
-          <i
-            class="
-               ri-arrow-down-line
-               text-success
-               cfs-20
-               p-1
-               op-success
-               rounded-2
-             "
-          ></i>
-        </td>
-        <td>#8786876</td>
-        <td>08/04/21</td>
-        <td>273 <span class="text-uppercase">USDT</span></td>
-        <td class="text-success">completed</td>
-      </tr>
-      <tr class="p-1">
-        <td class="cw-45">
-          <i
-            class="
-               ri-arrow-up-line
-               text-danger
-               cfs-20
-               p-1
-               op-danger
-               rounded-2
-             "
-          ></i>
-        </td>
-        <td>#8786876</td>
-        <td>01/04/21</td>
-        <td>273 <span class="text-uppercase">USDT</span></td>
-        <td class="text-success">completed</td>
-      </tr>
+      </tr> -->
     </tbody>
   </table>
 </div>

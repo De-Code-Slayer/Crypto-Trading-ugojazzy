@@ -1,5 +1,7 @@
-from app.database.models import User, Referrals, TraderProfile
+from app.database.models import User, Transactions, TraderProfile
+from sqlalchemy import and_
 from werkzeug.utils import secure_filename
+from .email import send_mail
 from flask_login import current_user
 from app import db, UPLOADS_PATH
 import logging
@@ -11,9 +13,11 @@ ALLOWED_EXTENSIONS = {'png', 'jpg','jpeg'}
 
 basedir = path.abspath(path.dirname(__file__))
 
-def follow_trader(trader_id):
+def follow_trader(traded_plan, traded_amount, trader_id):
     try:
         current_user.trader_profile_id = trader_id
+        current_user.traded_plan = traded_plan
+        current_user.traded_amount = traded_amount
         db.session.commit()
     except Exception as e:
         # Handle specific exceptions or provide a general error message
@@ -125,4 +129,39 @@ def update_profile_info(form_data,file=None):
     return True
 
 
-    
+def proccess_withdrawal(request_data):
+    amount = request_data.get('amount')
+    address = request_data.get('address')
+
+    message = f'withdrawal request to address: {address} for amount {amount}'
+    subject =  f'Withdrawal Request from {current_user.full_name}'
+    mail_address = current_user.email
+
+    # send email to site owner
+    emailed = send_mail(mail_address, subject, message)
+
+    # create transaction record
+    trx = Transactions(thether_account_user_id=current_user.id, amount=amount, transaction_type='debit', status='pending')
+
+    db.session.add(trx)
+    db.session.commit()
+    if emailed:
+    #   debit user
+        return True
+    else:
+        return False
+
+
+def get_trx():
+
+    return Transactions.query.filter((Transactions.thether_account_user_id == current_user.tether_account.user_id)|
+                                     (Transactions.ethereum_account_user_id == current_user.ethereum_account.user_id)|
+                                     (Transactions.bitcoin_account_user_id == current_user.bitcoin_account.user_id)
+                                ).all()
+
+
+
+
+
+
+

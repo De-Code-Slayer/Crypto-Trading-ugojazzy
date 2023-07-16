@@ -1,0 +1,249 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Subscriptions{% endblock %}
+
+{% block main %}
+<main>
+  <div class="container-xl">
+<div class="row">
+
+<!-- trade plans -->
+<div class="col-md-6 col-lg-4">
+<div class="card transaction">
+<div class="card-header">
+<h4 class="card-title">Plan Overview for Copy Trading</h4>
+</div>
+<div class="card-body">
+<ul
+  class="list-group list-group-flush position-relative"
+  id="recent-transaction"
+>
+  <li class="d-flex list-group-item py-3">
+    <div class="mt-1">
+      <i
+        class="ri-arrow-down-line text-success cfs-14 p-1 op-success rounded-2"
+      ></i>
+    </div>
+
+    <div class="ms-3 w-100">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h6>
+            <span class="text-capitalize">Starter</span>
+            <span class="text-uppercase">Plan</span>
+          </h6>
+          <p class="sub-text">30 Days</p>
+        </div>
+        <div>
+          <p>$1,000.00 <span class="text-uppercase"></span></p>
+          <p class="sub-text">min</p>
+        </div>
+        <div>
+          <p>$10,000.00</p>
+          <p class="sub-text">max</p>
+        </div>
+      </div>
+    </div>
+  </li>
+
+  <li class="d-flex list-group-item py-3">
+    <div class="mt-1">
+      <i
+        class="ri-arrow-down-line text-success cfs-14 p-1 op-success rounded-2"
+      ></i>
+    </div>
+
+    <div class="ms-3 w-100">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h6>
+            <span class="text-capitalize">Premium</span>
+            <span class="text-uppercase">Plan</span>
+          </h6>
+          <p class="sub-text">40 Days</p>
+        </div>
+        <div>
+          <p>$11,000.00 <span class="text-uppercase"></span></p>
+          <p class="sub-text">min</p>
+        </div>
+        <div>
+          <p>$20,000.00</p>
+          <p class="sub-text">max</p>
+        </div>
+      </div>
+    </div>
+  </li>
+
+  <li class="d-flex list-group-item py-3">
+    <div class="mt-1">
+      <i
+        class="ri-arrow-down-line text-success cfs-14 p-1 op-success rounded-2"
+      ></i>
+    </div>
+
+    <div class="ms-3 w-100">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h6>
+            <span class="text-capitalize">Professional</span>
+            <span class="text-uppercase">Plan</span>
+          </h6>
+          <p class="sub-text">60 Days</p>
+        </div>
+        <div>
+          <p>$21,000.00 <span class="text-uppercase"></span></p>
+          <p class="sub-text">min</p>
+        </div>
+        <div>
+          <p>$50,000.00</p>
+          <p class="sub-text">max</p>
+        </div>
+      </div>
+    </div>
+  </li>
+
+  <li class="d-flex list-group-item py-3">
+    <div class="mt-1">
+      <i
+        class="ri-arrow-down-line text-success cfs-14 p-1 op-success rounded-2"
+      ></i>
+    </div>
+
+    <div class="ms-3 w-100">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h6>
+            <span class="text-capitalize">Chambers</span>
+            <span class="text-uppercase">Plan</span>
+          </h6>
+          <p class="sub-text">80 Days</p>
+        </div>
+        <div>
+          <p>$50,000.00 <span class="text-uppercase"></span></p>
+          <p class="sub-text">min</p>
+        </div>
+        <div>
+          <p>$500,000.00</p>
+          <p class="sub-text">max</p>
+        </div>
+      </div>
+    </div>
+  </li>
+
+  <!-- <li class="d-flex list-group-item py-3">
+    <div class="mt-1">
+      <i
+        class="ri-arrow-down-line text-success cfs-14 p-1 op-success rounded-2"
+      ></i>
+    </div>
+
+    <div class="ms-3 w-100">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h6>
+            <span class="text-capitalize">buy</span>
+            <span class="text-uppercase">Plan</span>
+          </h6>
+          <p class="sub-text">14 Mar 2021</p>
+        </div>
+        <div>
+          <p>0.016 <span class="text-uppercase">Plan</span></p>
+          <p class="sub-text">Coin value</p>
+        </div>
+        <div>
+          <p>$100.00</p>
+          <p class="sub-text">Amount</p>
+        </div>
+      </div>
+    </div>
+  </li> -->
+  
+</ul>
+</div>
+</div>
+</div>
+
+
+
+<!-- announcement -->
+<div class="col-md-6">
+<div class="card announcements">
+<div class="card-header">
+<h4 class="card-title">More Info</h4>
+</div>
+<div class="card-body">
+<div class="position-relative" id="announcement">
+  <div class="row w-100 py-3 pt-0">
+    <div class="col-xl-2 col-md-3 col-sm-2 border-end">
+      <p class="text-muted">1</p>
+    </div>
+    <div class="col-xl-10 col-md-9 col-sm-10">
+      <h6>
+        STARTER PLAN
+
+      </h6>
+      <p class="sub-text mt-2">
+        This plan Starts a $1,000 minimum trading balance allocated for following a trader within the period of 30 days of trading and a max allocated balance of $10,000    
+      </p>
+    </div>
+  </div>
+
+  <div class="row mt-3 w-100 py-3">
+    <div class="col-xl-2 col-md-3 col-sm-2 border-end">
+      <p class="text-muted">2</p>
+    </div>
+    <div class="col-xl-10 col-md-9 col-sm-10">
+      <h6>PREMIUM</h6>
+      <p class="sub-text mt-2">
+        Participants must have a minimum total subscription volume of $1,000
+        to the 15-day DOCK Locked Savings product during the activity to
+        qualify for receiving the rewards (no Early Redemption).
+        
+      </p>
+    </div>
+  </div>
+
+
+  <div class="row mt-3 w-100 py-3">
+    <div class="col-xl-2 col-md-3 col-sm-2 border-end">
+      <p class="text-muted">3</p>
+    </div>
+    <div class="col-xl-10 col-md-9 col-sm-10">
+      <h6>PROFESSIONAL TRADING LEVEL</h6>
+      <p class="sub-text mt-2">
+        Participants must have a minimum total subscription volume of $1,000
+        to the 15-day DOCK Locked Savings product during the activity to
+        qualify for receiving the rewards (no Early Redemption).
+        
+      </p>
+    </div>
+  </div>
+
+  <div class="row mt-3 w-100 py-3">
+    <div class="col-xl-2 col-md-3 col-sm-2 border-end">
+      <p class="text-muted">4</p>
+    </div>
+    <div class="col-xl-10 col-md-9 col-sm-10">
+      <h6>CHAMBERS PRO LEVEL</h6>
+      <p class="sub-text mt-2">
+        Participants must have a minimum total subscription volume of $1,000
+        to the 15-day DOCK Locked Savings product during the activity to
+        qualify for receiving the rewards (no Early Redemption).
+        
+      </p>
+    </div>
+  </div>
+
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+</div>
+
+</div>
+</main>
+{% endblock %}

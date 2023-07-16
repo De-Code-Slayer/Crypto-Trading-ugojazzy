@@ -1,6 +1,5 @@
 {% extends 'dashboard/base.html' %}
-{% set active_page = "profile" %}
-
+{% block title %}Profile{% endblock %}
 
 {% block main %}
 
@@ -10,7 +9,11 @@
     <div class="row">
       <div class="col-lg-4">
         <div class="row">
-          <div class="col-12"><div class="bg-primary rounded-3 p-2 shadow">
+
+          <!-- complete profile -->
+  <!-- <div class="col-12">
+  <div class="bg-primary rounded-3 p-2 shadow">
+
 <div class="d-flex">
 <div id="radialChart"></div>
 
@@ -18,19 +21,21 @@
   <h5>Profile Informations</h5>
   <p>complete your profile to unlock all features</p>
 </div>
+
 </div>
+
 <a
 href="profile-settings.html"
 class="mt-2 btn btn-success border-0 rounded-pill m-auto d-block"
 >Complete My Profile</a
 >
 </div>
-</div>
+</div> -->
           <div class="col-12">
             <div class="card mt-3">
               <div class="card-body pb-0"><div id="setting-nav">
 <h4 class="card-title mb-2 border-bottom pb-2">Settings</h4>
-<a
+<!-- <a
 href="profile-settings.html"
 class="
   d-flex
@@ -58,9 +63,9 @@ class="
   <p class="ms-3">Personal Info</p>
 </div>
 <i class="ri-arrow-right-s-line"></i>
-</a>
+</a> -->
 <a
-href="security-settings.html"
+href="{{url_for('dashboard.security')}}"
 class="
   d-flex
   btn btn-light
@@ -89,7 +94,7 @@ class="
 <i class="ri-arrow-right-s-line"></i>
 </a>
 <a
-href="payment-method.html"
+href="{{url_for('dashboard.payment_method')}}"
 class="
   d-flex
   btn btn-light
@@ -117,7 +122,7 @@ class="
 </div>
 <i class="ri-arrow-right-s-line"></i>
 </a>
-<a
+<!-- <a
 href="api-key.html"
 class="
   d-flex
@@ -145,7 +150,7 @@ class="
   <p class="ms-3">Api key</p>
 </div>
 <i class="ri-arrow-right-s-line"></i>
-</a>
+</a> -->
 </div>
 </div>
             </div>
@@ -159,12 +164,16 @@ class="
 <h4 class="card-title">User Informations</h4>
 </div>
 <div class="card-body">
-<form name='user_info' method="post" class="form">
+<form name='user_info' enctype="multipart/form-data" method="post" class="form">
   <div class="form-group mb-4">
     <!-- <label for="" class="d-block fw-bold mb-1">Profile Pic</label> -->
     <div class="d-flex align-items-center">
       <img
+      {% if not current_user.display_photo  %}
         src={{url_for('static', filename="dashboard/assets/images/profile.jpg")}}
+      {% else %}
+        src={{url_for('static', filename="uploads/"+current_user.display_photo)}}
+      {% endif %}
         alt="Profile"
         class="cw-90 ch-90 rounded-3"
       />
