@@ -6,6 +6,11 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from os.path import join, dirname, realpath
 
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
 # create the extension
 db = SQLAlchemy()
 
@@ -22,8 +27,8 @@ def create_app(test_config=None):
 
     # upload folder
     app.config['UPLOAD_FOLDER'] = UPLOADS_PATH
-    # app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('SQLALCHEMY_DATABASE_URI') #local testing
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('DATABASE_URL')
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('SQLALCHEMY_DATABASE_URI') #local testing
+    # app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('DATABASE_URL')
 
     # init flask migrate
     migrate = Migrate(app, db)
