@@ -1,7 +1,8 @@
+gunicorn
 Flask
 python_dotenv
 flask_sqlalchemy
 psycopg2
 flask_login
 Flask-Migrate
-guincorn
+# psycopg2-binary
