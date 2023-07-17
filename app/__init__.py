@@ -6,12 +6,21 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from os.path import join, dirname, realpath
 from dotenv import load_dotenv
+from sqlalchemy.engine.url import make_url
 
 # Load environment variables from .env file
 load_dotenv()
 
 # create the extension
 db = SQLAlchemy()
+
+
+heroku_database_url = os.getenv('DATABASE_URL')
+# Create a URL object from the Heroku database URL
+parsed_url = make_url(heroku_database_url)
+
+# Modify the drivername to match SQLAlchemy's PostgreSQL dialect
+parsed_url.drivername = "postgresql"
 
 # upload path
 UPLOADS_PATH = join(dirname(realpath(__file__)), u'static\\uploads')
@@ -27,7 +36,7 @@ def create_app(test_config=None):
     # upload folder
     app.config['UPLOAD_FOLDER'] = UPLOADS_PATH
     # app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('SQLALCHEMY_DATABASE_URI') #local testing
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('DATABASE_URL')
+    app.config["SQLALCHEMY_DATABASE_URI"] = str(parsed_url)
 
     # init flask migrate
     migrate = Migrate(app, db)
