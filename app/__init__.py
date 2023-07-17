@@ -5,8 +5,6 @@ import os
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from os.path import join, dirname, realpath
-from sqlalchemy import create_engine, url
-
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -25,11 +23,11 @@ def create_app(test_config=None):
         SECRET_KEY=os.getenv('SECRET_KEY'),    
     )
 
-
+    print(os.getenv('DATABASE_URL'),'----------===========>>>>>>')
     # upload folder
     app.config['UPLOAD_FOLDER'] = UPLOADS_PATH
     # app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('SQLALCHEMY_DATABASE_URI') #local testing
-    app.config["SQLALCHEMY_DATABASE_URI"] = str(url.make_url(os.getenv('DATABASE_URL'))),
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('DATABASE_URL')
 
     # init flask migrate
     migrate = Migrate(app, db)
