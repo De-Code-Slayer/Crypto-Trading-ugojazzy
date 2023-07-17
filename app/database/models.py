@@ -147,7 +147,7 @@ class Referrals(db.Model):
     # Add more fields as needed
 
 class TraderProfile(db.Model):
-    id = db.Column(db.Integer, primary_key=True, unique=True)
+    id = db.Column(db.Integer, primary_key=True)
     trader_name = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=True)
     last_days_return_usd = db.Column(db.Float, nullable=True)
