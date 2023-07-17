@@ -15,7 +15,8 @@ load_dotenv()
 db = SQLAlchemy()
 
 
-heroku_database_url = os.getenv('DATABASE_URL')
+heroku_database_url = os.getenv('DATABASE_URL').replace("postgres://", "postgresql://")
+print(heroku_database_url,'\n\n\n\n\n\n\n\n','==================================<<<<>>>>>')
 # Create a URL object from the Heroku database URL
 parsed_url = make_url(heroku_database_url)
 
@@ -32,11 +33,11 @@ def create_app(test_config=None):
         SECRET_KEY=os.getenv('SECRET_KEY'),    
     )
 
-    print(os.getenv('DATABASE_URL'),parsed_url_str,'----------===========>>>>>>')
+
     # upload folder
     app.config['UPLOAD_FOLDER'] = UPLOADS_PATH
     # app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('SQLALCHEMY_DATABASE_URI') #local testing
-    app.config["SQLALCHEMY_DATABASE_URI"] = parsed_url_str
+    app.config["SQLALCHEMY_DATABASE_URI"] = heroku_database_url
 
     # init flask migrate
     migrate = Migrate(app, db)
