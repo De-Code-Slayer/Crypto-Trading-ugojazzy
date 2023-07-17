@@ -20,7 +20,7 @@ heroku_database_url = os.getenv('DATABASE_URL')
 parsed_url = make_url(heroku_database_url)
 
 # Modify the drivername to match SQLAlchemy's PostgreSQL dialect
-parsed_url.drivername = "postgresql"
+# parsed_url.drivername = "postgresql"
 
 # upload path
 UPLOADS_PATH = join(dirname(realpath(__file__)), u'static\\uploads')
@@ -32,7 +32,7 @@ def create_app(test_config=None):
         SECRET_KEY=os.getenv('SECRET_KEY'),    
     )
 
-    print(os.getenv('DATABASE_URL'),'----------===========>>>>>>')
+    print(os.getenv('DATABASE_URL'),parsed_url,'----------===========>>>>>>')
     # upload folder
     app.config['UPLOAD_FOLDER'] = UPLOADS_PATH
     # app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('SQLALCHEMY_DATABASE_URI') #local testing
