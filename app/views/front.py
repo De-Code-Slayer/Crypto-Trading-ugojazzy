@@ -24,9 +24,9 @@ def wallet():
 def market_data():
     return render_template('landing/market-data.html')
 
-@frontend.route('/contact')
-def contact():
-    return render_template('landing/contact.html')
+# @frontend.route('/contact')
+# def contact():
+#     return render_template('landing/contact.html')
 
 @frontend.route('/support')
 def support():
