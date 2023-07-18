@@ -528,6 +528,7 @@
   </a>
 </div>
  <ul id="menu" class="sidebar">
+
   <li class={{ 'mm-active' if request.path == url_for('dashboard.dashboard_home') }}>
     <a href="{{url_for('dashboard.dashboard_home')}}">
       <svg
@@ -550,7 +551,9 @@
       </svg>
     </a>
   </li>
-  <li class={{ 'mm-active' if request.path == url_for('dashboard.profile') }}>
+
+  {% if current_user.confirmed %}
+  <li class={{ 'mm-active' if request.path == url_for('dashboard.live_trading') }}>
     <a href="{{url_for('dashboard.live_trading')}}" aria-expanded="true">
       <svg
         class="svgh-20"
@@ -609,7 +612,7 @@
       </svg>
     </a>
   </li>
-  <li class={{ 'mm-active' if request.path == url_for('dashboard.profile') }}>
+  <li class={{ 'mm-active' if request.path == url_for('dashboard.transfers') }}>
     <a href="{{url_for('dashboard.transfers')}}">
       <svg
         class="svgh-20"
@@ -623,7 +626,7 @@
       </svg>
     </a>
   </li>
-  <li class={{ 'mm-active' if request.path == url_for('dashboard.profile') }}>
+  <li class={{ 'mm-active' if request.path == url_for('dashboard.wallet') }}>
     <a href="{{url_for('dashboard.wallet')}}">
       <svg
         class="svgh-20"
@@ -654,6 +657,7 @@
       </svg>
     </a>
   </li>
+  {% endif %}
 </ul>
  <div class="footer">
   <a href="{{url_for('dashboard.sign_out')}}">

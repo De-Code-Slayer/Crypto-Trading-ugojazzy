@@ -1,6 +1,9 @@
-# import requests
+import requests
+import os
 
-def get_usd_to_(currency_code) -> dict:
-    # exchang_rate = requests.get('https')
-    # return exchang_rate.json()
-    return 1
+COIN_LAYER_API_KEY = os.getenv('COIN_LAYER_API_KEY')
+
+def get_usd_to_() -> dict:
+    exchang_rate = requests.get(f'http://api.coinlayer.com/api/live?access_key={COIN_LAYER_API_KEY}&symbols=BTC,ETH,USDT&target=USDT')
+    return exchang_rate.json().get('rates')
+    

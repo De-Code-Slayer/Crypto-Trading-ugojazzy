@@ -34,9 +34,9 @@ def trade_plans():
 @login_required
 def transfers():
     exchange_rates = {
-    'usd_btc_rate'  : get_usd_to_('BTC'),
-    'usd_usdt_rate' : get_usd_to_('USDT'),
-    'usd_eth_rate'  : get_usd_to_('ETH'),
+    'usd_btc_rate'  : get_usd_to_().get('BTC'),
+    'usd_usdt_rate' : get_usd_to_().get('USDT'),
+    'usd_eth_rate'  : get_usd_to_().get('ETH'),
     }
     # get followed trader info
     trader_list = get_trader() # - populate the trader list when page is opened at any time
@@ -70,9 +70,9 @@ def wallet():
     }
 
     exchange_rates = {
-    'usd_btc_rate'  : get_usd_to_('BTC'),
-    'usd_usdt_rate' : get_usd_to_('USDT'),
-    'usd_eth_rate'  : get_usd_to_('ETH'),
+    'usd_btc_rate'  : get_usd_to_().get('BTC'),
+    'usd_usdt_rate' : get_usd_to_().get('USDT'),
+    'usd_eth_rate'  : get_usd_to_().get('ETH'),
     }
 
     if request.method == 'POST':
@@ -99,7 +99,7 @@ def profile():
 def security():
     # user info update
     
-    return render_template('dashboard/payment-method.html')
+    return render_template('dashboard/security-settings.html')
 
 @dashboard.route('/payment-method', methods=['GET','POST'])
 @login_required
@@ -135,4 +135,8 @@ def sign_out():
 
 @dashboard.route('/base')
 def base():
+    return render_template('dashboard/base.html')
+
+@dashboard.route('/referal/<referer>')
+def referal():
     return render_template('dashboard/base.html')

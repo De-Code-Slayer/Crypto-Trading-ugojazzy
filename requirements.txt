@@ -5,4 +5,5 @@ flask_sqlalchemy
 psycopg2
 flask_login
 Flask-Migrate
+requests
 # psycopg2-binary
