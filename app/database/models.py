@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
     temporary_address = db.Column(db.String,nullable=True, default='')
     permanent_address = db.Column(db.String, nullable=True, default='')
     phone= db.Column(db.String, nullable=False, default='')
-
+    
     # traders profile
     trader_profile_id = db.Column(db.Integer, db.ForeignKey('trader_profile.id'), unique=True, nullable=True)
     traded_plan = db.Column(db.String, nullable=True, default='')

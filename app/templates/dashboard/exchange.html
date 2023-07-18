@@ -641,6 +641,7 @@
       <p class="fw-bold cfs-18">Trader</p>
       <p>{{trader.trader_name}}</p>
 
+    {% if current_user.trader_profile %}
       {% if current_user.trader_profile.id == trader.id %}
       <a class="text-info"
         >You are following this trader</a
@@ -650,6 +651,11 @@
         >You are Not following this trader</a
       >
       {% endif %}
+    {% else %}
+    <a class="text-warning"
+      >You are not following any trader</a>    
+    {% endif %}
+
     </div>
     <!-- <img
       src={{url_for('static', filename="dashboard/assets/images/profile/2.jpg")}}
@@ -663,6 +669,7 @@
     class="table table-striped w-100 exchange-info table-borderless cmw-30"
   >
     <tbody>
+      {% if current_user.trader_profile %}
       <tr class="text-primary">
         <td>Last 7 days return in USD</td>
         <td class="text-end">{{trader.last_days_return_usd}}</td>
@@ -695,6 +702,8 @@
         <td>Total</td>
         <td class="text-end">$1232.00 USD</td>
       </tr> -->
+      
+      {% endif %}
     </tbody>
   </table>
 </div>
