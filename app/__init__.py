@@ -73,7 +73,8 @@ def create_app(test_config=None):
 
     # setup login manager
     login_manager = LoginManager(app)
-    login_manager.login_view = 'dashboard.sign_in'
+    login_manager.login_view = 'dashboard.sign_in'    
+    login_manager.login_message_category ='info'
 
     @login_manager.user_loader
     def load_user(user_id):

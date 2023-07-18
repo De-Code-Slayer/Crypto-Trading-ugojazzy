@@ -140,3 +140,7 @@ def base():
 @dashboard.route('/referal/<referer>')
 def referal():
     return render_template('dashboard/base.html')
+
+@dashboard.route('/resend-mail/')
+def resend_mail():
+    return redirect() #rediect to page that sent the request
