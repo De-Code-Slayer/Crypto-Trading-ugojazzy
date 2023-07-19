@@ -13,7 +13,7 @@
 					<div class="row">
 						<div class="col-md-6">
 							<h1 class="animate-bottom delayms5">Potomac <br /><span class="ucap">Copy Trading</span></h1>
-							<p class="lead animate-bottom delayms7">Sed ut persp iciatis unde omnis iste natus error sit volup tatem accusa ntium dolor emque lauda ntium, totam rem aperiam, eaque ipsa quae ab illo inven tore veri.</p>
+							<p class="lead animate-bottom delayms7">Welcome to Potomac Copy Trading - Your Gateway to Seamless Crypto Mirroring! Discover the power of mirroring top traders and amplify your crypto gains effortlessly.</p>
 							{% if current_user.is_authenticated %}
 							<ul class="btns animate-bottom delayms9">
 								<li><a href="{{ url_for('dashboard.dashboard_home')}}" class="btn">Copy Trade Dashboard</a></li>
@@ -35,8 +35,8 @@
 				<div class="banner-content">
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 text-center">
-							<h1 class="animate-bottom delayms5">Bitcoin Exchange <br /><span class="ucap">YOU CAN TRUST</span></h1>
-							<p class="lead animate-bottom delayms7">Sed ut persp iciatis unde omnis iste natus error sit volup tatem accusa ntium dolor emque lauda ntium, totam rem aperiam, eaque ipsa quae ab illo inven tore veri.</p>
+							<h1 class="animate-bottom delayms5">Potomac <br /><span class="ucap">Trade Mirroring</span></h1>
+							<p class="lead animate-bottom delayms7">Welcome to Potomac Copy Trading - Your Gateway to Seamless Crypto Mirroring! Discover the power of mirroring top traders and amplify your crypto gains effortlessly.</p>
 							{% if current_user.is_authenticated %}
 							<ul class="btns animate-bottom delayms9">
 								<li><a href="{{ url_for('dashboard.dashboard_home')}}" class="btn">Copy Trade Dashboard</a></li>
@@ -98,29 +98,30 @@
 			  <div class="col-md-3 col-sm-6 res-m-bttm">
 				  <div class="box box-alt-bg round shadow">
 					  <img src={{url_for('static', filename="landing/images/box-icon-a.png") }} alt="box-icon" class="box-icon">
-					  <h6 class="ucap">Licensed Lbourg</h6>
-					  <p class="small">Compliant with dolorts adipis sit ametcon sectetur.</p>
+					  <h6 class="ucap">Licensed Traders</h6>
+					  <p class="small">At Potomac Copy Trading, we pride ourselves on providing access to a diverse pool of licensed traders. Our team of experts undergoes rigorous verification processes to ensure that only skilled and reliable traders are available for you to mirror. Invest with confidence, knowing that your funds are in capable hands.</p>
 				  </div>
 			  </div>
 			  <div class="col-md-3 col-sm-6 res-m-bttm">
 				  <div class="box box-alt-bg round shadow">
 					  <img src={{url_for('static', filename="landing/images/box-icon-b.png") }} alt="box-icon" class="box-icon">
 					  <h6 class="ucap">NO HIDDEN FEES</h6>
-					  <p class="small">Lorem ipsum dolor sit amet, contetur adipiscing eli.</p>
+					  
+					  <p class="small">Transparency is our core value. Unlike many other platforms, Potomac Copy Trading believes in complete openness, and that's why we don't have any hidden fees. What you see is what you get - your profits are yours to keep, with no surprise deductions. Join us and experience the simplicity of straightforward pricing.</p>
 				  </div>
 			  </div>
 			  <div class="col-md-3 col-sm-6 res-m-bttm">
 				  <div class="box box-alt-bg round shadow">
 					  <img src={{url_for('static', filename="landing/images/box-icon-c.png") }} alt="box-icon" class="box-icon">
-					  <h6 class="ucap">INSTANT TRADING</h6>
-					  <p class="small">Dolore magna aliqa. Ut enim ad minim venim, quis.</p>
+					  <h6 class="ucap">INSTANT PROFIT</h6>
+					  <p class="small">With Potomac Copy Trading, waiting for your gains is a thing of the past. Our innovative platform ensures that when your chosen trader makes a profit, you do too - instantly! As soon as a successful trade is executed by the trader you follow, your account reflects the same gains without any delays.</p>
 				  </div>
 			  </div>
 			  <div class="col-md-3 col-sm-6">
 				  <div class="box box-alt-bg round shadow">
 					  <img src={{url_for('static', filename="landing/images/box-icon-d.png") }} alt="box-icon" class="box-icon">
-					  <h6 class="ucap">SECURE trusted</h6>
-					  <p class="small">Conse ctetur adipi scing elit, sed do eiusmod tempor.</p>
+					  <h6 class="ucap">SECURE & TRUSTED</h6>
+					  <p class="small">Safeguarding your assets and personal information is our top priority. Potomac Copy Trading employs cutting-edge security measures to create a secure environment for all users. Rest assured, your data and funds are protected, and you can trade with complete peace of mind on our trusted platform.</p>
 				  </div>
 			  </div>
 		  </div>
@@ -138,10 +139,10 @@
 			   </div>
 			   <div class="col-md-6 col-md-offset-1 ">
 				<div class="text-block">
-					<h2>Bitcoin is an innovative &amp; a new kind of money.</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-					<p>Tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-					<a href="#" class="btn btn-alt">Read More</a>
+					<h2>Crypto is an innovative &amp; a new kind of money.</h2>
+					<p>we delve into the world of cryptocurrencies, an innovative and decentralized form of money. With their borderless transactions, transparency, and disruption potential, cryptocurrencies are revolutionizing the financial landscape.</p>
+					<p> At Potomac Copy Trading, we empower users to explore this transformative realm, mirror expert traders, and embrace the future of money. Join us today and be a part of this financial revolution.</p>
+					<a href="{{url_for('dashboard.trade_plans')}}" class="btn btn-alt">Read More</a>
 				</div>
 			   </div>
 		   </div>
@@ -160,7 +161,7 @@
 			   <div class="col-md-5">
 				<div class="text-block">
 					<h2>Currency Calculator</h2>
-					<p>Vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint.</p>
+					<p>Discover our currency calculator - effortlessly convert currencies, assess potential gains, and make informed trading decisions with ease. Simplify your crypto experience on Potomac Copy Trading now!</p>
 				</div>
 			   </div>
 			   <div class="col-md-6 col-md-offset-1">
@@ -181,7 +182,7 @@
 						})();
 					</script>
 				   </div>
-				   <a href="{{url_for('dashboard.profile')}}" class="btn">Buy now</a>
+				   <a href="{{url_for('dashboard.wallet')}}" class="btn">Buy now</a>
 			   </div>
 		   </div>
 	   </div>
@@ -195,7 +196,7 @@
 			<div class="row text-center">
 				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 					<h2 class="heading-section">Why choose Us</h2>
-					<p>Sed ut perspi ciatis unde omnis iste natus error sit volup tatem accusa ntium dolor emque lauda ntium, totam rem aperiam</p>
+					<p>Choose Potomac Copy Trading for your crypto journey because we offer:</p>
 				</div>
 			</div>
 		   </div>
@@ -205,24 +206,24 @@
 				<div class="box-alt">
 					<span class="pe pe-7s-server"></span>
 					<h4>Payment Options</h4>
-					<p>Morbi eget varius risus, ut venenatis libero Pellentesque in porta dui.</p>
+					<p>Diverse payment methods for hassle-free transactions.</p>
 				</div>
 				<div class="box-alt">
 					<span class="pe pe-7s-note"></span>
 					<h4>Legal Compliance</h4>
-					<p>Morbi eget varius risus, ut venenatis libero Pellentesque in porta dui.</p>
+					<p> Fully compliant with regulations, ensuring peace of mind.</p>
 				</div>
 				<div class="box-alt">
 					<span class="pe pe-7s-airplay"></span>
 					<h4>Cross-Platform Trading</h4>
-					<p>Morbi eget varius risus, ut venenatis libero Pellentesque in porta dui.</p>
+					<p>Trade on any device, anytime, anywhere.</p>
 				</div>
 			</div>
 			<div class="col-md-4 res-m-bttm-lg">
 				<div class="box-alt">
 					<span class="pe pe-7s-lock"></span>
 					<h4>Strong Security</h4>
-					<p>Morbi eget varius risus, ut venenatis libero Pellentesque in porta dui.</p>
+					<p>Your assets protected with top-tier security measures.</p>
 				</div>
 				<div class="box-alt img">
 					<img src={{url_for('static', filename="landing/images/square-md-a.png") }} alt="square">
@@ -230,24 +231,24 @@
 				<div class="box-alt">
 					<span class="pe pe-7s-cash"></span>
 					<h4>Competitive Commissions</h4>
-					<p>Morbi eget varius risus, ut venenatis libero Pellentesque in porta dui.</p>
+					<p> Low fees to maximize your profits.</p>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="box-alt">
 					<span class="pe pe-7s-global"></span>
 					<h4>World Coverage</h4>
-					<p>Morbi eget varius risus, ut venenatis libero Pellentesque in porta dui.</p>
+					<p> Reach global markets and expand your horizons.</p>
 				</div>
 				<div class="box-alt">
 					<span class="pe pe-7s-graph"></span>
 					<h4>Advanced Reporting</h4>
-					<p>Morbi eget varius risus, ut venenatis libero Pellentesque in porta dui.</p>
+					<p>In-depth insights to drive smarter decisions.</p>
 				</div>
 				<div class="box-alt">
 					<span class="pe pe-7s-graph1"></span>
 					<h4>Margin Trading</h4>
-					<p>Morbi eget varius risus, ut venenatis libero Pellentesque in porta dui.</p>
+					<p> Amplify your potential with leveraged trades.</p>
 				</div>
 			</div>
 		</div>
@@ -262,7 +263,7 @@
 			   <div class="col-md-6">
 				<div class="trendingview-chart res-m-bttm">
 					<!-- TradingView Widget BEGIN -->
-					<script src="https://www.s3.tradingview.com/tv.js") }}></script>
+					<script src="https://s3.tradingview.com/tv.js") }}></script>
 					<script>
 					new TradingView.widget({
 						"autosize":true,
@@ -284,9 +285,9 @@
 			   <div class="col-md-5 col-md-offset-1 ">
 				<div class="text-block">
 					<h2>No Experience? <br/>No worries</h2>
-					<p>Looking to get started in the world of cryptocurrency trading sit amet tristique?</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et lorem nec felis finibus laoreet. Nullam id dictum urna. Vestibulum in aliquam tellus, sit amet tristique ipsum. </p>
-					<a href="#" class="btn btn-alt">get started</a>
+					<p>No experience in crypto trading? No worries!</p>
+					<p>At Potomac Copy Trading, we welcome beginners with open arms, providing a user-friendly platform and expert guidance to help you embark on your crypto journey with confidence and success. </p>
+					<a href="{{url_for('dashboard.transfers')}}" class="btn btn-alt">get started</a>
 				</div>
 			   </div>
 		   </div>
@@ -301,7 +302,7 @@
 			<div class="row text-center">
 				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 					<h2 class="heading-section">What investors say</h2>
-					<p>Sed ut perspi ciatis unde omnis iste natus error sit volup tatem accusa ntium dolor emque lauda ntium, totam rem aperiam</p>
+					<p>Investors Rave About Potomac Copy Trading - Unmatched Profits and Outstanding Support!</p>
 				</div>
 			</div>
 		   </div>
@@ -314,10 +315,10 @@
 							   <img src={{url_for('static', filename="landing/images/client-a.jpg") }} alt="client">
 							   <em class="fa fa-quote-right"></em>
 						   </div>
-						   <blockquote>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi.</blockquote>
+						   <blockquote>Potomac Copy Trading has been a game-changer for me. As a newcomer to the crypto world, I was a bit hesitant at first, but the platform's user-friendly interface and excellent customer support made it a breeze. I've seen remarkable gains by mirroring top traders, and I couldn't be happier!</blockquote>
 						   <div class="client-info">
-							   <h6>John Doe</h6>
-							   <span>CEO, Company Name</span>
+							   <h6> John W. (New York, USA)</h6>
+							   <span>Software Engineer, TechBurst Inc.</span>
 						   </div>
 					   </div>
 					   <div class="testimonial-item">
@@ -325,10 +326,10 @@
 							   <img src={{url_for('static', filename="landing/images/client-a.jpg") }} alt="client">
 							   <em class="fa fa-quote-right"></em>
 						   </div>
-						   <blockquote>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi.</blockquote>
+						   <blockquote>"No prior crypto experience? No problem! Potomac Copy Trading's user-friendly approach and educational resources have helped me overcome my initial uncertainties. The platform's world-class support team is always available to assist, making my trading journey a smooth and profitable one."</blockquote>
 						   <div class="client-info">
-							   <h6>John Doe</h6>
-							   <span>CEO, Company Name</span>
+							   <h6>Alex H. (Toronto, Canada)</h6>
+							   <span> Marketing Manager, DigitalEdge Agency - Sydney, Australia</span>
 						   </div>
 					   </div>
 				   </div>

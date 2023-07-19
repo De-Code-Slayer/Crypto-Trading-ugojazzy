@@ -1,6 +1,8 @@
 
 {% extends 'landing/base.html' %}
 
+
+{% block title %}Wallets{% endblock %}
 {% block main %}
 
 			<!-- Banner/Slider -->
@@ -14,8 +16,8 @@
 							<h2>Wallet overview</h2>
 							<div class="page-breadcrumb">
 								<ul class="breadcrumb">
-									<li><a href="index-2.html">Home</a></li>
-									<li class="active"><span>Wallet overview</span></li>
+									<!-- <li><a href="index-2.html">Home</a></li>
+									<li class="active"><span>Wallet overview</span></li> -->
 								</ul>
 							</div>
 						</div>
@@ -32,7 +34,7 @@
 					<div class="row text-center">
 						<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 							<h2 class="heading-section cap">Our Wallet Features</h2>
-							<p>Sed ut perspi ciatis unde omnis iste natus error sit volup tatem accusa ntium dolor emque lauda ntium, totam rem aperiam</p>
+							<p>Potomac Copy Trading takes your wallet security and convenience seriously, providing you with an array of powerful wallet features</p>
 						</div>
 					</div>
        			</div>
@@ -42,7 +44,7 @@
 						<div class="box box-small-dot box-alt-bg round">
       						<span class="font-icon"><span class="pe pe-7s-lock"></span></span>
       						<h4>Safe &amp; Secure</h4>
-      						<p>Morbi eget varius risus, ut venenatis libero. Pellentesque in porta dui.</p>
+      						<p></p>
       					</div>
       					<div class="gaps size-1-5x"></div>
 					</div>
@@ -50,7 +52,7 @@
 						<div class="box box-small-dot box-alt-bg round">
       						<span class="font-icon"><span class="pe pe-7s-repeat"></span></span>
       						<h4>Recurring Buys</h4>
-      						<p>Morbi eget varius risus, ut venenatis libero. Pellentesque in porta dui.</p>
+      						<p></p>
       					</div>
       					<div class="gaps size-1-5x"></div>
 					</div>
@@ -58,7 +60,7 @@
 						<div class="box box-small-dot box-alt-bg round">
       						<span class="font-icon"><span class="pe pe-7s-wallet"></span></span>
       						<h4>Mobile Apps</h4>
-      						<p>Morbi eget varius risus, ut venenatis libero. Pellentesque in porta dui.</p>
+      						<p></p>
       					</div>
       					<div class="gaps size-1-5x"></div>
 					</div>
@@ -66,28 +68,28 @@
 						<div class="box box-small-dot box-alt-bg round">
       						<span class="font-icon"><span class="pe pe-7s-cash"></span></span>
       						<h4>Low Commission</h4>
-      						<p>Morbi eget varius risus, ut venenatis libero. Pellentesque in porta dui.</p>
+      						<p></p>
       					</div>
 					</div>
 					<div class="col-md-4 col-sm-6 res-m-bttm">
 						<div class="box box-small-dot box-alt-bg round">
       						<span class="font-icon"><span class="pe pe-7s-cart"></span></span>
       						<h4>Buy &amp; Sell</h4>
-      						<p>Morbi eget varius risus, ut venenatis libero. Pellentesque in porta dui.</p>
+      						<p></p>
       					</div>
 					</div>
 					<div class="col-md-4 col-sm-6 res-m-bttm">
 						<div class="box box-small-dot box-alt-bg round">
       						<span class="font-icon"><span class="pe pe-7s-global"></span></span>
       						<h4>Global</h4>
-      						<p>Morbi eget varius risus, ut venenatis libero. Pellentesque in porta dui.</p>
+      						<p></p>
       					</div>
 					</div>
 				</div>
       			<div class="section-head">
 					<div class="row text-center">
 						<div class="col-md-12">
-							<h2 class="heading-section cap">how to start using a bitcoin wallet?</h2>
+							<h2 class="heading-section cap">how to start using our wallet?</h2>
 						</div>
 					</div>
        			</div>
@@ -100,8 +102,8 @@
 								<div class="image-icon">
 									<img src={{url_for('static', filename="landing/images/box-icon-i.png")}} alt="box-icon">
 								</div>
-								<h5>Download a Wallet</h5>
-								<p>Download an app dolorts adipis sit ametcon sectetur.</p>
+								<h5>Create an account</h5>
+								<p>DOnce you signup a wallet is automatically created for you</p>
 							</div>
 						</li>
 						<li class="col-md-4 col-sm-12 res-m-bttm" data-toggle="tab" data-target="#tab2">
@@ -109,8 +111,8 @@
 								<div class="image-icon">
 									<img src={{url_for('static', filename="landing/images/box-icon-j.png")}} alt="box-icon">
 								</div>
-								<h5>Add Bitcoin to a Walet</h5>
-								<p>Once your wallet is  dolorts adipis sit ametcon sectetur.</p>
+								<h5>Add Bitcoin to your Walet</h5>
+								<p>Once your wallet is  ready, fund your account.</p>
 							</div>
 						</li>
 						<li class="col-md-4 col-sm-12" data-toggle="tab" data-target="#tab3">
@@ -118,8 +120,8 @@
 								<div class="image-icon">
 									<img src={{url_for('static', filename="landing/images/box-icon-k.png")}} alt="box-icon">
 								</div>
-								<h5>Send/Receive with Wallet</h5>
-								<p>The Process of sending dolorts adipis sit ametcon sectetur.</p>
+								<h5>Buy plans/Invest with wallet funds</h5>
+								<p>Use funds from wallet to buy plans or copy a trader.</p>
 							</div>
 						</li>
 					</ul>
@@ -151,7 +153,7 @@
        	<!--End Section -->
        	
        	<!-- Section -->
-       	<div class="section section-pad cta-section">
+       	<!-- <div class="section section-pad cta-section">
        		<div class="imagebg has-parallax">
 				<img src={{url_for('static', filename="landing/images/cta-light-bg.jpg")}} alt="cta-light">
 			</div>
@@ -163,7 +165,7 @@
     				</div>
     			</div>
     		</div>
-    	</div>
+    	</div> -->
        	<!--End Section -->
        	
 {% endblock %}
