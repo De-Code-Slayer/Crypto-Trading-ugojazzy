@@ -46,8 +46,10 @@
 					<ul class="top-nav">
 						<!-- <li><a href="faqs.html">Help</a></li> -->
 						<li><a href={{url_for('frontend.support')}}>Support</a></li>
+						{% if not current_user.is_authenticated %}
 						<li><a href={{url_for('dashboard.sign_in')}}>Login</a></li>
 						<li><a href={{url_for('frontend.register')}}>Register</a></li>
+						{% endif %}
 					</ul>
 				</div>
 			</div>
