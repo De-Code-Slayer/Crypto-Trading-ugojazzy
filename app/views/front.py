@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, flash, redirect, render_template, request, url_for
+    Blueprint, flash, redirect, render_template, request, url_for,session
 )
 from .view_utils.authentication import handle_registration
 
@@ -42,16 +42,24 @@ def register():
         if registered:
             # login user
             # login_user(user, remember=True)
+            # After storing the necessary information, remove the referral code from the session (if present)
+            # This ensures that users won't accidentally refer themselves on subsequent registrations
+            session.pop('referral_code', None)
             return redirect(url_for('dashboard.dashboard_home'))
         
         elif registered == {'error': 'User already exists'}:
             flash('Email already in used, login instead', 'warning')
+            session.pop('referral_code', None)
 
         else:
             flash('Could not register user', 'warning')
 
     return render_template('landing/signup.html')
 
+@frontend.route('/ref/<referral_code>')
+def referral_link(referral_code):
+    session['referral_code'] = referral_code
+    return redirect(url_for('frontend.register'))
 
 @frontend.route('/base')
 def base():

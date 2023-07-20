@@ -1,4 +1,5 @@
 from app.database.models import User, Referrals, BitcoinAccount, EthereumAccount, TetherAccount
+from flask import (session)
 from app import db
 import logging
 
@@ -47,7 +48,8 @@ def handle_registration(form_data):
             logging.error(f'User already exists')
             return {'error': 'User already exists'}
 
-
+        
+        
         user = User(
             full_name=full_name,
             email=email,
@@ -59,6 +61,10 @@ def handle_registration(form_data):
             postal_code=postal_code,
         )
         if referer:
+            referal = Referrals(reffered_user_name=full_name, username=referer)
+            db.session.add(referal)
+        else:
+            referer = session.get('referral_code', None)  # Get the referral code from the session (if available) to mark the referrer
             referal = Referrals(reffered_user_name=full_name, username=referer)
             db.session.add(referal)
 

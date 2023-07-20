@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for
+    Blueprint, flash, redirect, render_template, request, url_for
 )
 from flask_login import login_user, logout_user, login_required, current_user
 from .view_utils.authentication import login_user_from_db
@@ -135,10 +135,6 @@ def sign_out():
 
 @dashboard.route('/base')
 def base():
-    return render_template('dashboard/base.html')
-
-@dashboard.route('/referal/<referer>')
-def referal():
     return render_template('dashboard/base.html')
 
 @dashboard.route('/resend-mail/')
