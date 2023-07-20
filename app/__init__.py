@@ -15,7 +15,7 @@ load_dotenv()
 db = SQLAlchemy()
 
 
-heroku_database_url = os.getenv('DATABASE_URL')#.replace("postgres://", "postgresql://")
+heroku_database_url = os.getenv('DATABASE_URL').replace("postgres://", "postgresql://")
 
 # Create a URL object from the Heroku database URL
 parsed_url = make_url(heroku_database_url)
