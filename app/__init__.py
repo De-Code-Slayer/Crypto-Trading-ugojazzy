@@ -36,8 +36,8 @@ def create_app(test_config=None):
 
     # upload folder
     app.config['UPLOAD_FOLDER'] = UPLOADS_PATH
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('SQLALCHEMY_DATABASE_URI') #local testing
-    # app.config["SQLALCHEMY_DATABASE_URI"] = heroku_database_url
+    # app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('SQLALCHEMY_DATABASE_URI') #local testing
+    app.config["SQLALCHEMY_DATABASE_URI"] = heroku_database_url
 
     # init flask migrate
     migrate = Migrate(app, db)
