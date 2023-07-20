@@ -45,7 +45,7 @@
 				<div class="col-sm-6 al-right">
 					<ul class="top-nav">
 						<!-- <li><a href="faqs.html">Help</a></li> -->
-						<li><a href={{url_for('frontend.support')}}>Support</a></li>
+						<!-- <li><a href={{url_for('frontend.support')}}>Support</a></li> -->
 						{% if not current_user.is_authenticated %}
 						<li><a href={{url_for('dashboard.sign_in')}}>Login</a></li>
 						<li><a href={{url_for('frontend.register')}}>Register</a></li>
@@ -231,7 +231,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="site-copy col-sm-7">
-						<p>Copyright &copy; 2023 <a href=""></a></p>
+						<p>Copyright &copy; <span id="currentYear"></span> <a href=""></a></p>
 					</div>
 					<div class="col-sm-5 text-right mobile-left">
 						<!-- <ul class="social">
@@ -265,5 +265,15 @@
 			},false)
 		  })(document,'script','https://www.widgets.bitcoin.com/widget.js','btcwdgt');
 		</script>
+		<script>
+			// Get the current date
+			const currentDate = new Date();
+		
+			// Get the current year (returns a 4-digit number)
+			const currentYear = currentDate.getFullYear();
+		
+			// Display the current year on the webpage
+			document.getElementById("currentYear").textContent = currentYear;
+		  </script>
 	</body>
 </html>
