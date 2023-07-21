@@ -7,6 +7,7 @@ from flask_migrate import Migrate
 from os.path import join, dirname, realpath
 from dotenv import load_dotenv
 from sqlalchemy.engine.url import make_url
+from flask_talisman import Talisman
 
 # Load environment variables from .env file
 load_dotenv()
@@ -33,6 +34,8 @@ def create_app(test_config=None):
         SECRET_KEY=os.getenv('SECRET_KEY'),    
     )
 
+    # force SSL
+    Talisman(app, content_security_policy=None)
 
     # upload folder
     app.config['UPLOAD_FOLDER'] = UPLOADS_PATH
