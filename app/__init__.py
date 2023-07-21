@@ -35,7 +35,7 @@ def create_app(test_config=None):
     )
 
     # force SSL
-    Talisman(app, content_security_policy=None)
+    Talisman(app)
 
     # upload folder
     app.config['UPLOAD_FOLDER'] = UPLOADS_PATH
