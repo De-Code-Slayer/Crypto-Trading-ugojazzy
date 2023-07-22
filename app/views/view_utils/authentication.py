@@ -63,7 +63,7 @@ def handle_registration(form_data):
         if referer:
             referal = Referrals(reffered_user_name=full_name, username=referer)
             db.session.add(referal)
-        else:
+        elif session.get('referral_code', None):
             referer = session.get('referral_code', None)  # Get the referral code from the session (if available) to mark the referrer
             referal = Referrals(reffered_user_name=full_name, username=referer)
             db.session.add(referal)

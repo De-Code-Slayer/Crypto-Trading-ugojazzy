@@ -53,7 +53,6 @@ def register():
 
         else:
             flash('Could not register user', 'warning')
-
     return render_template('landing/signup.html')
 
 @frontend.route('/ref/<referral_code>')
