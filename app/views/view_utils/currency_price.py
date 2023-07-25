@@ -10,5 +10,5 @@ def get_usd_to_() -> dict:
     except Exception as e:
         logging.error(f'could not get currency exchange rate: {str(e)}')
         return {'BTC': 29639.892987, 'ETH': 1883.490822, 'USDT': 1}
-    return exchang_rate.json().get('rates')
+    return {'BTC': 29639.892987, 'ETH': 1883.490822, 'USDT': 1} #exchang_rate.json().get('rates')
     
