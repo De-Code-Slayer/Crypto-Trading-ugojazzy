@@ -34,9 +34,6 @@ def create_app(test_config=None):
         SECRET_KEY=os.getenv('SECRET_KEY'),    
     )
 
-    # force SSL
-    Talisman(app, force_https=True, content_security_policy=None)
-
     # upload folder
     app.config['UPLOAD_FOLDER'] = UPLOADS_PATH
     # app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('SQLALCHEMY_DATABASE_URI') #local testing
@@ -83,6 +80,8 @@ def create_app(test_config=None):
     def load_user(user_id):
         return User.query.get(int(user_id))
     
+    # force SSL
+    Talisman(app, force_https=True, content_security_policy=None)
 
     return app
 
