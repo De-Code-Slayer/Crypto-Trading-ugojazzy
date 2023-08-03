@@ -34,6 +34,7 @@ def support():
 
 @frontend.route('/signup', methods=['GET','POST'])
 def register():
+    
     if request.method == 'POST':
 
         form_data = request.form
@@ -53,7 +54,8 @@ def register():
 
         else:
             flash('Could not register user', 'warning')
-    return render_template('landing/signup.html')
+    username = session.get('referral_username', '')
+    return render_template('landing/signup.html', username=username)
 
 @frontend.route('/ref/<referral_code>')
 def referral_link(referral_code):
