@@ -54,7 +54,8 @@ def register():
 
         else:
             flash('Could not register user', 'warning')
-    username = session.get('referral_username', '')
+    
+    username = session.get('referral_code', '')
     return render_template('landing/signup.html', username=username)
 
 @frontend.route('/ref/<referral_code>')
