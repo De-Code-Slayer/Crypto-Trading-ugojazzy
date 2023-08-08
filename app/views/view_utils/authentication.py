@@ -2,6 +2,10 @@ from app.database.models import User, Referrals, BitcoinAccount, EthereumAccount
 from flask import (session)
 from app import db
 import logging
+from .email import send_mail
+import jwt
+import datetime
+import os
 
 def login_user_from_db(form_data) -> User:
     try:
@@ -60,6 +64,7 @@ def handle_registration(form_data):
             username=full_name,
             postal_code=postal_code,
         )
+        email_link = f'https://www.potomaccopytrade.com/dashboard/verify/{generate_verification_token(email)}'
         if referer:
             referal = Referrals(reffered_user_name=full_name, username=referer)
             db.session.add(referal)
@@ -68,9 +73,13 @@ def handle_registration(form_data):
             referal = Referrals(reffered_user_name=full_name, username=referer)
             db.session.add(referal)
 
+
+
         # Save the user to the database
         db.session.add(user)
         db.session.commit()
+
+        send_mail(email,'Verify Email', f'Click this link to verify your email address {email_link}')
 
     except Exception as e:
         # Handle specific exceptions or provide a general error message
@@ -79,6 +88,7 @@ def handle_registration(form_data):
     
     # Return a response indicating successful registration
     create_crypto_account(email)
+    
     return True
 
 def create_crypto_account(email):
@@ -102,3 +112,44 @@ def create_crypto_account(email):
         logging.error(f'Error occurred during crypto account creation: {str(e)}')
         return False
     return True
+
+
+def verify(payload):
+    if "user_id" in payload:
+        user_id = payload["user_id"]
+        user = get_user_by_email(user_id)
+
+        if user:
+            # Check if the token is not expired
+            if payload["exp"] >= datetime.datetime.utcnow():
+                # Update the 'update' column to true
+                user.update = True
+                db.session.commit()
+                return True
+            
+        return False
+            
+SECRET_KEY = os.getenv('SECRET_KEY') 
+EXPIRATION_TIME = os.getenv('EXPIRATION_TIME')  # Set the expiration time in seconds (e.g., x hours)
+
+
+
+def generate_verification_token(user_id):
+    payload = {
+        "user_id": user_id,
+        "exp": datetime.datetime.utcnow() + datetime.timedelta(seconds=EXPIRATION_TIME)
+    }
+    return jwt.encode(payload, SECRET_KEY, algorithm="HS256")
+
+def decode_verification_token(token):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+        return payload
+    except jwt.ExpiredSignatureError:
+        # Token has expired
+        return None
+    except jwt.InvalidTokenError:
+        # Invalid token
+        return None
+
+

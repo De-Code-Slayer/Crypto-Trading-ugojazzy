@@ -9,6 +9,7 @@ from os import path
 
 
 
+
 ALLOWED_EXTENSIONS = {'png', 'jpg','jpeg'}
 
 basedir = path.abspath(path.dirname(__file__))
@@ -24,6 +25,8 @@ def follow_trader(traded_plan, traded_amount, trader_id):
         logging.error(f'Error occurred: {str(e)}')
         return False
     else:
+        
+        
         return True
 
 

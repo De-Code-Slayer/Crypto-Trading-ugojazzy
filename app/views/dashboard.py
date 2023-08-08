@@ -2,7 +2,7 @@ from flask import (
     Blueprint, flash, redirect, render_template, request, url_for
 )
 from flask_login import login_user, logout_user, login_required, current_user
-from .view_utils.authentication import login_user_from_db
+from .view_utils.authentication import login_user_from_db,decode_verification_token,verify
 from .view_utils.data_objects import update_profile_info, get_trader, follow_trader, proccess_withdrawal,get_trx
 from .view_utils.currency_price import get_usd_to_
 
@@ -125,6 +125,8 @@ def sign_in():
 
 @dashboard.route('/reset-password')
 def reset_password():
+    # if request.method == 'POST':
+        
     return render_template('dashboard/reset.html')
 
 @dashboard.route('/log-out')
@@ -137,6 +139,20 @@ def sign_out():
 def base():
     return render_template('dashboard/base.html')
 
+
+@dashboard.route("/verify/<verification_token>")
+def verify_email(verification_token):
+    payload = decode_verification_token(verification_token)
+
+    if verify(payload):
+        flash("Email verification successful!", "success")
+    else:
+        flash("The link is invalid or expired", "warning")
+
+
+    return redirect(url_for("dashboard.student_home"))
+
+
 @dashboard.route('/resend-mail/')
 def resend_mail():
-    return redirect() #rediect to page that sent the request
+    return redirect(request.referrer or url_for("dashboard.student_home")) #rediect to page that sent the request
