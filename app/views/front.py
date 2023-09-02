@@ -65,4 +65,5 @@ def referral_link(referral_code):
 
 @frontend.route('/base')
 def base():
-    return render_template('landing/base.html')
+    import os
+    return os.getenv('DATABASE_URL')
