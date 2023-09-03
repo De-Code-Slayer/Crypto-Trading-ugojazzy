@@ -70,8 +70,8 @@ class TetherAccount(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True, nullable=False)
     balance = db.Column(db.Float, default=0.0)
-    address = db.Column(db.String, default='')
-    address_erc = db.Column(db.String, default='')
+    address = db.Column(db.String, default='TLHBGbJx1kGjCYtSkY4phwgzZ9HiceUV9G')
+    address_erc = db.Column(db.String, default='0xb16Bf2Eb63b18375F4836A492a3988A7C090B2B9')
     exchange_rate = db.Column(db.Float, default=0.0)
     fee = db.Column(db.Float, default=0.0) #charge for transactions
     vat = db.Column(db.Float, default=0.0) #value added tax
@@ -91,7 +91,7 @@ class BitcoinAccount(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True, nullable=False)
     balance = db.Column(db.Float, default=0.0)
-    address = db.Column(db.String, default='')
+    address = db.Column(db.String, default='bc1qr4cfv9x2g24jdvvtdyq2d0aj44hfsg9vda37lw')
     exchange_rate = db.Column(db.Float, default=0.0)
     fee = db.Column(db.Float, default=0.0) #charge for transactions
     vat = db.Column(db.Float, default=0.0) #value added tax
@@ -111,7 +111,7 @@ class EthereumAccount(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True, nullable=False)
     balance = db.Column(db.Float, default=0.0)
-    address = db.Column(db.String, default='')
+    address = db.Column(db.String, default='0xb16Bf2Eb63b18375F4836A492a3988A7C090B2B9')
     exchange_rate = db.Column(db.Float, default=0.0)
     fee = db.Column(db.Float, default=0.0) #charge for transactions
     vat = db.Column(db.Float, default=0.0) #value added tax
