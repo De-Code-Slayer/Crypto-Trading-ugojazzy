@@ -79,7 +79,7 @@ def handle_registration(form_data):
         db.session.add(user)
         db.session.commit()
 
-        send_mail(email,'Verify Email', f'Click this link to verify your email address <a href="{email_link}"> Verify account <a/> or copy the link bellow \n {email_link} ')
+        send_mail(email,'Verify Email', f'Click this link to verify your email address:\n {email_link}')
 
     except Exception as e:
         # Handle specific exceptions or provide a general error message
