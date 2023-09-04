@@ -159,4 +159,4 @@ def resend_mail():
         flash('Email re-sent successfully', 'success')
     else:
         flash('Email couldd not be sent', 'warning')
-    return redirect(request.referrer or url_for("dashboard.student_home")) #rediect to page that sent the request
+    return redirect(request.referrer or url_for("dashboard.dashboard_home")) #rediect to page that sent the request
