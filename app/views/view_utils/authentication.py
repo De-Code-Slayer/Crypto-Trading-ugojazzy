@@ -128,7 +128,11 @@ def verify(payload):
 
         if user:
             # Check if the token is not expired
-            if payload["exp"] >= datetime.datetime.utcnow():
+            # Assuming payload["exp"] is a Unix timestamp (an integer)
+            timestamp = payload["exp"]
+            exp_datetime = datetime.datetime.utcfromtimestamp(timestamp)
+
+            if exp_datetime >= datetime.datetime.utcnow():
                 # Update the 'update' column to true
                 user.update = True
                 db.session.commit()
