@@ -150,7 +150,7 @@ def verify_email(verification_token):
         flash("The link is invalid or expired", "warning")
 
 
-    return redirect(url_for("dashboard.student_home"))
+    return redirect(url_for("dashboard.dashboard_home"))
 
 
 @dashboard.route('/resend-mail/')
