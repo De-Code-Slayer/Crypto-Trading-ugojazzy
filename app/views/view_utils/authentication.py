@@ -137,7 +137,7 @@ EXPIRATION_TIME = os.getenv('EXPIRATION_TIME')  # Set the expiration time in sec
 def generate_verification_token(user_id):
     payload = {
         "user_id": user_id,
-        "exp": datetime.datetime.utcnow() + datetime.timedelta(seconds=EXPIRATION_TIME)
+        "exp": datetime.datetime.utcnow() + datetime.timedelta(seconds=int(EXPIRATION_TIME))
     }
     return jwt.encode(payload, SECRET_KEY, algorithm="HS256")
 
