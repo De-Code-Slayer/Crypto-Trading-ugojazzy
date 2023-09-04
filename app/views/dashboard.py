@@ -2,7 +2,7 @@ from flask import (
     Blueprint, flash, redirect, render_template, request, url_for
 )
 from flask_login import login_user, logout_user, login_required, current_user
-from .view_utils.authentication import login_user_from_db,decode_verification_token,verify
+from .view_utils.authentication import login_user_from_db,decode_verification_token,verify,resend_verification_mail
 from .view_utils.data_objects import update_profile_info, get_trader, follow_trader, proccess_withdrawal,get_trx
 from .view_utils.currency_price import get_usd_to_
 
@@ -155,4 +155,8 @@ def verify_email(verification_token):
 
 @dashboard.route('/resend-mail/')
 def resend_mail():
+    if resend_verification_mail():
+        flash('Email re-sent successfully', 'success')
+    else:
+        flash('Email couldd not be sent', 'warning')
     return redirect(request.referrer or url_for("dashboard.student_home")) #rediect to page that sent the request

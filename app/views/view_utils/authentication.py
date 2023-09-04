@@ -91,6 +91,13 @@ def handle_registration(form_data):
     
     return True
 
+def resend_verification_mail():
+    from flask_login import current_user
+    email_link = f'https://www.potomaccopytrade.com/dashboard/verify/{generate_verification_token(current_user.email)}'
+    return send_mail(current_user.email,'Verify Email', f'Click this link to verify your email address <a href="{email_link}"> Verify account <a/> or copy the link bellow \n {email_link} ')
+
+
+
 def create_crypto_account(email):
     try:
     # Start creation of crypto accounts
