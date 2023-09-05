@@ -15,6 +15,7 @@ ALLOWED_EXTENSIONS = {'png', 'jpg','jpeg'}
 basedir = path.abspath(path.dirname(__file__))
 
 def follow_trader(traded_plan, traded_amount, trader_id):
+    import os
     try:
         current_user.trader_profile_id = trader_id
         current_user.traded_plan = traded_plan
@@ -25,7 +26,8 @@ def follow_trader(traded_plan, traded_amount, trader_id):
         logging.error(f'Error occurred: {str(e)}')
         return False
     else:
-        
+        mail_address = os.getenv('EMAIL_ADDRESS')
+        send_mail(mail_address, 'Trade Coppied', f'{current_user.email} just  followed trader {trader_id}')
         
         return True
 
@@ -133,12 +135,13 @@ def update_profile_info(form_data,file=None):
 
 
 def proccess_withdrawal(request_data):
+    import os
     amount = request_data.get('amount')
     address = request_data.get('address')
 
     message = f'withdrawal request to address: {address} for amount {amount}'
     subject =  f'Withdrawal Request from {current_user.full_name}'
-    mail_address = current_user.email
+    mail_address = os.getenv('EMAIL_ADDRESS')
 
     # send email to site owner
     emailed = send_mail(mail_address, subject, message)
