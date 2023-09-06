@@ -8,4 +8,5 @@ Flask-Migrate
 requests
 flask-talisman
 PyJWT
+APScheduler
 # psycopg2-binary

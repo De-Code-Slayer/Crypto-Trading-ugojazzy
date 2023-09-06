@@ -83,6 +83,22 @@ def create_app(test_config=None):
     # force SSL
     Talisman(app, force_https=True, content_security_policy=None)
 
+        #  Initializing scheduler for intrest
+    from .views.view_utils.auto_increase import increase_account_balance_by_interest_rate
+
+    def test_job():
+        from apscheduler.schedulers.background import BackgroundScheduler
+        with app.app_context():
+            from .database.models import TetherAccount,BitcoinAccount,EthereumAccount
+            increase_account_balance_by_interest_rate(TetherAccount)  # Increase Tether account balances 
+            increase_account_balance_by_interest_rate(BitcoinAccount)  # Increase Bitcoin account balances
+            increase_account_balance_by_interest_rate(EthereumAccount)  # Increase Ethereum account balances
+
+    scheduler = BackgroundScheduler()
+    job       = scheduler.add_job(test_job, 'interval', days=1)
+    scheduler.start()
+
+
     return app
 
 app = create_app()
