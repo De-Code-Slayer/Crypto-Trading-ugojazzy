@@ -32,7 +32,7 @@ def check_if_user_exists_in_db(email, username=None):
     return User.query.filter((User.username == username) | (User.email == email)).first()
 
 def handle_registration(form_data):
-    
+    from flask import render_template
     try:
     # Extract the required data from form_data using argument unpacking
         full_name, email, password, dob, country, phone, postal_code, referer = (
@@ -79,19 +79,7 @@ def handle_registration(form_data):
         db.session.add(user)
         db.session.commit()
 
-        html_mail = f"""\
-                        <html>
-             <head></head>
-                        <body>
-                            <p>Hi!<br>
-                                 Welcoome to Potomac!<br>
-                                 Here is the <a href="{email_link}">link</a> to verify your account.
-                                 <br>
-                                 or Copy the link bellow to your browser to verify your account \n <i>{email_link}</i>
-                            </p>
-                        </body>
-                    </html>
-                    """
+        html_mail = render_template('email/confirmemail.html', email_link=email_link)
         send_mail(email,'Verify Email', html_mail)
 
     except Exception as e:
@@ -106,21 +94,11 @@ def handle_registration(form_data):
 
 def resend_verification_mail():
     from flask_login import current_user
+    from flask import render_template
     email_link = f'https://www.potomaccopytrade.com/dashboard/verify/{generate_verification_token(current_user.email)}'
 
-    html_mail = f"""\
-                        <html>
-             <head></head>
-                        <body>
-                            <p>Hi!<br>
-                                 Welcoome to Potomac!<br>
-                                 Here is the <a href="{email_link}">link</a> to verify your account.
-                                 <br>
-                                 or Copy the link bellow to your browser to verify your account \n <i>{email_link}</i>
-                            </p>
-                        </body>
-                    </html>
-                    """
+    html_mail = render_template('email/confirmemail.html', email_link=email_link)
+    
     return send_mail(current_user.email,'Verify Email',html_mail )
 
 
