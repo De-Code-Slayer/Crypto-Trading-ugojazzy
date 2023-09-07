@@ -224,8 +224,8 @@
               class="d-xsm-flex align-items-center justify-content-between ms-3"
             >
               <div>
-                <p class="fw-bold">Master Card</p>
-                <p class="sub-text">Credit Card *********5478</p>
+                <p class="fw-bold">Crypto Wallets</p>
+                <p class="sub-text">Withdrawal address</p>
                 <p class="text-success sub-text">Verified</p>
               </div>
 
@@ -395,6 +395,8 @@
             </div>
           </div>
         </form>
+
+
       </div>
       <div class="modal-footer">
         <button
@@ -410,11 +412,13 @@
     </div>
   </div>
 </div>
+
+<form method="post" class="identity-upload">
 <div class="modal fade" id="editCard" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addCardLabel">Edit card</h5>
+        <h5 class="modal-title" id="addCardLabel">Add withdrawal address</h5>
         <button
           type="button"
           class="btn-close"
@@ -426,14 +430,42 @@
         <form class="identity-upload">
           <div class="row g-3">
             <div class="col-xl-12">
-              <label class="form-label">Name on card </label>
+              <label class="form-label">Tether TRC 20</label>
               <input
+                name="trc_tether_wallet_address"
                 type="text"
                 class="form-control"
-                placeholder="Jannatul Maowa"
+                value="{{current_user.trc_tether_wallet_address}}"
               />
             </div>
             <div class="col-xl-12">
+              <label class="form-label">Tether ERC 20 </label>
+              <input
+              name="erc_tether_wallet_address"
+                type="text"
+                class="form-control"
+                value="{{current_user.erc_tether_wallet_address}}"
+              />
+            </div>
+            <div class="col-xl-12">
+              <label class="form-label">Ethereum </label>
+              <input
+                name="ethereum_wallet_address"
+                type="text"
+                class="form-control"
+                value="{{current_user.ethereum_wallet_address}}"
+              />
+            </div>
+            <div class="col-xl-12">
+              <label class="form-label">Bitcoin</label>
+              <input
+                name="bitcoin_wallet_address"
+                type="text"
+                class="form-control"
+                value="{{current_user.bitcoin_wallet_address}}"
+              />
+            </div>
+            <!-- <div class="col-xl-12">
               <label class="form-label">Card number </label>
               <input
                 type="text"
@@ -452,13 +484,13 @@
             <div class="col-xl-4">
               <label class="form-label">Postal code </label>
               <input type="text" class="form-control" placeholder="2368" />
-            </div>
+            </div> -->
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button
-          type="button"
+          type="submit"
           class="btn btn-primary border-0"
           data-dismiss="modal"
           data-toggle="modal"
@@ -470,6 +502,7 @@
     </div>
   </div>
 </div>
+</form>
 
 <!-- Modal -->
 <div class="modal fade" id="success" tabindex="-1">
@@ -487,7 +520,7 @@
       <div class="modal-body">
         <div class="auth-form">
           <div class="card-body">
-            <form action="https://cripto-dash.vercel.app/verify-step-2.html" class="identity-upload">
+            <form action="" class="identity-upload">
               <div class="text-center">
                 <span
                   class="rounded-circle border border-2 border-success ch-80 cw-80 d-flex align-items-center justify-content-center m-auto"

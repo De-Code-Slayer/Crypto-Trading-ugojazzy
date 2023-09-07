@@ -5,6 +5,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 from .view_utils.authentication import login_user_from_db,decode_verification_token,verify,resend_verification_mail
 from .view_utils.data_objects import update_profile_info, get_trader, follow_trader, proccess_withdrawal,get_trx
 from .view_utils.currency_price import get_usd_to_
+from .view_utils.payment_method import update_payment_method
 
 
 
@@ -105,6 +106,8 @@ def security():
 @login_required
 def payment_method():
     # user info update
+    if request.method == 'POST':
+        update_payment_method(request.form)
     
     return render_template('dashboard/payment-method.html')
 
