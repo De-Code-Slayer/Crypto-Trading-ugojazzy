@@ -49,16 +49,18 @@ def smtpmailer(receiver, message, subject, file=None, mail_type='html'):
     from email.mime.text import MIMEText
     from email.mime.base import MIMEBase
     from email import encoders
+    from email.message import EmailMessage
 
     # create email obj
-    msg = MIMEMultipart()
+    msg = EmailMessage()
+    # msg = MIMEMultipart()
     msg['From'] = 'Potomac Copy Trade'
     msg['To'] = receiver
     msg['Subject'] = subject
 
     # add the message body
-    msg.attach(MIMEText(message, 'html'))
-    # msg.attach(message)
+    # msg.attach(MIMEText(message, 'html'))
+    msg.set_content(message, subtype='html')
 
     if file:
         
@@ -83,7 +85,9 @@ def smtpmailer(receiver, message, subject, file=None, mail_type='html'):
     # Authentication
       s.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
       # sending the mail
-      s.sendmail(EMAIL_ADDRESS, receiver, msg)
+       # Sending the mail
+      s.send_message(EMAIL_ADDRESS, receiver, msg)
+    #   s.sendmail(EMAIL_ADDRESS, receiver, msg.as_string())
     except Exception as e:
         import traceback
         traceback.print_exc()
