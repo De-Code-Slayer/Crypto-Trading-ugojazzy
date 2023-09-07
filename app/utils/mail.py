@@ -58,7 +58,7 @@ def smtpmailer(receiver, message, subject, file=None, mail_type='html'):
 
     # add the message body
     msg.attach(MIMEText(message, mail_type))
-    msg.attach(message)
+    # msg.attach(message)
 
     if file:
         
