@@ -43,7 +43,7 @@ SENDER_ADDRES  = os.environ.get('SENDER_ADDRES')
 
 
 
-def smtpmailer(receiver, message, subject, file=None, mail_type='plain'):
+def smtpmailer(receiver, message, subject, file=None, mail_type='html'):
     import smtplib
     from email.mime.multipart import MIMEMultipart
     from email.mime.text import MIMEText
