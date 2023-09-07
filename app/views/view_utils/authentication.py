@@ -139,7 +139,7 @@ def verify(payload):
 
             if exp_datetime >= datetime.datetime.utcnow():
                 # Update the 'update' column to true
-                user.update = True
+                user.verified = True
                 db.session.commit()
                 return True
             
