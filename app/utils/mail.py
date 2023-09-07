@@ -83,7 +83,7 @@ def smtpmailer(receiver, message, subject, file=None, mail_type='html'):
     # Authentication
       s.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
       # sending the mail
-      s.sendmail(EMAIL_ADDRESS, receiver, msg.as_string())
+      s.sendmail(EMAIL_ADDRESS, receiver, msg)
     except Exception as e:
         import traceback
         traceback.print_exc()
