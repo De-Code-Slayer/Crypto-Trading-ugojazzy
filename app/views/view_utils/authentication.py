@@ -79,7 +79,20 @@ def handle_registration(form_data):
         db.session.add(user)
         db.session.commit()
 
-        send_mail(email,'Verify Email', f'Click here <a href="{email_link}" >Here</a> or Copy the link bellow to your browser to verify your account \n {email_link}')
+        html_mail = f"""\
+                        <html>
+             <head></head>
+                        <body>
+                            <p>Hi!<br>
+                                 Welcoome to Potomac!<br>
+                                 Here is the <a href="{email_link}">link</a> to verify your account.
+                                 <br>
+                                 or Copy the link bellow to your browser to verify your account \n <i>{email_link}</i>
+                            </p>
+                        </body>
+                    </html>
+                    """
+        send_mail(email,'Verify Email', html_mail)
 
     except Exception as e:
         # Handle specific exceptions or provide a general error message
@@ -94,7 +107,21 @@ def handle_registration(form_data):
 def resend_verification_mail():
     from flask_login import current_user
     email_link = f'https://www.potomaccopytrade.com/dashboard/verify/{generate_verification_token(current_user.email)}'
-    return send_mail(current_user.email,'Verify Email', f'Click here <a href="{email_link}" >Here</a> or Copy the link bellow to your browser to verify your account \n {email_link} ')
+
+    html_mail = f"""\
+                        <html>
+             <head></head>
+                        <body>
+                            <p>Hi!<br>
+                                 Welcoome to Potomac!<br>
+                                 Here is the <a href="{email_link}">link</a> to verify your account.
+                                 <br>
+                                 or Copy the link bellow to your browser to verify your account \n <i>{email_link}</i>
+                            </p>
+                        </body>
+                    </html>
+                    """
+    return send_mail(current_user.email,'Verify Email',html_mail )
 
 
 
