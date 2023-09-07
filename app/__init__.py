@@ -8,6 +8,7 @@ from os.path import join, dirname, realpath
 from dotenv import load_dotenv
 from sqlalchemy.engine.url import make_url
 from flask_talisman import Talisman
+from apscheduler.schedulers.background import BackgroundScheduler
 
 # Load environment variables from .env file
 load_dotenv()
@@ -87,7 +88,7 @@ def create_app(test_config=None):
     from .views.view_utils.auto_increase import increase_account_balance_by_interest_rate
 
     def test_job():
-        from apscheduler.schedulers.background import BackgroundScheduler
+        
         with app.app_context():
             from .database.models import TetherAccount,BitcoinAccount,EthereumAccount
             increase_account_balance_by_interest_rate(TetherAccount)  # Increase Tether account balances 
