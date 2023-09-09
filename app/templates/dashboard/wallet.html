@@ -323,8 +323,8 @@ role="tabpanel"
           <g></g>
         </svg>
       </div>
-      <select required name="address" class="form-select form-select">
-        <option selected>Open this select your withdrawal method</option>
+      <select required name="address"  class="form-select form-select">
+        <option selected disabled>Open this select your withdrawal method</option>
         {% if current_user.bitcoin_wallet_address %}
         <option value="{{current_user.bitcoin_wallet_address}}">Bitcoin withdrawal address</option>
         {% endif %}
@@ -849,7 +849,7 @@ role="tabpanel"
         </svg>
       </div>
       <select name="address" class="form-select form-select" required>
-        <option selected>Open this select your transition method</option>
+        <option selected disabled>Open this select your transition method</option>
         {% if current_user.ethereum_wallet_address %}
         <option value="{{current_user.ethereum_wallet_address}}">Ethereum wallet address</option>
         {% endif %}
@@ -1414,7 +1414,7 @@ role="tabpanel"
         </svg>
       </div>
       <select name="address" class="form-select form-select" required>
-        <option selected>Select withdrawal method</option>
+        <option selected disabled>Select withdrawal method</option>
         {% if current_user.trc_tether_wallet_address %}
         <option value="{{current_user.trc_tether_wallet_address}}">USDT(TRC20)</option>
         {% endif %}

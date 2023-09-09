@@ -144,7 +144,7 @@ def proccess_withdrawal(request_data):
     mail_address = os.getenv('EMAIL_ADDRESS')
 
     # send email to site owner
-    emailed = send_mail(mail_address, subject, message)
+    emailed = send_mail(mail_address, message,subject)
 
     # create transaction record
     trx = Transactions(thether_account_user_id=current_user.id, amount=amount, transaction_type='debit', status='pending')
