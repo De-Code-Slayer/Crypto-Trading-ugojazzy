@@ -7,7 +7,7 @@ def increase_account_balance_by_interest_rate(model_class):
 
     for account in accounts:
         # Calculate the interest amount
-        interest_amount = account.available_balance * (account.interest_rate / 100)
+        interest_amount = account.locked_balance * (account.interest_rate / 100)
 
         # Update the available balance with the interest amount
         account.available_balance += interest_amount
