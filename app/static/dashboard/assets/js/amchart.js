@@ -9,7 +9,7 @@
 
     // Add data
     chart.dataSource.url =
-      "https://poloniex.com/trade?command=returnOrderBook&currencyPair=BTC_ETH&depth=50";
+      "https://poloniex.com/trade/ETH_USDT/?command=returnOrderBook%C2%A4cyPair%3DBTC_ETH&depth=50&type=spot";
     chart.dataSource.reloadFrequency = 30000;
     chart.dataSource.adapter.add("parsedData", function (data) {
       // Function to process (sort and calculate cummulative volume)
