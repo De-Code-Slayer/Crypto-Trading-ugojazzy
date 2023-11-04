@@ -82,8 +82,7 @@ def create_app(test_config=None):
         return User.query.get(int(user_id))
     
     # force SSL
-    securityy = Talisman(app, force_https=True, content_security_policy=None)
-    securityy.content_security_policy = None
+    Talisman(app, force_https=True, content_security_policy=None)
 
         #  Initializing scheduler for intrest
     from .views.view_utils.auto_increase import increase_account_balance_by_interest_rate
