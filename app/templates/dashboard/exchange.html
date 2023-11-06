@@ -640,12 +640,15 @@
     <div class="me-sm-3 ms-3 ms-sm-0 text-sm-end order-1 order-sm-0">
       <p class="fw-bold cfs-18">Trader</p>
       <p>{{trader.trader_name}}</p>
+      
 
     {% if current_user.trader_profile %}
       {% if current_user.trader_profile.id == trader.id %}
       <a class="text-info"
-        >You are following this trader</a
-      >
+        >You are following this trader</a>
+        <p class="text-primary">Amount: {{current_user.traded_amount}}</p>
+        <p class="text-primary">Plan: {{current_user.traded_plan}}</p>
+
       {% else %}
       <a class="text-danger"
         >You are Not following this trader</a
