@@ -646,8 +646,10 @@
       {% if current_user.trader_profile.id == trader.id %}
       <a class="text-info"
         >You are following this trader</a>
-        <p class="text-primary">Amount: {{current_user.traded_amount}}</p>
-        <p class="text-primary">Plan: {{current_user.traded_plan}}</p>
+        <p class="fw-bold cfs-18">Amount</p>
+        <p class="text-primary">{{current_user.traded_amount}}</p>
+        <p class="fw-bold cfs-18">Plan </p>
+        <p class="text-primary">{{current_user.traded_plan}}</p>
 
       {% else %}
       <a class="text-danger"
