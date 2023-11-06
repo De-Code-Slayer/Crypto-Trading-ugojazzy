@@ -644,17 +644,17 @@
 
     {% if current_user.trader_profile %}
       {% if current_user.trader_profile.id == trader.id %}
-      <div class="ms-3">
+      <div class="mb-3">
       <a class="text-info"
         >You are following this trader</a>
       </div>
 
-        <div class="ms-3">  
+        <div class="mb-3">  
         <p class="fw-bold cfs-18">Amount</p>
         <p class="text-primary">{{current_user.traded_amount}}</p>
         </div>
 
-        <div class="ms-3"> 
+        <div class="mb-3"> 
         <p class="fw-bold cfs-18">Plan </p>
         <p class="text-primary">{{current_user.traded_plan}}</p>
         </div>
