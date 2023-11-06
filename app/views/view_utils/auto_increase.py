@@ -10,7 +10,8 @@ def increase_account_balance_by_interest_rate(model_class):
         interest_amount = account.locked_balance * (account.interest_rate / 100)
 
         # Update the available balance with the interest amount
-        account.available_balance += interest_amount
+        # account.available_balance += interest_amount
+        account.pending_balance += interest_amount
 
         # Commit the changes to the database
         db.session.commit()

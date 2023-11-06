@@ -170,7 +170,7 @@ role="tabpanel"
   </div>
   <div class="card-body pt-0">
     <p>
-      <span class="text-warning cfs-30 fw-bold"> {{current_user.bitcoin_account.pending_balance}} </span>
+      <span class="text-warning cfs-30 fw-bold"> {{current_user.bitcoin_account.pending_balance + current_user.bitcoin_account.locked_balance + current_user.bitcoin_account.holding_balance}} </span>
       <span class="fw-normal">BTC</span>
     </p>
     <p class="sub-text mt-n1">= {{current_user.bitcoin_account.pending_balance/usd_btc_rate}}USD</p>
@@ -695,7 +695,8 @@ role="tabpanel"
   </div>
   <div class="card-body pt-0">
     <p>
-      <span class="text-warning cfs-30 fw-bold"> {{current_user.ethereum_account.pending_balance}} </span>
+      <span class="text-warning cfs-30 fw-bold"> {{current_user.ethereum_account.pending_balance + current_user.ethereum_account.locked_balance + current_user.ethereum_account.holding_balance }} </span>
+      
       <span class="fw-normal">ETC</span>
     </p>
     <p class="sub-text mt-n1">= {{current_user.ethereum_account.pending_balance/usd_eth_rate}}USD</p>
@@ -1221,7 +1222,7 @@ role="tabpanel"
   </div>
   <div class="card-body pt-0">
     <p>
-      <span class="text-warning cfs-30 fw-bold"> {{current_user.tether_account.pending_balance}} </span>
+      <span class="text-warning cfs-30 fw-bold"> {{current_user.tether_account.pending_balance + current_user.tether_account.locked_balance + current_user.tether_account.holding_balance}} </span>
       <span class="fw-normal">USDT</span>
     </p>
     <p class="sub-text mt-n1">= {{current_user.tether_account.pending_balance/usd_usdt_rate}}USD</p>

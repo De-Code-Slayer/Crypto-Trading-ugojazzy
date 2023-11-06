@@ -77,10 +77,10 @@ class TetherAccount(db.Model):
     fee = db.Column(db.Float, default=0.0) #charge for transactions
     vat = db.Column(db.Float, default=0.0) #value added tax
 
-    holding_balance = db.Column(db.Float, default=0.0)
-    available_balance = db.Column(db.Float, default=0.0)
-    pending_balance = db.Column(db.Float, default=0.0)
-    locked_balance = db.Column(db.Float, default=0.0)
+    holding_balance = db.Column(db.Float, default=0.0) #referral
+    available_balance = db.Column(db.Float, default=0.0) # choice of amount for cl to withdraw
+    pending_balance = db.Column(db.Float, default=0.0)# total of lock and holding
+    locked_balance = db.Column(db.Float, default=0.0)#trading capital
     wallet_deposit_address = db.Column(db.String, default='')
 
     min_withdrawable_amount = db.Column(db.Float, default=0.0)
