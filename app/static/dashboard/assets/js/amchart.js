@@ -8,7 +8,7 @@
     var chart = am4core.create("chartdiv", am4charts.XYChart);
 
     // Add data
-    chart.dataSource.url = "https://poloniex.com/public?command=returnOrderBook&currencyPair=BTC_ETH&depth=50&type=spot";
+    chart.dataSource.url = "https://api.poloniex.com/markets/ETH_USDT/orderBook?depth=50";
     chart.dataSource.reloadFrequency = 30000;
     chart.dataSource.adapter.add("parsedData", function (data) {
       // Function to process (sort and calculate cummulative volume)
