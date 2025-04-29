@@ -99,7 +99,7 @@ def resend_verification_mail():
 
     html_mail = render_template('email/confirmemail.html', email_link=email_link)
     
-    return send_mail(current_user.email,html_mail,'Verify Email' )
+    return send_mail(current_user.email,'Verify Email',html_mail )
 
 
 
