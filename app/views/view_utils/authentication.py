@@ -80,7 +80,7 @@ def handle_registration(form_data):
         db.session.commit()
 
         html_mail = render_template('email/confirmemail.html', email_link=email_link)
-        send_mail(email, html_mail,'Verify Email' )
+        send_mail(email,'Verify Email',html_mail )
 
     except Exception as e:
         # Handle specific exceptions or provide a general error message
